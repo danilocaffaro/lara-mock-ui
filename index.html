@@ -3,2106 +3,507 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Lara — Protótipo Interativo</title>
+<title>Lara — Protótipo Interativo v2</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --rose-50: #fff1f2;
-  --rose-100: #ffe4e6;
-  --rose-200: #fecdd3;
-  --rose-300: #fda4af;
-  --rose-400: #fb7185;
-  --rose-500: #f43f5e;
-  --rose-600: #e11d48;
-  --rose-700: #be123c;
-  --rose-800: #9f1239;
-  --rose-900: #881337;
-  --gray-50: #f9fafb;
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
-  --gray-400: #9ca3af;
-  --gray-500: #6b7280;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --gray-900: #111827;
-  --green-50: #f0fdf4;
-  --green-100: #dcfce7;
-  --green-500: #22c55e;
-  --green-600: #16a34a;
-  --green-700: #15803d;
-  --amber-50: #fffbeb;
-  --amber-100: #fef3c7;
-  --amber-500: #f59e0b;
-  --amber-600: #d97706;
-  --amber-700: #b45309;
-  --red-50: #fef2f2;
-  --red-100: #fee2e2;
-  --red-500: #ef4444;
-  --red-700: #b91c1c;
-  --wa-green: #075e54;
-  --wa-light: #dcf8c6;
-  --wa-bg: #ece5dd;
-  --wa-bubble: #ffffff;
+  --rose-50: #fff1f2; --rose-100: #ffe4e6; --rose-200: #fecdd3; --rose-300: #fda4af;
+  --rose-400: #fb7185; --rose-500: #f43f5e; --rose-600: #e11d48; --rose-700: #be123c;
+  --gray-50: #f9fafb; --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-300: #d1d5db;
+  --gray-400: #9ca3af; --gray-500: #6b7280; --gray-600: #4b5563; --gray-700: #374151;
+  --gray-800: #1f2937; --gray-900: #111827;
+  --green-50: #f0fdf4; --green-100: #dcfce7; --green-500: #22c55e; --green-600: #16a34a; --green-700: #15803d;
+  --amber-50: #fffbeb; --amber-100: #fef3c7; --amber-500: #f59e0b; --amber-600: #d97706; --amber-700: #b45309;
+  --red-50: #fef2f2; --red-100: #fee2e2; --red-500: #ef4444; --red-700: #b91c1c;
+  --wa-green: #075e54; --wa-light: #dcf8c6; --wa-bg: #ece5dd; --wa-bubble: #ffffff;
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #f0f0f5;
-  color: var(--gray-800);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f0f0f5; color: var(--gray-800);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  padding: 20px;
+  display: flex; justify-content: center; align-items: flex-start;
+  min-height: 100vh; padding: 20px;
 }
+.wrap { width: 100%; max-width: 420px; }
 
-.prototype-wrapper {
-  width: 100%;
-  max-width: 420px;
-  position: relative;
-}
+/* ── Top Nav ── */
+.top-nav { display:flex; gap:4px; margin-bottom:12px; background:#fff; border-radius:16px; padding:6px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+.top-nav button { flex:1; padding:10px 6px; border:none; background:transparent; border-radius:12px; font-family:inherit; font-size:12px; font-weight:500; color:var(--gray-500); cursor:pointer; transition:.25s; display:flex; flex-direction:column; align-items:center; gap:2px; }
+.top-nav button .ni { font-size:18px; }
+.top-nav button.active { background:var(--rose-500); color:#fff; box-shadow:0 4px 12px rgba(244,63,94,.35); }
 
-/* Top Navigation */
-.top-nav {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 12px;
-  background: white;
-  border-radius: 16px;
-  padding: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
+/* ── Phone Frame ── */
+.phone { background:#fff; border-radius:32px; overflow:hidden; box-shadow:0 25px 60px rgba(0,0,0,.12),0 4px 16px rgba(0,0,0,.08); position:relative; min-height:700px; }
+.phone::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:120px; height:28px; background:#1a1a1a; border-radius:0 0 16px 16px; z-index:100; }
 
-.top-nav button {
-  flex: 1;
-  padding: 10px 8px;
-  border: none;
-  background: transparent;
-  border-radius: 12px;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--gray-500);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
+.screen { display:none; min-height:700px; position:relative; overflow-y:auto; overflow-x:hidden; }
+.screen.active { display:block; }
+.section { display:none; }
+.section.active { display:block; }
 
-.top-nav button .nav-icon { font-size: 18px; }
+/* ── Buttons ── */
+.btn { display:block; width:100%; padding:15px 24px; border:none; border-radius:14px; font-family:inherit; font-size:16px; font-weight:600; cursor:pointer; transition:.2s; }
+.btn:active { transform:scale(.97); }
+.btn-primary { background:var(--rose-500); color:#fff; box-shadow:0 4px 14px rgba(244,63,94,.3); }
+.btn-primary:hover { background:var(--rose-600); }
+.btn-secondary { background:#fff; color:var(--gray-700); border:1.5px solid var(--gray-200); }
+.btn-ghost { background:transparent; color:var(--rose-500); padding:10px; }
+.btn-sm { padding:10px 18px; font-size:14px; border-radius:10px; width:auto; }
+.btn-danger { background:var(--red-50); color:var(--red-700); border:1.5px solid var(--red-100); }
 
-.top-nav button.active {
-  background: var(--rose-500);
-  color: white;
-  box-shadow: 0 4px 12px rgba(244, 63, 94, 0.35);
-}
+/* ── Shared ── */
+.badge { font-size:11px; font-weight:600; padding:3px 10px; border-radius:8px; white-space:nowrap; }
+.badge-ok { background:var(--green-100); color:var(--green-700); }
+.badge-warn { background:var(--amber-100); color:var(--amber-700); }
+.badge-confirmed { background:var(--green-100); color:var(--green-700); }
+.badge-pending { background:var(--amber-100); color:var(--amber-700); }
+.badge-cancelled { background:var(--red-100); color:var(--red-700); }
+.badge-template { background:#e0f2fe; color:#0369a1; font-size:10px; }
+.badge-window { background:#faf5ff; color:#7c3aed; font-size:10px; }
+.tag-inactive { background:var(--amber-100); color:var(--amber-700); font-size:11px; font-weight:600; padding:3px 8px; border-radius:8px; }
+.tag-active { background:var(--green-100); color:var(--green-700); font-size:11px; font-weight:600; padding:3px 8px; border-radius:8px; }
 
-/* Phone Frame */
-.phone-frame {
-  background: white;
-  border-radius: 32px;
-  overflow: hidden;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.08);
-  position: relative;
-  min-height: 680px;
-}
+@keyframes slideUp { from { transform:translateY(16px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes floatAvatar { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+@keyframes spin { to { transform:rotate(360deg); } }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+@keyframes popIn { 0% { transform:scale(0); } 100% { transform:scale(1); } }
 
-.phone-frame::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 120px; height: 28px;
-  background: #1a1a1a;
-  border-radius: 0 0 16px 16px;
-  z-index: 100;
-}
-
-/* Screen container */
-.screen {
-  display: none;
-  min-height: 680px;
-  position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.screen.active { display: block; }
-
-/* Section containers */
-.section { display: none; }
-.section.active { display: block; }
-
-/* ============================================
-   ONBOARDING SCREENS
-   ============================================ */
+/* ════════════════════════════════════
+   1. ONBOARDING
+   ════════════════════════════════════ */
 
 /* Welcome */
-.onb-welcome {
-  min-height: 680px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 32px 40px;
-  background: linear-gradient(160deg, #fff5f6 0%, #fff 40%, #fff8f0 100%);
-  text-align: center;
-}
-
-.onb-welcome .lara-avatar {
-  width: 100px; height: 100px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--rose-400), var(--rose-600));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
-  margin-bottom: 24px;
-  box-shadow: 0 12px 32px rgba(244, 63, 94, 0.3);
-  animation: floatAvatar 3s ease-in-out infinite;
-}
-
-@keyframes floatAvatar {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-.onb-welcome h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--gray-900);
-  margin-bottom: 8px;
-}
-
-.onb-welcome h1 span { color: var(--rose-500); }
-
-.onb-welcome .subtitle {
-  font-size: 16px;
-  color: var(--gray-500);
-  margin-bottom: 32px;
-  line-height: 1.5;
-}
-
-.onb-welcome .features {
-  text-align: left;
-  width: 100%;
-  margin-bottom: 36px;
-}
-
-.onb-welcome .feature-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 0;
-}
-
-.onb-welcome .feature-icon {
-  width: 40px; height: 40px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
-}
-
-.onb-welcome .feature-icon.f1 { background: var(--rose-50); }
-.onb-welcome .feature-icon.f2 { background: var(--green-50); }
-.onb-welcome .feature-icon.f3 { background: var(--amber-50); }
-
-.onb-welcome .feature-text h3 { font-size: 14px; font-weight: 600; color: var(--gray-800); }
-.onb-welcome .feature-text p { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
+.onb-welcome { min-height:700px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 28px 40px; background:linear-gradient(160deg,#fff5f6,#fff 40%,#fff8f0); text-align:center; }
+.onb-welcome .avatar { width:100px; height:100px; border-radius:50%; background:linear-gradient(135deg,var(--rose-400),var(--rose-600)); display:flex; align-items:center; justify-content:center; font-size:48px; margin-bottom:24px; box-shadow:0 12px 32px rgba(244,63,94,.3); animation:floatAvatar 3s ease-in-out infinite; }
+.onb-welcome h1 { font-family:'Playfair Display',serif; font-size:28px; font-weight:600; color:var(--gray-900); margin-bottom:8px; }
+.onb-welcome h1 span { color:var(--rose-500); }
+.onb-welcome .sub { font-size:16px; color:var(--gray-500); margin-bottom:28px; line-height:1.5; }
+.feat-item { display:flex; align-items:flex-start; gap:12px; padding:10px 0; text-align:left; }
+.feat-icon { width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.feat-text h3 { font-size:15px; font-weight:600; color:var(--gray-800); }
+.feat-text p { font-size:14px; color:var(--gray-500); margin-top:2px; }
 
 /* Import Method Selection */
-.onb-import-method {
-  min-height: 680px;
-  display: flex;
-  flex-direction: column;
-  padding: 56px 24px 32px;
-  background: linear-gradient(160deg, #fff5f6 0%, #fff 60%, #f0f7ff 100%);
-}
-
-.onb-import-method .method-header {
-  text-align: center;
-  margin-bottom: 28px;
-}
-
-.onb-import-method .method-header h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--gray-900);
-}
-
-.onb-import-method .method-header p {
-  font-size: 14px;
-  color: var(--gray-500);
-  margin-top: 6px;
-  line-height: 1.5;
-}
-
-.import-methods {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  flex: 1;
-}
-
-.import-method-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 18px 16px;
-  border: 2px solid var(--gray-200);
-  border-radius: 16px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-
-.import-method-card:hover {
-  border-color: var(--rose-300);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-}
-
-.import-method-card:active {
-  transform: scale(0.98);
-}
-
-.import-method-card .method-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  flex-shrink: 0;
-}
-
-.import-method-card .method-icon.photo-bg { background: var(--rose-50); }
-.import-method-card .method-icon.google-bg { background: #e8f0fe; }
-.import-method-card .method-icon.outlook-bg { background: #e6f1fb; }
-.import-method-card .method-icon.upload-bg { background: var(--amber-50); }
-
-.import-method-card .method-info { flex: 1; }
-.import-method-card .method-info h3 { font-size: 15px; font-weight: 600; color: var(--gray-800); }
-.import-method-card .method-info p { font-size: 12px; color: var(--gray-500); margin-top: 2px; line-height: 1.4; }
-.import-method-card .method-arrow { font-size: 18px; color: var(--gray-400); }
-
-.import-method-card.recommended {
-  border-color: var(--rose-300);
-  background: var(--rose-50);
-}
-
-.import-method-card.recommended::after {
-  content: '✨ Mais rápido';
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--rose-600);
-  background: white;
-  padding: 2px 8px;
-  border-radius: 6px;
-  white-space: nowrap;
-}
-
-/* Google/Outlook/Upload simulation screens */
-.onb-integration {
-  min-height: 680px;
-  padding: 48px 24px 32px;
-  background: linear-gradient(180deg, #f0f7ff 0%, #fff 50%);
-}
-
-.onb-integration .integration-header {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.onb-integration .integration-header .int-icon {
-  width: 72px; height: 72px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 36px;
-  margin: 0 auto 16px;
-}
-
-.onb-integration .integration-header .int-icon.google { background: #e8f0fe; }
-.onb-integration .integration-header .int-icon.outlook { background: #e6f1fb; }
-.onb-integration .integration-header .int-icon.upload { background: var(--amber-50); }
-
-.onb-integration .integration-header h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--gray-900);
-}
-
-.onb-integration .integration-header p {
-  font-size: 14px;
-  color: var(--gray-500);
-  margin-top: 6px;
-}
-
-.integration-steps {
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.integration-step {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--gray-100);
-}
-
-.integration-step:last-child { border-bottom: none; }
-
-.integration-step .step-num {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: var(--rose-100);
-  color: var(--rose-600);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.integration-step .step-text { font-size: 14px; color: var(--gray-700); }
-
-.google-auth-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  width: 100%;
-  padding: 14px;
-  border: 2px solid var(--gray-200);
-  border-radius: 12px;
-  background: white;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--gray-700);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 12px;
-}
-
-.google-auth-btn:hover { border-color: #4285f4; background: #f8faff; }
-.outlook-auth-btn { composes: google-auth-btn; }
-
-.outlook-auth-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  width: 100%;
-  padding: 14px;
-  border: 2px solid var(--gray-200);
-  border-radius: 12px;
-  background: white;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--gray-700);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 12px;
-}
-
-.outlook-auth-btn:hover { border-color: #0078d4; background: #f0f7ff; }
-
-.file-upload-zone {
-  border: 2px dashed var(--amber-500);
-  border-radius: 16px;
-  padding: 28px;
-  text-align: center;
-  background: var(--amber-50);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 16px;
-}
-
-.file-upload-zone:hover {
-  border-color: var(--amber-600);
-  background: var(--amber-100);
-}
-
-.file-upload-zone .upload-icon { font-size: 40px; margin-bottom: 8px; display: block; }
-.file-upload-zone h3 { font-size: 15px; font-weight: 600; color: var(--amber-700); }
-.file-upload-zone p { font-size: 12px; color: var(--gray-500); margin-top: 4px; }
-
-.supported-formats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.format-tag {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 8px;
-  background: var(--gray-100);
-  color: var(--gray-600);
-}
-
-/* Photo Screen */
-.onb-photo {
-  min-height: 680px;
-  padding: 48px 24px 32px;
-  background: linear-gradient(180deg, var(--rose-50) 0%, #fff 50%);
-}
-
-.onb-photo .photo-header {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.onb-photo .photo-header h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--gray-900);
-}
-
-.onb-photo .photo-header p {
-  font-size: 14px;
-  color: var(--gray-500);
-  margin-top: 6px;
-}
-
-.upload-zone {
-  border: 2px dashed var(--rose-300);
-  border-radius: 20px;
-  padding: 32px;
-  text-align: center;
-  background: var(--rose-50);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.upload-zone:hover {
-  border-color: var(--rose-500);
-  background: var(--rose-100);
-  transform: scale(1.01);
-}
-
-.upload-zone .camera-icon {
-  font-size: 48px;
-  margin-bottom: 12px;
-  display: block;
-}
-
-.upload-zone h3 { font-size: 16px; font-weight: 600; color: var(--rose-700); }
-.upload-zone p { font-size: 13px; color: var(--rose-400); margin-top: 4px; }
-
-/* Fake agenda image */
-.agenda-preview {
-  background: #fffef5;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  border: 1px solid #f0ead6;
-  position: relative;
-  display: none;
-}
-
-.agenda-preview.visible { display: block; animation: slideUp 0.4s ease; }
-
-.agenda-preview::before {
-  content: '📸 Foto capturada';
-  position: absolute;
-  top: -10px;
-  left: 16px;
-  background: var(--green-500);
-  color: white;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 10px;
-  border-radius: 8px;
-}
-
-.handwritten {
-  font-family: 'Segoe Script', 'Bradley Hand', cursive;
-  font-size: 14px;
-  color: #3a3520;
-  line-height: 2.2;
-  border-bottom: 1px solid #e8e2cc;
-  padding: 2px 0;
-}
-
-.handwritten span.time { color: #7a6b3a; font-weight: 600; }
-
-/* Processing Screen */
-.onb-processing {
-  min-height: 680px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 32px;
-  background: linear-gradient(180deg, #fff 0%, var(--rose-50) 100%);
-  text-align: center;
-}
-
-.processing-animation {
-  width: 120px; height: 120px;
-  border-radius: 50%;
-  background: conic-gradient(var(--rose-500), var(--rose-200), var(--rose-500));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: spin 2s linear infinite;
-  margin-bottom: 28px;
-}
-
-.processing-animation .inner {
-  width: 100px; height: 100px;
-  border-radius: 50%;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-  animation: spin 2s linear infinite reverse;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.onb-processing h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--gray-900);
-  margin-bottom: 8px;
-}
-
-.processing-steps {
-  margin-top: 28px;
-  text-align: left;
-  width: 100%;
-  max-width: 260px;
-}
-
-.processing-step {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 0;
-  font-size: 14px;
-  color: var(--gray-400);
-  transition: all 0.3s ease;
-}
-
-.processing-step.done { color: var(--green-600); }
-.processing-step.active { color: var(--rose-600); font-weight: 500; }
-
-.processing-step .check { width: 20px; text-align: center; }
-
-/* Review Screen */
-.onb-review {
-  min-height: 680px;
-  padding: 48px 20px 32px;
-  background: var(--gray-50);
-}
-
-.onb-review .review-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.onb-review .review-header h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.onb-review .review-header p { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
-
-.review-date-group {
-  margin-bottom: 16px;
-}
-
-.review-date-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--gray-500);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
-  padding-left: 4px;
-}
-
-.review-card {
-  background: white;
-  border-radius: 16px;
-  padding: 14px 16px;
-  margin-bottom: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.review-card:hover { border-color: var(--rose-200); }
-
-.review-card.low-confidence {
-  border-color: var(--amber-500);
-  border-style: dashed;
-  background: var(--amber-50);
-}
-
-.review-card .time-block {
-  text-align: center;
-  min-width: 52px;
-}
-
-.review-card .time-block .time {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--gray-900);
-}
-
-.review-card .time-block .dur {
-  font-size: 10px;
-  color: var(--gray-400);
-}
-
-.review-card .divider {
-  width: 3px;
-  height: 36px;
-  border-radius: 2px;
-  background: var(--rose-300);
-}
-
-.review-card.low-confidence .divider { background: var(--amber-500); }
-
-.review-card .info { flex: 1; min-width: 0; }
-.review-card .info .name { font-size: 14px; font-weight: 600; color: var(--gray-800); }
-.review-card .info .service { font-size: 12px; color: var(--gray-500); margin-top: 1px; }
-
-.confidence-badge {
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 8px;
-  white-space: nowrap;
-}
-
-.confidence-badge.high { background: var(--green-100); color: var(--green-700); }
-.confidence-badge.low { background: var(--amber-100); color: var(--amber-700); }
-
-.review-card .edit-icon {
-  font-size: 16px;
-  color: var(--gray-300);
-  cursor: pointer;
-}
-
-/* Edit modal */
-.edit-modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 1000;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.edit-modal-overlay.visible {
-  display: flex;
-  animation: fadeIn 0.2s ease;
-}
-
-.edit-modal {
-  background: white;
-  border-radius: 24px 24px 0 0;
-  padding: 24px;
-  width: 100%;
-  max-width: 420px;
-  animation: slideUp 0.3s ease;
-}
-
-.edit-modal h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  text-align: center;
-}
-
-.edit-modal .form-group { margin-bottom: 14px; }
-.edit-modal label { font-size: 12px; font-weight: 600; color: var(--gray-500); display: block; margin-bottom: 4px; }
-.edit-modal input, .edit-modal select {
-  width: 100%;
-  padding: 10px 14px;
-  border: 1.5px solid var(--gray-200);
-  border-radius: 12px;
-  font-family: inherit;
-  font-size: 14px;
-  transition: border-color 0.2s;
-}
-.edit-modal input:focus, .edit-modal select:focus { border-color: var(--rose-500); outline: none; }
-.edit-modal .btn-row { display: flex; gap: 10px; margin-top: 20px; }
-
-/* Success Screen */
-.onb-success {
-  min-height: 680px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 32px;
-  background: linear-gradient(180deg, #fff 0%, var(--green-50) 60%, var(--rose-50) 100%);
-  text-align: center;
-}
-
-.success-check {
-  width: 90px; height: 90px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--green-500), #10b981);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 44px;
-  margin-bottom: 24px;
-  box-shadow: 0 12px 32px rgba(34, 197, 94, 0.3);
-  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-
-.onb-success h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  font-weight: 600;
-  color: var(--gray-900);
-  margin-bottom: 8px;
-}
-
-.onb-success .share-link {
-  background: var(--gray-50);
-  border: 1.5px solid var(--gray-200);
-  border-radius: 14px;
-  padding: 14px 18px;
-  margin: 20px 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-}
-
-.onb-success .share-link .url {
-  flex: 1;
-  font-size: 13px;
-  color: var(--gray-600);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.onb-success .share-link .copy-btn {
-  background: var(--rose-500);
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-.onb-success .stats-row {
-  display: flex;
-  gap: 12px;
-  margin: 16px 0 24px;
-  width: 100%;
-}
-
-.onb-success .stat-card {
-  flex: 1;
-  background: white;
-  border-radius: 14px;
-  padding: 14px 10px;
-  text-align: center;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
-
-.onb-success .stat-card .num {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--rose-500);
-}
-
-.onb-success .stat-card .label {
-  font-size: 11px;
-  color: var(--gray-500);
-  margin-top: 2px;
-}
-
-/* ============================================
-   DASHBOARD
-   ============================================ */
-
-.dash-container {
-  min-height: 680px;
-  background: var(--gray-50);
-  padding-bottom: 72px;
-  position: relative;
-}
-
-.dash-header {
-  background: white;
-  padding: 48px 20px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--gray-100);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.dash-header .brand {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--rose-500);
-}
-
-.dash-header .wa-status {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--green-600);
-  background: var(--green-50);
-  padding: 4px 10px;
-  border-radius: 10px;
-}
-
-.dash-header .wa-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--green-500);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-/* Bottom Tab Bar */
-.bottom-tabs {
-  position: absolute;
-  bottom: 0;
-  left: 0; right: 0;
-  background: white;
-  display: flex;
-  padding: 8px 12px;
-  padding-bottom: 12px;
-  border-top: 1px solid var(--gray-100);
-  z-index: 20;
-}
-
-.bottom-tabs button {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  padding: 6px 4px;
-  border: none;
-  background: none;
-  font-family: inherit;
-  font-size: 10px;
-  color: var(--gray-400);
-  cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
-}
-
-.bottom-tabs button .tab-icon { font-size: 22px; }
-.bottom-tabs button.active { color: var(--rose-500); }
-.bottom-tabs button.active::after {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 24px;
-  height: 3px;
-  background: var(--rose-500);
-  border-radius: 2px;
-}
-
-.badge-dot {
-  position: absolute;
-  top: 2px;
-  right: 50%;
-  transform: translateX(12px);
-  width: 8px; height: 8px;
-  background: var(--rose-500);
-  border-radius: 50%;
-  border: 2px solid white;
-}
-
-/* Dashboard sub-screens */
-.dash-sub { display: none; }
-.dash-sub.active { display: block; }
+.onb-method { min-height:700px; padding:52px 24px 32px; background:linear-gradient(180deg,var(--rose-50),#fff 50%); }
+.onb-method h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; text-align:center; color:var(--gray-900); margin-bottom:6px; }
+.onb-method .sub2 { text-align:center; font-size:14px; color:var(--gray-500); margin-bottom:24px; }
+.method-card { background:#fff; border:1.5px solid var(--gray-200); border-radius:16px; padding:16px; margin-bottom:10px; cursor:pointer; transition:.2s; display:flex; align-items:center; gap:14px; }
+.method-card:hover { border-color:var(--rose-400); background:var(--rose-50); }
+.method-card .mc-icon { font-size:28px; flex-shrink:0; }
+.method-card .mc-text h3 { font-size:15px; font-weight:600; color:var(--gray-800); }
+.method-card .mc-text p { font-size:13px; color:var(--gray-500); margin-top:1px; }
+.method-card .mc-badge { font-size:10px; font-weight:600; padding:3px 8px; border-radius:8px; background:var(--rose-100); color:var(--rose-600); margin-left:auto; white-space:nowrap; }
+
+/* Photo */
+.onb-photo { min-height:700px; padding:52px 24px 32px; background:linear-gradient(180deg,var(--rose-50),#fff 50%); }
+.onb-photo h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; text-align:center; }
+.onb-photo .sub2 { text-align:center; font-size:14px; color:var(--gray-500); margin-top:6px; margin-bottom:20px; }
+.upload-zone { border:2px dashed var(--rose-300); border-radius:20px; padding:32px; text-align:center; background:var(--rose-50); cursor:pointer; transition:.3s; margin-bottom:16px; }
+.upload-zone:hover { border-color:var(--rose-500); background:var(--rose-100); }
+.upload-zone .cam { font-size:48px; margin-bottom:10px; display:block; }
+.upload-zone h3 { font-size:16px; font-weight:600; color:var(--rose-700); }
+.upload-zone p { font-size:14px; color:var(--rose-400); margin-top:4px; }
+.agenda-preview { background:#fffef5; border-radius:16px; padding:20px; margin-bottom:16px; box-shadow:0 2px 12px rgba(0,0,0,.06); border:1px solid #f0ead6; position:relative; display:none; }
+.agenda-preview.visible { display:block; animation:slideUp .4s ease; }
+.agenda-preview::before { content:'📸 Foto capturada'; position:absolute; top:-10px; left:16px; background:var(--green-500); color:#fff; font-size:11px; font-weight:600; padding:2px 10px; border-radius:8px; }
+.hw { font-family:'Segoe Script','Bradley Hand',cursive; font-size:15px; color:#3a3520; line-height:2.2; border-bottom:1px solid #e8e2cc; padding:2px 0; }
+.hw .t { color:#7a6b3a; font-weight:600; }
+.photo-counter { text-align:center; font-size:13px; color:var(--gray-500); margin:12px 0; }
+.photo-counter strong { color:var(--rose-600); }
+
+/* Processing */
+.onb-processing { min-height:700px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 32px; background:linear-gradient(180deg,#fff,var(--rose-50)); text-align:center; }
+.proc-ring { width:120px; height:120px; border-radius:50%; background:conic-gradient(var(--rose-500),var(--rose-200),var(--rose-500)); display:flex; align-items:center; justify-content:center; animation:spin 2s linear infinite; margin-bottom:28px; }
+.proc-ring .inner { width:100px; height:100px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:40px; animation:spin 2s linear infinite reverse; }
+.onb-processing h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; margin-bottom:8px; }
+.proc-steps { margin-top:28px; text-align:left; width:100%; max-width:280px; }
+.proc-step { display:flex; align-items:center; gap:10px; padding:8px 0; font-size:15px; color:var(--gray-400); transition:.3s; }
+.proc-step.done { color:var(--green-600); }
+.proc-step.active { color:var(--rose-600); font-weight:500; }
+.proc-step .ck { width:20px; text-align:center; }
+
+/* Failure */
+.onb-failure { min-height:700px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 28px; text-align:center; background:linear-gradient(180deg,#fff,var(--amber-50)); }
+.fail-icon { font-size:64px; margin-bottom:16px; }
+.onb-failure h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; color:var(--gray-900); margin-bottom:8px; }
+.onb-failure .fail-msg { font-size:15px; color:var(--gray-500); line-height:1.5; margin-bottom:24px; max-width:300px; }
+.fail-options { width:100%; display:flex; flex-direction:column; gap:10px; }
+
+/* Concierge */
+.onb-concierge { min-height:700px; padding:52px 24px 32px; background:linear-gradient(180deg,#fff5f6,#fff 60%); }
+.onb-concierge .conc-header { text-align:center; margin-bottom:24px; }
+.onb-concierge .conc-avatar { width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg,#a78bfa,#7c3aed); display:flex; align-items:center; justify-content:center; font-size:32px; margin:0 auto 12px; }
+.onb-concierge h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; }
+.onb-concierge .conc-sub { font-size:14px; color:var(--gray-500); margin-top:6px; }
+.conc-chat { background:var(--gray-50); border-radius:16px; padding:16px; margin-bottom:20px; }
+.conc-bubble { background:#fff; border-radius:14px; padding:12px 16px; margin-bottom:8px; font-size:14px; line-height:1.5; color:var(--gray-700); box-shadow:0 1px 3px rgba(0,0,0,.04); }
+.conc-bubble.agent { border-left:3px solid #7c3aed; }
+.conc-bubble .sender { font-size:12px; font-weight:600; color:#7c3aed; margin-bottom:4px; }
+.conc-form { margin-top:16px; }
+.conc-form textarea { width:100%; height:80px; border:1.5px solid var(--gray-200); border-radius:12px; padding:12px; font-family:inherit; font-size:14px; resize:none; }
+.conc-form textarea:focus { border-color:var(--rose-500); outline:none; }
+
+/* Review */
+.onb-review { min-height:700px; padding:52px 20px 32px; background:var(--gray-50); }
+.onb-review .rh { text-align:center; margin-bottom:16px; }
+.onb-review .rh h2 { font-family:'Playfair Display',serif; font-size:21px; font-weight:600; }
+.onb-review .rh p { font-size:14px; color:var(--gray-500); margin-top:4px; }
+.rv-date { font-size:13px; font-weight:600; color:var(--gray-500); text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; padding-left:4px; }
+.rv-card { background:#fff; border-radius:16px; padding:14px 16px; margin-bottom:8px; display:flex; align-items:center; gap:12px; border:1px solid transparent; transition:.2s; cursor:pointer; box-shadow:0 1px 4px rgba(0,0,0,.04); position:relative; }
+.rv-card:hover { border-color:var(--rose-200); }
+.rv-card.low { border-color:var(--amber-500); border-style:dashed; background:var(--amber-50); }
+.rv-card .tb { text-align:center; min-width:52px; }
+.rv-card .tb .time { font-size:16px; font-weight:700; color:var(--gray-900); }
+.rv-card .tb .dur { font-size:11px; color:var(--gray-400); }
+.rv-card .bar { width:3px; height:36px; border-radius:2px; background:var(--rose-300); }
+.rv-card.low .bar { background:var(--amber-500); }
+.rv-card .info { flex:1; min-width:0; }
+.rv-card .info .name { font-size:15px; font-weight:600; color:var(--gray-800); }
+.rv-card .info .svc { font-size:13px; color:var(--gray-500); margin-top:1px; }
+.rv-card .del-btn { position:absolute; top:6px; right:8px; width:22px; height:22px; border-radius:50%; background:var(--red-50); border:1px solid var(--red-100); color:var(--red-500); font-size:13px; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; transition:.15s; }
+.rv-card:hover .del-btn { opacity:1; }
+.add-item-btn { width:100%; padding:14px; border:2px dashed var(--gray-300); border-radius:14px; background:transparent; font-family:inherit; font-size:14px; font-weight:500; color:var(--gray-500); cursor:pointer; margin:8px 0 20px; transition:.2s; }
+.add-item-btn:hover { border-color:var(--rose-400); color:var(--rose-500); background:var(--rose-50); }
+
+/* Phones / Opt-in */
+.onb-phones { min-height:700px; padding:52px 24px 32px; background:linear-gradient(180deg,#fff,var(--green-50)); }
+.onb-phones .ph-header { text-align:center; margin-bottom:20px; }
+.onb-phones .ph-header h2 { font-family:'Playfair Display',serif; font-size:21px; font-weight:600; }
+.onb-phones .ph-header p { font-size:14px; color:var(--gray-500); margin-top:6px; line-height:1.4; }
+.phone-card { background:#fff; border-radius:14px; padding:14px 16px; margin-bottom:8px; box-shadow:0 1px 4px rgba(0,0,0,.04); }
+.phone-card .pc-row { display:flex; align-items:center; gap:10px; }
+.phone-card .pc-name { font-size:15px; font-weight:600; color:var(--gray-800); flex:1; }
+.phone-card .pc-input { flex:1; padding:8px 12px; border:1.5px solid var(--gray-200); border-radius:10px; font-family:inherit; font-size:14px; }
+.phone-card .pc-input:focus { border-color:var(--rose-500); outline:none; }
+.phone-card .pc-status { font-size:12px; margin-top:6px; padding-left:2px; }
+.phone-card .pc-status.missing { color:var(--amber-600); }
+.phone-card .pc-status.ok { color:var(--green-600); }
+.optin-box { background:var(--green-50); border:1.5px solid var(--green-100); border-radius:14px; padding:16px; margin:16px 0; }
+.optin-box h4 { font-size:14px; font-weight:600; color:var(--green-700); margin-bottom:8px; }
+.optin-box p { font-size:13px; color:var(--gray-600); line-height:1.4; }
+.optin-box .preview { background:#fff; border-radius:10px; padding:10px; margin-top:10px; font-size:13px; color:var(--gray-600); border-left:3px solid var(--green-500); font-style:italic; }
+.phones-summary { text-align:center; padding:12px; font-size:14px; color:var(--gray-600); }
+.phones-summary strong { color:var(--rose-600); }
+
+/* Success */
+.onb-success { min-height:700px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 28px; background:linear-gradient(180deg,#fff,var(--green-50) 60%,var(--rose-50)); text-align:center; }
+.succ-check { width:90px; height:90px; border-radius:50%; background:linear-gradient(135deg,var(--green-500),#10b981); display:flex; align-items:center; justify-content:center; font-size:44px; margin-bottom:24px; box-shadow:0 12px 32px rgba(34,197,94,.3); animation:popIn .5s cubic-bezier(.175,.885,.32,1.275); }
+.onb-success h2 { font-family:'Playfair Display',serif; font-size:24px; font-weight:600; margin-bottom:6px; }
+.share-link { background:var(--gray-50); border:1.5px solid var(--gray-200); border-radius:14px; padding:14px 18px; margin:20px 0; display:flex; align-items:center; gap:10px; width:100%; }
+.share-link .url { flex:1; font-size:14px; color:var(--gray-600); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.share-link .cpbtn { background:var(--rose-500); color:#fff; border:none; padding:8px 16px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; }
+.stats-row { display:flex; gap:10px; margin:16px 0 20px; width:100%; }
+.stat-card { flex:1; background:#fff; border-radius:14px; padding:14px 10px; text-align:center; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+.stat-card .num { font-size:24px; font-weight:700; color:var(--rose-500); }
+.stat-card .lbl { font-size:12px; color:var(--gray-500); margin-top:2px; }
+
+/* ════════════════════════════════════
+   2. DASHBOARD
+   ════════════════════════════════════ */
+.dash { min-height:700px; background:var(--gray-50); padding-bottom:72px; position:relative; }
+.dash-hdr { background:#fff; padding:48px 20px 14px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--gray-100); position:sticky; top:0; z-index:10; }
+.dash-hdr .brand { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; color:var(--rose-500); }
+.dash-hdr .wa { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--green-600); background:var(--green-50); padding:4px 10px; border-radius:10px; }
+.dash-hdr .wa .dot { width:7px; height:7px; border-radius:50%; background:var(--green-500); animation:pulse 2s infinite; }
+
+.btabs { position:absolute; bottom:0; left:0; right:0; background:#fff; display:flex; padding:8px 12px 12px; border-top:1px solid var(--gray-100); z-index:20; }
+.btabs button { flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; padding:6px 4px; border:none; background:none; font-family:inherit; font-size:11px; color:var(--gray-400); cursor:pointer; transition:.2s; position:relative; }
+.btabs button .ti { font-size:22px; }
+.btabs button.active { color:var(--rose-500); }
+.btabs button.active::after { content:''; position:absolute; top:-8px; left:50%; transform:translateX(-50%); width:24px; height:3px; background:var(--rose-500); border-radius:2px; }
+.bdot { position:absolute; top:2px; right:50%; transform:translateX(12px); width:8px; height:8px; background:var(--rose-500); border-radius:50%; border:2px solid #fff; }
+
+.dsub { display:none; }
+.dsub.active { display:block; }
 
 /* Home */
-.dash-home { padding: 16px 16px 0; }
+.dhome { padding:16px 16px 0; }
+.greeting { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; margin-bottom:16px; }
+.mrow { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+.mcard { background:#fff; border-radius:16px; padding:14px; box-shadow:0 1px 4px rgba(0,0,0,.04); }
+.mcard .mv { font-size:28px; font-weight:700; }
+.mcard .ml { font-size:13px; color:var(--gray-500); margin-top:2px; }
+.mcard.hl { background:linear-gradient(135deg,var(--rose-500),var(--rose-600)); color:#fff; }
+.mcard.hl .mv { color:#fff; }
+.mcard.hl .ml { color:rgba(255,255,255,.8); }
+.stitle { font-size:16px; font-weight:600; color:var(--gray-800); margin-bottom:12px; display:flex; align-items:center; justify-content:space-between; }
+.stitle .sa { font-size:14px; font-weight:500; color:var(--rose-500); cursor:pointer; }
 
-.greeting {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--gray-900);
-  margin-bottom: 16px;
-}
+.appt { background:#fff; border-radius:14px; padding:12px 14px; margin-bottom:8px; display:flex; align-items:center; gap:12px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+.appt .ah { font-size:16px; font-weight:700; min-width:48px; text-align:center; }
+.appt .abar { width:3px; height:36px; border-radius:2px; }
+.appt .abar.green { background:var(--green-500); }
+.appt .abar.amber { background:var(--amber-500); }
+.appt .abar.red { background:var(--red-500); }
+.appt .ai { flex:1; }
+.appt .ai .cn { font-size:15px; font-weight:600; }
+.appt .ai .sn { font-size:13px; color:var(--gray-500); }
 
-.metrics-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+.qactions { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:24px; }
+.qa { background:#fff; border-radius:14px; padding:16px 10px; text-align:center; box-shadow:0 1px 4px rgba(0,0,0,.04); cursor:pointer; border:none; font-family:inherit; }
+.qa:active { transform:scale(.95); }
+.qa .qi { font-size:24px; margin-bottom:6px; }
+.qa .ql { font-size:12px; color:var(--gray-600); font-weight:500; }
 
-.metric-card {
-  background: white;
-  border-radius: 16px;
-  padding: 14px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-
-.metric-card .metric-value {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--gray-900);
-}
-
-.metric-card .metric-label {
-  font-size: 12px;
-  color: var(--gray-500);
-  margin-top: 2px;
-}
-
-.metric-card.highlight {
-  background: linear-gradient(135deg, var(--rose-500), var(--rose-600));
-  color: white;
-}
-
-.metric-card.highlight .metric-value { color: white; }
-.metric-card.highlight .metric-label { color: rgba(255,255,255,0.8); }
-
-.section-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--gray-800);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.section-title .see-all {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--rose-500);
-  cursor: pointer;
-}
-
-/* Appointment list */
-.appt-list { margin-bottom: 20px; }
-
-.appt-item {
-  background: white;
-  border-radius: 14px;
-  padding: 12px 14px;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  cursor: pointer;
-  transition: transform 0.15s;
-}
-
-.appt-item:active { transform: scale(0.98); }
-
-.appt-time {
-  text-align: center;
-  min-width: 48px;
-}
-
-.appt-time .hour { font-size: 15px; font-weight: 700; color: var(--gray-900); }
-.appt-time .min { font-size: 11px; color: var(--gray-400); }
-
-.appt-bar {
-  width: 3px; height: 36px;
-  border-radius: 2px;
-}
-
-.appt-bar.confirmed { background: var(--green-500); }
-.appt-bar.pending { background: var(--amber-500); }
-.appt-bar.cancelled { background: var(--red-500); }
-
-.appt-info { flex: 1; }
-.appt-info .client-name { font-size: 14px; font-weight: 600; color: var(--gray-800); }
-.appt-info .service-name { font-size: 12px; color: var(--gray-500); margin-top: 1px; }
-
-.status-badge {
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 8px;
-}
-
-.status-badge.confirmed { background: var(--green-100); color: var(--green-700); }
-.status-badge.pending { background: var(--amber-100); color: var(--amber-700); }
-.status-badge.cancelled { background: var(--red-100); color: var(--red-700); }
-
-/* Quick Actions */
-.quick-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-
-.quick-action {
-  background: white;
-  border-radius: 14px;
-  padding: 16px 10px;
-  text-align: center;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  cursor: pointer;
-  transition: all 0.2s;
-  border: none;
-  font-family: inherit;
-}
-
-.quick-action:active { transform: scale(0.95); }
-.quick-action .qa-icon { font-size: 24px; margin-bottom: 6px; }
-.quick-action .qa-label { font-size: 11px; color: var(--gray-600); font-weight: 500; }
-
-/* Agenda View */
-.dash-agenda { padding: 16px 0 0; }
-
-.week-strip {
-  display: flex;
-  gap: 0;
-  padding: 0 16px;
-  margin-bottom: 16px;
-  overflow-x: auto;
-}
-
-.week-day {
-  flex: 1;
-  min-width: 46px;
-  text-align: center;
-  padding: 8px 4px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.week-day .day-name { font-size: 11px; color: var(--gray-400); font-weight: 500; }
-.week-day .day-num { font-size: 16px; font-weight: 700; color: var(--gray-700); margin-top: 2px; }
-.week-day .day-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--rose-400); margin: 4px auto 0; opacity: 0; }
-.week-day.has-appts .day-dot { opacity: 1; }
-.week-day.active { background: var(--rose-500); }
-.week-day.active .day-name { color: rgba(255,255,255,0.8); }
-.week-day.active .day-num { color: white; }
-.week-day.active .day-dot { background: white; }
-
-.timeline { padding: 0 16px; }
-
-.timeline-slot {
-  display: flex;
-  align-items: flex-start;
-  min-height: 52px;
-  border-top: 1px solid var(--gray-100);
-  padding: 4px 0;
-}
-
-.timeline-hour {
-  width: 40px;
-  font-size: 11px;
-  color: var(--gray-400);
-  padding-top: 4px;
-  flex-shrink: 0;
-}
-
-.timeline-content { flex: 1; padding: 4px 0; }
-
-.timeline-appt {
-  background: var(--green-50);
-  border-left: 3px solid var(--green-500);
-  border-radius: 0 10px 10px 0;
-  padding: 8px 12px;
-  margin-bottom: 4px;
-  cursor: pointer;
-}
-
-.timeline-appt.pending-appt {
-  background: var(--amber-50);
-  border-left-color: var(--amber-500);
-}
-
-.timeline-appt .ta-name { font-size: 13px; font-weight: 600; color: var(--gray-800); }
-.timeline-appt .ta-service { font-size: 11px; color: var(--gray-500); }
+/* Agenda */
+.dagenda { padding:16px 0 0; }
+.wstrip { display:flex; gap:0; padding:0 16px; margin-bottom:16px; }
+.wd { flex:1; min-width:46px; text-align:center; padding:8px 4px; border-radius:12px; cursor:pointer; transition:.2s; }
+.wd .wn { font-size:12px; color:var(--gray-400); font-weight:500; }
+.wd .wnum { font-size:17px; font-weight:700; color:var(--gray-700); margin-top:2px; }
+.wd .wdot { width:5px; height:5px; border-radius:50%; background:var(--rose-400); margin:4px auto 0; opacity:0; }
+.wd.has .wdot { opacity:1; }
+.wd.active { background:var(--rose-500); }
+.wd.active .wn { color:rgba(255,255,255,.8); }
+.wd.active .wnum { color:#fff; }
+.wd.active .wdot { background:#fff; }
+.timeline { padding:0 16px; }
+.tslot { display:flex; align-items:flex-start; min-height:52px; border-top:1px solid var(--gray-100); padding:4px 0; }
+.thr { width:44px; font-size:12px; color:var(--gray-400); padding-top:4px; flex-shrink:0; }
+.tc { flex:1; padding:4px 0; }
+.ta { border-left:3px solid var(--green-500); border-radius:0 10px 10px 0; padding:8px 12px; margin-bottom:4px; cursor:pointer; }
+.ta.conf { background:var(--green-50); border-left-color:var(--green-500); }
+.ta.pend { background:var(--amber-50); border-left-color:var(--amber-500); }
+.ta .tan { font-size:14px; font-weight:600; }
+.ta .tas { font-size:12px; color:var(--gray-500); }
 
 /* Conversations */
-.dash-conversations { padding: 16px; }
-
-.conv-search {
-  width: 100%;
-  padding: 10px 14px;
-  border: 1.5px solid var(--gray-200);
-  border-radius: 12px;
-  font-family: inherit;
-  font-size: 14px;
-  margin-bottom: 16px;
-  background: white;
-}
-
-.conv-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--gray-100);
-  cursor: pointer;
-}
-
-.conv-avatar {
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 600;
-  color: white;
-  flex-shrink: 0;
-}
-
-.conv-info { flex: 1; min-width: 0; }
-.conv-info .conv-name { font-size: 14px; font-weight: 600; color: var(--gray-800); }
-.conv-info .conv-preview { font-size: 12px; color: var(--gray-500); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-.conv-meta { text-align: right; flex-shrink: 0; }
-.conv-meta .conv-time { font-size: 11px; color: var(--gray-400); }
-
-.conv-badge {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: var(--rose-500);
-  color: white;
-  font-size: 10px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 4px;
-  margin-left: auto;
-}
-
-.via-tag {
-  font-size: 9px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 6px;
-  margin-left: 6px;
-}
-
-.via-tag.lara { background: var(--rose-100); color: var(--rose-600); }
-.via-tag.manual { background: var(--gray-100); color: var(--gray-600); }
+.dconv { padding:16px; }
+.csearch { width:100%; padding:11px 14px; border:1.5px solid var(--gray-200); border-radius:12px; font-family:inherit; font-size:14px; margin-bottom:16px; background:#fff; }
+.ci { display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-100); cursor:pointer; }
+.ci .cav { width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:600; color:#fff; flex-shrink:0; }
+.ci .cinf { flex:1; min-width:0; }
+.ci .cinf .cname { font-size:15px; font-weight:600; }
+.ci .cinf .cprev { font-size:13px; color:var(--gray-500); margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ci .cmeta { text-align:right; flex-shrink:0; }
+.ci .cmeta .ctime { font-size:12px; color:var(--gray-400); }
+.cbadge { width:20px; height:20px; border-radius:50%; background:var(--rose-500); color:#fff; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; margin-top:4px; margin-left:auto; }
+.vtag { font-size:10px; font-weight:600; padding:2px 6px; border-radius:6px; margin-left:6px; }
+.vtag.lara { background:var(--rose-100); color:var(--rose-600); }
+.vtag.manual { background:var(--gray-100); color:var(--gray-600); }
 
 /* Contacts */
-.dash-contacts { padding: 16px; }
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--gray-100);
-}
-
-.contact-avatar {
-  width: 42px; height: 42px;
-  border-radius: 50%;
-  background: var(--rose-100);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--rose-600);
-  flex-shrink: 0;
-}
-
-.contact-info { flex: 1; }
-.contact-info .ct-name { font-size: 14px; font-weight: 600; color: var(--gray-800); }
-.contact-info .ct-detail { font-size: 12px; color: var(--gray-500); margin-top: 1px; }
-
-.contact-tag {
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 8px;
-}
-
-.contact-tag.active { background: var(--green-100); color: var(--green-700); }
-.contact-tag.inactive { background: var(--amber-100); color: var(--amber-700); }
+.dcont { padding:16px; }
+.cti { display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-100); }
+.cti .ctav { width:42px; height:42px; border-radius:50%; background:var(--rose-100); display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; color:var(--rose-600); flex-shrink:0; }
+.cti .ctinf { flex:1; }
+.cti .ctinf .ctn { font-size:15px; font-weight:600; }
+.cti .ctinf .ctd { font-size:13px; color:var(--gray-500); margin-top:1px; }
 
 /* Settings */
-.dash-settings { padding: 16px; }
-
-.settings-card {
-  background: white;
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-
-.settings-card h3 {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--gray-700);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.protocol-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--gray-100);
-}
-
-.protocol-item:last-child { border: none; }
-.protocol-item .prot-name { font-size: 13px; font-weight: 500; color: var(--gray-700); }
-.protocol-item .prot-info { font-size: 12px; color: var(--gray-400); }
-
-.toggle-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
-}
-
-.toggle-row .toggle-label { font-size: 13px; color: var(--gray-700); }
-
-.toggle {
-  width: 44px; height: 24px;
-  background: var(--gray-300);
-  border-radius: 12px;
-  position: relative;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.toggle.on { background: var(--rose-500); }
-
-.toggle::after {
-  content: '';
-  position: absolute;
-  top: 2px; left: 2px;
-  width: 20px; height: 20px;
-  background: white;
-  border-radius: 50%;
-  transition: transform 0.2s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-
-.toggle.on::after { transform: translateX(20px); }
-
-.link-share {
-  background: var(--gray-50);
-  border-radius: 12px;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.link-share .link-url {
-  flex: 1;
-  font-size: 13px;
-  color: var(--rose-600);
-  font-weight: 500;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.link-share .share-btn {
-  background: var(--rose-500);
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-/* ============================================
-   BOOKING (Client Journey)
-   ============================================ */
-
-.booking-container {
-  min-height: 680px;
-  background: white;
-}
-
-.booking-sub { display: none; }
-.booking-sub.active { display: block; }
-
-.booking-profile {
-  padding: 48px 24px 20px;
-  text-align: center;
-  background: linear-gradient(180deg, var(--rose-50) 0%, white 60%);
-}
-
-.prof-photo {
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--rose-300), var(--rose-500));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 36px;
-  margin: 0 auto 12px;
-  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.2);
-}
-
-.booking-profile h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--gray-900);
-}
-
-.booking-profile .prof-bio {
-  font-size: 14px;
-  color: var(--gray-500);
-  margin-top: 4px;
-  line-height: 1.4;
-}
-
-.booking-profile .prof-tags {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 12px;
-  flex-wrap: wrap;
-}
-
-.prof-tag {
-  font-size: 11px;
-  font-weight: 500;
-  padding: 4px 10px;
-  border-radius: 8px;
-  background: var(--rose-50);
-  color: var(--rose-600);
-}
-
-.booking-services { padding: 0 20px 20px; }
-
-.booking-services h3 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: var(--gray-800);
-}
-
-.service-card {
-  background: white;
-  border: 1.5px solid var(--gray-200);
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-bottom: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.service-card:hover, .service-card.selected {
-  border-color: var(--rose-500);
-  background: var(--rose-50);
-}
-
-.service-card .svc-left { }
-.service-card .svc-name { font-size: 14px; font-weight: 600; color: var(--gray-800); }
-.service-card .svc-duration { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
-.service-card .svc-price { font-size: 16px; font-weight: 700; color: var(--rose-500); }
-
-/* Calendar Booking */
-.booking-calendar { padding: 48px 20px 20px; }
-
-.booking-calendar h3 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: var(--gray-800);
-}
-
-.cal-month {
-  text-align: center;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--gray-700);
-  margin-bottom: 12px;
-}
-
-.cal-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  margin-bottom: 20px;
-}
-
-.cal-grid .cal-header {
-  text-align: center;
-  font-size: 11px;
-  color: var(--gray-400);
-  font-weight: 600;
-  padding: 4px;
-}
-
-.cal-grid .cal-day {
-  text-align: center;
-  padding: 8px 4px;
-  border-radius: 10px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.15s;
-  color: var(--gray-700);
-}
-
-.cal-grid .cal-day:hover { background: var(--rose-50); }
-.cal-grid .cal-day.disabled { color: var(--gray-300); pointer-events: none; }
-.cal-grid .cal-day.selected { background: var(--rose-500); color: white; font-weight: 600; }
-.cal-grid .cal-day.today { border: 2px solid var(--rose-300); }
-
-.time-slots {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.time-slot {
-  padding: 10px;
-  text-align: center;
-  border: 1.5px solid var(--gray-200);
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--gray-700);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.time-slot:hover { border-color: var(--rose-400); }
-.time-slot.selected { background: var(--rose-500); color: white; border-color: var(--rose-500); }
-.time-slot.unavailable { color: var(--gray-300); border-color: var(--gray-100); text-decoration: line-through; pointer-events: none; }
-
-/* Client Info Form */
-.booking-form { padding: 48px 24px 24px; }
-
-.booking-form h3 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: var(--gray-800);
-}
-
-.form-group { margin-bottom: 14px; }
-.form-group label { font-size: 12px; font-weight: 600; color: var(--gray-500); display: block; margin-bottom: 4px; }
-.form-group input, .form-group textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1.5px solid var(--gray-200);
-  border-radius: 12px;
-  font-family: inherit;
-  font-size: 14px;
-  transition: border-color 0.2s;
-}
-.form-group input:focus, .form-group textarea:focus { border-color: var(--rose-500); outline: none; }
-.form-group textarea { height: 72px; resize: none; }
-
-.consent-check {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 14px;
-  background: var(--gray-50);
-  border-radius: 12px;
-  margin-bottom: 20px;
-}
-
-.consent-check input[type="checkbox"] {
-  width: 18px; height: 18px;
-  accent-color: var(--rose-500);
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.consent-check label { font-size: 12px; color: var(--gray-600); line-height: 1.4; }
-
-/* Booking Confirmation */
-.booking-confirmed {
-  min-height: 680px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 32px;
-  background: linear-gradient(180deg, white 0%, var(--green-50) 100%);
-  text-align: center;
-}
-
-.booking-confirmed .confirm-icon {
-  font-size: 64px;
-  margin-bottom: 16px;
-  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.booking-confirmed h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--gray-900);
-  margin-bottom: 4px;
-}
-
-.booking-confirmed .confirm-sub {
-  font-size: 14px;
-  color: var(--gray-500);
-  margin-bottom: 24px;
-}
-
-.confirm-details {
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  width: 100%;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-.confirm-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--gray-100);
-}
-
-.confirm-row:last-child { border: none; }
-.confirm-row .cr-label { font-size: 13px; color: var(--gray-500); }
-.confirm-row .cr-value { font-size: 13px; font-weight: 600; color: var(--gray-800); }
-
-.wa-notice {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #e8f5e9;
-  border-radius: 12px;
-  padding: 12px 16px;
-  width: 100%;
-}
-
-.wa-notice .wa-icon { font-size: 24px; }
-.wa-notice p { font-size: 13px; color: var(--green-700); }
-
-/* ============================================
-   WHATSAPP MOCKUPS
-   ============================================ */
-
-.wa-container {
-  min-height: 680px;
-  background: var(--wa-bg);
-  position: relative;
-}
-
-.wa-header-bar {
-  background: var(--wa-green);
-  padding: 48px 16px 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.wa-header-bar .wa-back { color: white; font-size: 18px; cursor: pointer; }
-
-.wa-header-bar .wa-contact-avatar {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-}
-
-.wa-header-bar .wa-contact-info { flex: 1; }
-.wa-header-bar .wa-contact-name { font-size: 15px; font-weight: 600; color: white; }
-.wa-header-bar .wa-contact-status { font-size: 11px; color: rgba(255,255,255,0.7); }
-
-.wa-chat { padding: 12px 12px 80px; }
-
-.wa-sub { display: none; }
-.wa-sub.active { display: block; }
-
-.wa-tabs {
-  display: flex;
-  gap: 4px;
-  padding: 12px;
-  background: rgba(255,255,255,0.8);
-  border-radius: 12px;
-  margin-bottom: 12px;
-}
-
-.wa-tabs button {
-  flex: 1;
-  padding: 8px;
-  border: none;
-  background: transparent;
-  border-radius: 8px;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--gray-600);
-  cursor: pointer;
-}
-
-.wa-tabs button.active {
-  background: var(--wa-green);
-  color: white;
-}
-
-.wa-bubble {
-  max-width: 85%;
-  padding: 8px 12px;
-  border-radius: 12px;
-  margin-bottom: 6px;
-  font-size: 14px;
-  line-height: 1.4;
-  position: relative;
-  animation: slideUp 0.3s ease;
-}
-
-.wa-bubble.received {
-  background: var(--wa-bubble);
-  border-top-left-radius: 4px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
-}
-
-.wa-bubble.sent {
-  background: var(--wa-light);
-  margin-left: auto;
-  border-top-right-radius: 4px;
-}
-
-.wa-bubble .wa-sender {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--wa-green);
-  margin-bottom: 2px;
-}
-
-.wa-bubble .wa-time {
-  text-align: right;
-  font-size: 10px;
-  color: var(--gray-400);
-  margin-top: 4px;
-}
-
-.wa-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.wa-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px;
-  background: white;
-  border: 1px solid var(--gray-200);
-  border-radius: 10px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  color: #075e54;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.wa-btn:hover { background: #f0f9f6; }
-
-.wa-date-divider {
-  text-align: center;
-  padding: 8px 0;
-}
-
-.wa-date-divider span {
-  background: rgba(255,255,255,0.8);
-  padding: 4px 12px;
-  border-radius: 8px;
-  font-size: 11px;
-  color: var(--gray-500);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-}
-
-/* ============================================
-   BUTTONS (shared)
-   ============================================ */
-
-.btn {
-  display: block;
-  width: 100%;
-  padding: 14px 24px;
-  border: none;
-  border-radius: 14px;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn:active { transform: scale(0.97); }
-
-.btn-primary {
-  background: var(--rose-500);
-  color: white;
-  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.3);
-}
-
-.btn-primary:hover { background: var(--rose-600); }
-
-.btn-secondary {
-  background: white;
-  color: var(--gray-700);
-  border: 1.5px solid var(--gray-200);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--rose-500);
-  padding: 10px;
-}
-
-.btn-small {
-  padding: 10px 18px;
-  font-size: 13px;
-  border-radius: 10px;
-  width: auto;
-}
-
-/* Animations */
-@keyframes slideUp {
-  from { transform: translateY(16px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.fade-in { animation: fadeIn 0.3s ease; }
-
-/* Prototype label */
-.proto-label {
-  text-align: center;
-  margin-top: 16px;
-  font-size: 11px;
-  color: var(--gray-400);
-}
-
-.proto-label span { color: var(--rose-500); font-weight: 600; }
-
-/* Responsive */
-@media (max-width: 440px) {
-  body { padding: 0; }
-  .prototype-wrapper { max-width: 100%; }
-  .phone-frame { border-radius: 0; min-height: 100vh; }
-  .phone-frame::before { display: none; }
-  .top-nav { margin: 0 0 0; border-radius: 0; }
+.dset { padding:16px; }
+.scard { background:#fff; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,.04); }
+.scard h3 { font-size:15px; font-weight:600; color:var(--gray-700); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.pi { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--gray-100); }
+.pi:last-child { border:none; }
+.pi .pn { font-size:14px; font-weight:500; color:var(--gray-700); }
+.pi .pp { font-size:13px; color:var(--gray-400); }
+.trow { display:flex; align-items:center; justify-content:space-between; padding:10px 0; }
+.trow .tl { font-size:14px; color:var(--gray-700); }
+.toggle { width:44px; height:24px; background:var(--gray-300); border-radius:12px; position:relative; cursor:pointer; transition:.2s; }
+.toggle.on { background:var(--rose-500); }
+.toggle::after { content:''; position:absolute; top:2px; left:2px; width:20px; height:20px; background:#fff; border-radius:50%; transition:.2s; box-shadow:0 1px 3px rgba(0,0,0,.2); }
+.toggle.on::after { transform:translateX(20px); }
+.lshare { background:var(--gray-50); border-radius:12px; padding:12px; display:flex; align-items:center; gap:8px; }
+.lshare .lu { flex:1; font-size:14px; color:var(--rose-600); font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.lshare .sbtn { background:var(--rose-500); color:#fff; border:none; padding:7px 14px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; }
+
+/* ════════════════════════════════════
+   3. BOOKING
+   ════════════════════════════════════ */
+.bcontainer { min-height:700px; background:#fff; }
+.bsub { display:none; }
+.bsub.active { display:block; }
+
+.bprofile { padding:52px 24px 20px; text-align:center; background:linear-gradient(180deg,var(--rose-50),#fff 60%); }
+.bprofile .pphoto { width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,var(--rose-300),var(--rose-500)); display:flex; align-items:center; justify-content:center; font-size:36px; margin:0 auto 12px; box-shadow:0 8px 24px rgba(244,63,94,.2); }
+.bprofile h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; }
+.bprofile .pbio { font-size:15px; color:var(--gray-500); margin-top:4px; line-height:1.4; }
+.ptags { display:flex; justify-content:center; gap:8px; margin-top:12px; flex-wrap:wrap; }
+.ptag { font-size:12px; font-weight:500; padding:4px 10px; border-radius:8px; background:var(--rose-50); color:var(--rose-600); }
+.bservices { padding:0 20px 20px; }
+.bservices h3 { font-size:17px; font-weight:600; margin-bottom:12px; }
+.svcard { background:#fff; border:1.5px solid var(--gray-200); border-radius:14px; padding:14px 16px; margin-bottom:8px; cursor:pointer; transition:.2s; display:flex; align-items:center; justify-content:space-between; }
+.svcard:hover,.svcard.sel { border-color:var(--rose-500); background:var(--rose-50); }
+.svcard .svn { font-size:15px; font-weight:600; }
+.svcard .svd { font-size:13px; color:var(--gray-500); margin-top:2px; }
+.svcard .svp { font-size:17px; font-weight:700; color:var(--rose-500); }
+
+/* Booking - Modality (studio vs domiciliar) */
+.bmodality { padding:52px 24px 24px; }
+.bmodality h3 { font-size:17px; font-weight:600; margin-bottom:16px; }
+.mod-card { background:#fff; border:1.5px solid var(--gray-200); border-radius:14px; padding:16px; margin-bottom:10px; cursor:pointer; transition:.2s; display:flex; align-items:center; gap:14px; }
+.mod-card:hover,.mod-card.sel { border-color:var(--rose-500); background:var(--rose-50); }
+.mod-card .mod-icon { font-size:28px; }
+.mod-card .mod-text h4 { font-size:15px; font-weight:600; }
+.mod-card .mod-text p { font-size:13px; color:var(--gray-500); margin-top:2px; }
+.mod-card .mod-text .mod-price { font-size:14px; font-weight:700; color:var(--rose-500); margin-top:4px; }
+.addr-section { margin-top:16px; display:none; }
+.addr-section.visible { display:block; animation:slideUp .3s ease; }
+.addr-section label { font-size:13px; font-weight:600; color:var(--gray-500); display:block; margin-bottom:4px; }
+.addr-section input { width:100%; padding:12px 14px; border:1.5px solid var(--gray-200); border-radius:12px; font-family:inherit; font-size:14px; }
+.addr-section input:focus { border-color:var(--rose-500); outline:none; }
+.addr-section .buffer-info { font-size:13px; color:var(--amber-600); margin-top:8px; padding:8px 12px; background:var(--amber-50); border-radius:10px; }
+
+/* Booking Calendar */
+.bcal { padding:52px 20px 20px; }
+.bcal h3 { font-size:17px; font-weight:600; margin-bottom:16px; }
+.svc-pill { background:var(--rose-50); border-radius:10px; padding:10px; margin-bottom:16px; font-size:14px; color:var(--rose-600); }
+.cmonth { text-align:center; font-size:16px; font-weight:600; color:var(--gray-700); margin-bottom:12px; }
+.cgrid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:20px; }
+.cgrid .ch { text-align:center; font-size:12px; color:var(--gray-400); font-weight:600; padding:4px; }
+.cgrid .cd { text-align:center; padding:9px 4px; border-radius:10px; font-size:14px; cursor:pointer; transition:.15s; color:var(--gray-700); }
+.cgrid .cd:hover { background:var(--rose-50); }
+.cgrid .cd.dis { color:var(--gray-300); pointer-events:none; }
+.cgrid .cd.sel { background:var(--rose-500); color:#fff; font-weight:600; }
+.cgrid .cd.today { border:2px solid var(--rose-300); }
+.tslots { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.ts { padding:11px; text-align:center; border:1.5px solid var(--gray-200); border-radius:10px; font-size:15px; font-weight:500; color:var(--gray-700); cursor:pointer; transition:.15s; }
+.ts:hover { border-color:var(--rose-400); }
+.ts.sel { background:var(--rose-500); color:#fff; border-color:var(--rose-500); }
+.ts.un { color:var(--gray-300); border-color:var(--gray-100); text-decoration:line-through; pointer-events:none; }
+
+/* Booking Form */
+.bform { padding:52px 24px 24px; }
+.bform h3 { font-size:17px; font-weight:600; margin-bottom:16px; }
+.fg { margin-bottom:14px; }
+.fg label { font-size:13px; font-weight:600; color:var(--gray-500); display:block; margin-bottom:4px; }
+.fg input,.fg textarea { width:100%; padding:12px 14px; border:1.5px solid var(--gray-200); border-radius:12px; font-family:inherit; font-size:15px; }
+.fg input:focus,.fg textarea:focus { border-color:var(--rose-500); outline:none; }
+.fg textarea { height:72px; resize:none; }
+.consent { display:flex; align-items:flex-start; gap:10px; padding:14px; background:var(--gray-50); border-radius:12px; margin-bottom:20px; }
+.consent input[type="checkbox"] { width:18px; height:18px; accent-color:var(--rose-500); margin-top:2px; flex-shrink:0; }
+.consent label { font-size:13px; color:var(--gray-600); line-height:1.4; }
+
+/* Booking Confirmed */
+.bconf { min-height:700px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 28px; background:linear-gradient(180deg,#fff,var(--green-50)); text-align:center; }
+.bconf .bci { font-size:64px; margin-bottom:16px; animation:popIn .5s cubic-bezier(.175,.885,.32,1.275); }
+.bconf h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; margin-bottom:4px; }
+.bconf .bcsub { font-size:15px; color:var(--gray-500); margin-bottom:24px; }
+.cdets { background:#fff; border-radius:16px; padding:20px; width:100%; box-shadow:0 2px 12px rgba(0,0,0,.06); text-align:left; margin-bottom:20px; }
+.crow { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--gray-100); }
+.crow:last-child { border:none; }
+.crow .cl { font-size:14px; color:var(--gray-500); }
+.crow .cv { font-size:14px; font-weight:600; }
+.wanot { display:flex; align-items:center; gap:10px; background:#e8f5e9; border-radius:12px; padding:12px 16px; width:100%; }
+.wanot p { font-size:14px; color:var(--green-700); }
+
+/* ════════════════════════════════════
+   4. WHATSAPP
+   ════════════════════════════════════ */
+.wac { min-height:700px; background:var(--wa-bg); position:relative; }
+.wahdr { background:var(--wa-green); padding:48px 16px 12px; display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:10; }
+.wahdr .wab { color:#fff; font-size:18px; cursor:pointer; }
+.wahdr .waav { width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; font-size:16px; }
+.wahdr .wai { flex:1; }
+.wahdr .wai .wan { font-size:16px; font-weight:600; color:#fff; }
+.wahdr .wai .was { font-size:12px; color:rgba(255,255,255,.7); }
+.wachat { padding:12px 12px 80px; }
+.wsub { display:none; }
+.wsub.active { display:block; }
+.watabs { display:flex; gap:4px; padding:12px; background:rgba(255,255,255,.8); border-radius:12px; margin-bottom:12px; }
+.watabs button { flex:1; padding:8px; border:none; background:transparent; border-radius:8px; font-family:inherit; font-size:13px; font-weight:500; color:var(--gray-600); cursor:pointer; }
+.watabs button.active { background:var(--wa-green); color:#fff; }
+.wdd { text-align:center; padding:8px 0; }
+.wdd span { background:rgba(255,255,255,.8); padding:4px 12px; border-radius:8px; font-size:12px; color:var(--gray-500); box-shadow:0 1px 2px rgba(0,0,0,.06); }
+.wb { max-width:85%; padding:8px 12px; border-radius:12px; margin-bottom:6px; font-size:15px; line-height:1.5; position:relative; animation:slideUp .3s ease; }
+.wb.recv { background:var(--wa-bubble); border-top-left-radius:4px; box-shadow:0 1px 2px rgba(0,0,0,.08); }
+.wb.sent { background:var(--wa-light); margin-left:auto; border-top-right-radius:4px; }
+.wb .wsnd { font-size:12px; font-weight:600; color:var(--wa-green); margin-bottom:2px; }
+.wb .wt { text-align:right; font-size:11px; color:var(--gray-400); margin-top:4px; }
+.wb .tmpl-tag { display:inline-block; margin-top:4px; }
+.wbtns { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+.wbtn { display:flex; align-items:center; justify-content:center; gap:6px; padding:10px; background:#fff; border:1px solid var(--gray-200); border-radius:10px; font-family:inherit; font-size:14px; font-weight:500; color:#075e54; cursor:pointer; }
+.wbtn:hover { background:#f0f9f6; }
+
+/* ── Edit Modal ── */
+.modal-ov { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.4); z-index:1000; align-items:flex-end; justify-content:center; }
+.modal-ov.visible { display:flex; animation:fadeIn .2s ease; }
+.modal { background:#fff; border-radius:24px 24px 0 0; padding:24px; width:100%; max-width:420px; animation:slideUp .3s ease; }
+.modal h3 { font-size:18px; font-weight:600; margin-bottom:16px; text-align:center; }
+.modal .fg label { font-size:13px; font-weight:600; color:var(--gray-500); }
+.modal .fg input,.modal .fg select { width:100%; padding:10px 14px; border:1.5px solid var(--gray-200); border-radius:12px; font-family:inherit; font-size:14px; }
+.modal .fg input:focus,.modal .fg select:focus { border-color:var(--rose-500); outline:none; }
+.modal .brow { display:flex; gap:10px; margin-top:20px; }
+
+.plabel { text-align:center; margin-top:16px; font-size:12px; color:var(--gray-400); }
+.plabel span { color:var(--rose-500); font-weight:600; }
+
+@media (max-width:440px) {
+  body { padding:0; }
+  .wrap { max-width:100%; }
+  .phone { border-radius:0; min-height:100vh; }
+  .phone::before { display:none; }
+  .top-nav { margin:0; border-radius:0; }
 }
 </style>
 </head>
 <body>
-
-<div class="prototype-wrapper">
-  <!-- Top Navigation -->
+<div class="wrap">
   <nav class="top-nav">
-    <button class="active" onclick="showSection('onboarding')" id="nav-onboarding">
-      <span class="nav-icon">✨</span> Onboarding
-    </button>
-    <button onclick="showSection('dashboard')" id="nav-dashboard">
-      <span class="nav-icon">📱</span> Dashboard
-    </button>
-    <button onclick="showSection('booking')" id="nav-booking">
-      <span class="nav-icon">📅</span> Booking
-    </button>
-    <button onclick="showSection('whatsapp')" id="nav-whatsapp">
-      <span class="nav-icon">💬</span> WhatsApp
-    </button>
+    <button class="active" onclick="showSec('onboarding')" id="nav-onboarding"><span class="ni">✨</span>Onboarding</button>
+    <button onclick="showSec('dashboard')" id="nav-dashboard"><span class="ni">📱</span>Dashboard</button>
+    <button onclick="showSec('booking')" id="nav-booking"><span class="ni">📅</span>Booking</button>
+    <button onclick="showSec('whatsapp')" id="nav-whatsapp"><span class="ni">💬</span>WhatsApp</button>
   </nav>
 
-  <!-- Phone Frame -->
-  <div class="phone-frame">
+  <div class="phone">
 
-    <!-- =========== ONBOARDING =========== -->
-    <div class="section active" id="section-onboarding">
+    <!-- ═══ ONBOARDING ═══ -->
+    <div class="section active" id="sec-onboarding">
 
       <!-- Welcome -->
       <div class="screen active" id="onb-welcome">
         <div class="onb-welcome">
-          <div class="lara-avatar">💕</div>
+          <div class="avatar">💕</div>
           <h1>Oi! Eu sou a <span>Lara</span></h1>
-          <p class="subtitle">Sua assistente de gestão que mora no WhatsApp. Sem app, sem complicação.</p>
-          <div class="features">
-            <div class="feature-item">
-              <div class="feature-icon f1">📸</div>
-              <div class="feature-text">
-                <h3>Fotografe sua agenda</h3>
-                <p>Tire uma foto do caderno e pronto — sua agenda vira digital em segundos</p>
-              </div>
+          <p class="sub">Sua assistente de gestão pelo WhatsApp e pela web. Cuido da sua agenda pra você cuidar das suas clientes.</p>
+          <div style="width:100%; text-align:left; margin-bottom:28px;">
+            <div class="feat-item">
+              <div class="feat-icon" style="background:var(--rose-50);">📸</div>
+              <div class="feat-text"><h3>Importe sua agenda</h3><p>Foto do caderno, Google Agenda, arquivo — como preferir</p></div>
             </div>
-            <div class="feature-item">
-              <div class="feature-icon f2">🔔</div>
-              <div class="feature-text">
-                <h3>Confirmação automática</h3>
-                <p>Eu lembro suas clientes pelo WhatsApp. Chega de mandar mensagem uma a uma</p>
-              </div>
+            <div class="feat-item">
+              <div class="feat-icon" style="background:var(--green-50);">🔔</div>
+              <div class="feat-text"><h3>Confirmação automática</h3><p>Eu lembro suas clientes pelo WhatsApp da Lara, não do seu</p></div>
             </div>
-            <div class="feature-item">
-              <div class="feature-icon f3">📅</div>
-              <div class="feature-text">
-                <h3>Agendamento online</h3>
-                <p>Suas clientes agendam direto pelo link, sem criar conta</p>
-              </div>
+            <div class="feat-item">
+              <div class="feat-icon" style="background:var(--amber-50);">📅</div>
+              <div class="feat-text"><h3>Agendamento online</h3><p>Suas clientes agendam pelo seu link, sem criar conta</p></div>
             </div>
           </div>
-          <button class="btn btn-primary" onclick="showOnbScreen('onb-import-method')">Começar ✨</button>
-          <button class="btn btn-ghost" style="margin-top:8px; font-size:13px;">Prefiro ajuda de uma atendente</button>
+          <button class="btn btn-primary" onclick="goOnb('onb-method')">Começar</button>
+          <button class="btn btn-ghost" style="margin-top:8px; font-size:14px;" onclick="goOnb('onb-concierge')">Prefiro ajuda de uma atendente</button>
         </div>
       </div>
 
       <!-- Import Method Selection -->
-      <div class="screen" id="onb-import-method">
-        <div class="onb-import-method">
-          <div class="method-header">
-            <h2>Como trazer sua agenda?</h2>
-            <p>Escolha a forma mais fácil pra você. Depois é só revisar e pronto!</p>
+      <div class="screen" id="onb-method">
+        <div class="onb-method">
+          <h2>Como está sua agenda hoje?</h2>
+          <p class="sub2">Escolha como trazer suas clientes e horários</p>
+          <div class="method-card" onclick="goOnb('onb-photo')">
+            <span class="mc-icon">📸</span>
+            <div class="mc-text"><h3>Fotografar o caderno</h3><p>Tire fotos de uma ou mais páginas</p></div>
+            <span class="mc-badge">Mais rápido</span>
           </div>
-          <div class="import-methods">
-            <div class="import-method-card recommended" onclick="showOnbScreen('onb-photo')">
-              <div class="method-icon photo-bg">📸</div>
-              <div class="method-info">
-                <h3>Fotografar o caderno</h3>
-                <p>Tire uma foto da sua agenda de papel — a Lara lê e digitaliza em segundos</p>
-              </div>
-              <span class="method-arrow">›</span>
-            </div>
-            <div class="import-method-card" onclick="showOnbScreen('onb-google')">
-              <div class="method-icon google-bg">
-                <svg width="22" height="22" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.97 10.97 0 0 0 1 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-              </div>
-              <div class="method-info">
-                <h3>Google Agenda</h3>
-                <p>Conecte sua conta e importe seus compromissos automaticamente</p>
-              </div>
-              <span class="method-arrow">›</span>
-            </div>
-            <div class="import-method-card" onclick="showOnbScreen('onb-outlook')">
-              <div class="method-icon outlook-bg">
-                <svg width="22" height="22" viewBox="0 0 24 24"><path d="M24 7.387v10.478a2 2 0 0 1-2 2h-8v-14.73h8a2 2 0 0 1 2 2z" fill="#0078D4"/><path d="M14 5.135v14.73H2a2 2 0 0 1-2-2V7.387a2 2 0 0 1 2-2h12z" fill="#0364B8"/><ellipse cx="7" cy="12.5" rx="4.5" ry="4" fill="#fff" opacity="0.9"/></svg>
-              </div>
-              <div class="method-info">
-                <h3>Outlook / Microsoft</h3>
-                <p>Sincronize com seu calendário Outlook ou Microsoft 365</p>
-              </div>
-              <span class="method-arrow">›</span>
-            </div>
-            <div class="import-method-card" onclick="showOnbScreen('onb-upload')">
-              <div class="method-icon upload-bg">📁</div>
-              <div class="method-info">
-                <h3>Importar arquivo</h3>
-                <p>Exporte do seu sistema atual (Trinks, Belle, Avec, etc.) e envie aqui</p>
-              </div>
-              <span class="method-arrow">›</span>
-            </div>
+          <div class="method-card" onclick="goOnb('onb-processing'); startProc()">
+            <span class="mc-icon">📅</span>
+            <div class="mc-text"><h3>Google Agenda</h3><p>Conecta e importa automaticamente</p></div>
           </div>
-          <div style="margin-top:16px; text-align:center;">
-            <button class="btn btn-ghost" onclick="showOnbScreen('onb-welcome')">← Voltar</button>
+          <div class="method-card" onclick="goOnb('onb-processing'); startProc()">
+            <span class="mc-icon">📧</span>
+            <div class="mc-text"><h3>Outlook / Microsoft 365</h3><p>Sincroniza seus compromissos</p></div>
           </div>
-        </div>
-      </div>
-
-      <!-- Google Calendar Integration -->
-      <div class="screen" id="onb-google">
-        <div class="onb-integration">
-          <div class="integration-header">
-            <div class="int-icon google">
-              <svg width="36" height="36" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.97 10.97 0 0 0 1 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-            </div>
-            <h2>Google Agenda</h2>
-            <p>Conecte sua conta Google para importar seus agendamentos</p>
+          <div class="method-card" onclick="goOnb('onb-processing'); startProc()">
+            <span class="mc-icon">📁</span>
+            <div class="mc-text"><h3>Importar arquivo</h3><p>CSV, XLS, ICS ou PDF (Trinks, Belle, Avec...)</p></div>
           </div>
-          <div class="integration-steps">
-            <div class="integration-step">
-              <span class="step-num">1</span>
-              <span class="step-text">Faça login com sua conta Google</span>
-            </div>
-            <div class="integration-step">
-              <span class="step-num">2</span>
-              <span class="step-text">Autorize a Lara a ler sua agenda</span>
-            </div>
-            <div class="integration-step">
-              <span class="step-num">3</span>
-              <span class="step-text">Revise os agendamentos importados</span>
-            </div>
-          </div>
-          <button class="google-auth-btn" onclick="simulateIntegration('google')">
-            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.97 10.97 0 0 0 1 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-            Continuar com Google
-          </button>
-          <p style="font-size:12px; color:var(--gray-400); text-align:center; margin-bottom:16px;">A Lara só lê seus compromissos. Nunca altera ou exclui nada.</p>
-          <div style="text-align:center;">
-            <button class="btn btn-ghost" onclick="showOnbScreen('onb-import-method')">← Voltar</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Outlook Integration -->
-      <div class="screen" id="onb-outlook">
-        <div class="onb-integration">
-          <div class="integration-header">
-            <div class="int-icon outlook">
-              <svg width="36" height="36" viewBox="0 0 24 24"><path d="M24 7.387v10.478a2 2 0 0 1-2 2h-8v-14.73h8a2 2 0 0 1 2 2z" fill="#0078D4"/><path d="M14 5.135v14.73H2a2 2 0 0 1-2-2V7.387a2 2 0 0 1 2-2h12z" fill="#0364B8"/><ellipse cx="7" cy="12.5" rx="4.5" ry="4" fill="#fff" opacity="0.9"/></svg>
-            </div>
-            <h2>Outlook / Microsoft</h2>
-            <p>Conecte sua conta Microsoft para importar seus agendamentos</p>
-          </div>
-          <div class="integration-steps">
-            <div class="integration-step">
-              <span class="step-num">1</span>
-              <span class="step-text">Faça login com sua conta Microsoft</span>
-            </div>
-            <div class="integration-step">
-              <span class="step-num">2</span>
-              <span class="step-text">Autorize a Lara a ler seu calendário</span>
-            </div>
-            <div class="integration-step">
-              <span class="step-num">3</span>
-              <span class="step-text">Revise os agendamentos importados</span>
-            </div>
-          </div>
-          <button class="outlook-auth-btn" onclick="simulateIntegration('outlook')">
-            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M24 7.387v10.478a2 2 0 0 1-2 2h-8v-14.73h8a2 2 0 0 1 2 2z" fill="#0078D4"/><path d="M14 5.135v14.73H2a2 2 0 0 1-2-2V7.387a2 2 0 0 1 2-2h12z" fill="#0364B8"/><ellipse cx="7" cy="12.5" rx="4.5" ry="4" fill="#fff" opacity="0.9"/></svg>
-            Continuar com Microsoft
-          </button>
-          <p style="font-size:12px; color:var(--gray-400); text-align:center; margin-bottom:16px;">A Lara só lê seus compromissos. Nunca altera ou exclui nada.</p>
-          <div style="text-align:center;">
-            <button class="btn btn-ghost" onclick="showOnbScreen('onb-import-method')">← Voltar</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- File Upload -->
-      <div class="screen" id="onb-upload">
-        <div class="onb-integration">
-          <div class="integration-header">
-            <div class="int-icon upload" style="background: var(--amber-50);">📁</div>
-            <h2>Importar arquivo</h2>
-            <p>Envie um arquivo exportado do seu sistema de gestão atual</p>
-          </div>
-          <div class="file-upload-zone" onclick="simulateFileUpload()">
-            <span class="upload-icon">📎</span>
-            <h3>Toque para selecionar arquivo</h3>
-            <p>ou arraste aqui</p>
-          </div>
-          <div class="supported-formats">
-            <span class="format-tag">.CSV</span>
-            <span class="format-tag">.XLS / .XLSX</span>
-            <span class="format-tag">.ICS</span>
-            <span class="format-tag">.PDF</span>
-          </div>
-          <div class="integration-steps">
-            <div class="integration-step">
-              <span class="step-num">💡</span>
-              <span class="step-text"><strong>Trinks:</strong> Relatórios → Exportar agenda</span>
-            </div>
-            <div class="integration-step">
-              <span class="step-num">💡</span>
-              <span class="step-text"><strong>Belle Software:</strong> Agenda → Exportar CSV</span>
-            </div>
-            <div class="integration-step">
-              <span class="step-num">💡</span>
-              <span class="step-text"><strong>Avec:</strong> Configurações → Dados → Exportar</span>
-            </div>
-            <div class="integration-step">
-              <span class="step-num">💡</span>
-              <span class="step-text"><strong>Outro sistema:</strong> Exporte como CSV ou planilha</span>
-            </div>
-          </div>
-          <div style="text-align:center; margin-top:12px;">
-            <button class="btn btn-ghost" onclick="showOnbScreen('onb-import-method')">← Voltar</button>
+          <div style="margin-top:12px; text-align:center;">
+            <button class="btn btn-ghost" onclick="goOnb('onb-welcome')">← Voltar</button>
           </div>
         </div>
       </div>
@@ -2110,57 +511,94 @@ body {
       <!-- Photo -->
       <div class="screen" id="onb-photo">
         <div class="onb-photo">
-          <div class="photo-header">
-            <h2>📸 Fotografe sua agenda</h2>
-            <p>Tire uma foto da página do seu caderno de hoje</p>
-          </div>
+          <h2>📸 Fotografe sua agenda</h2>
+          <p class="sub2">Tire fotos de quantas páginas precisar. Uma por dia, uma por semana — como estiver organizado.</p>
 
-          <div class="upload-zone" onclick="capturePhoto()">
-            <span class="camera-icon">📷</span>
+          <div class="upload-zone" id="uz" onclick="capturePhoto()">
+            <span class="cam">📷</span>
             <h3>Toque para fotografar</h3>
             <p>ou arraste uma imagem aqui</p>
           </div>
 
-          <div class="agenda-preview" id="agenda-preview">
-            <div class="handwritten"><span class="time">8:00</span> — Maria Helena — Limpeza</div>
-            <div class="handwritten"><span class="time">9:30</span> — Ana C. — Drenagem</div>
-            <div class="handwritten"><span class="time">11:00</span> — Juliana — Design Sobrancelha</div>
-            <div class="handwritten"><span class="time">13:00</span> — almoço</div>
-            <div class="handwritten"><span class="time">14:00</span> — Fer — Peeling (cancelou?)</div>
-            <div class="handwritten"><span class="time">15:30</span> — Rê — Massagem Relax</div>
-            <div class="handwritten"><span class="time">17:00</span> — Patrícia — Limp + Hidrat.</div>
+          <div class="agenda-preview" id="agprev">
+            <div class="hw"><span class="t">8:00</span> — Maria Helena — Limpeza</div>
+            <div class="hw"><span class="t">9:30</span> — Ana C. — Drenagem</div>
+            <div class="hw"><span class="t">11:00</span> — Juliana — Design Sobrancelha</div>
+            <div class="hw"><span class="t">13:00</span> — almoço</div>
+            <div class="hw"><span class="t">14:00</span> — Fer — Peeling (cancelou?)</div>
+            <div class="hw"><span class="t">15:30</span> — Rê — Massagem Relax</div>
+            <div class="hw"><span class="t">17:00</span> — Patrícia — Limp + Hidrat.</div>
           </div>
 
-          <button class="btn btn-primary" id="btn-process" style="display:none" onclick="showOnbScreen('onb-processing'); startProcessing()">Enviar para Lara ler 🪄</button>
-
-          <div style="margin-top:16px; text-align:center;">
-            <button class="btn btn-ghost" onclick="showOnbScreen('onb-import-method')">← Voltar</button>
+          <div class="photo-counter" id="pcounter" style="display:none;">
+            <strong>1 foto</strong> capturada · <a href="#" style="color:var(--rose-500);" onclick="event.preventDefault();">+ Adicionar outra página</a>
           </div>
+
+          <button class="btn btn-primary" id="btnProc" style="display:none" onclick="goOnb('onb-processing'); startProc()">Enviar para Lara ler 🪄</button>
+          <button class="btn btn-ghost" style="margin-top:8px;" onclick="goOnb('onb-method')">← Voltar</button>
         </div>
       </div>
 
       <!-- Processing -->
       <div class="screen" id="onb-processing">
         <div class="onb-processing">
-          <div class="processing-animation">
-            <div class="inner">🔍</div>
-          </div>
+          <div class="proc-ring"><div class="inner">🔍</div></div>
           <h2>Lendo sua agenda...</h2>
-          <p style="font-size:14px; color:var(--gray-500);">Isso leva só alguns segundos</p>
+          <p style="font-size:15px; color:var(--gray-500);">Isso leva só alguns segundos</p>
+          <div class="proc-steps">
+            <div class="proc-step active" id="ps1"><span class="ck">⏳</span> Analisando a imagem</div>
+            <div class="proc-step" id="ps2"><span class="ck">⏳</span> Encontrando horários e nomes</div>
+            <div class="proc-step" id="ps3"><span class="ck">⏳</span> Identificando serviços</div>
+            <div class="proc-step" id="ps4"><span class="ck">⏳</span> Montando sua agenda digital</div>
+          </div>
+        </div>
+      </div>
 
-          <div class="processing-steps">
-            <div class="processing-step active" id="step-1">
-              <span class="check">⏳</span> Analisando a imagem
+      <!-- Failure -->
+      <div class="screen" id="onb-failure">
+        <div class="onb-failure">
+          <div class="fail-icon">😕</div>
+          <h2>Não consegui ler tudo</h2>
+          <p class="fail-msg">Encontrei a caligrafia difícil em algumas partes. Consegui ler 4 de ~7 itens, mas alguns ficaram ilegíveis.</p>
+          <div class="fail-options">
+            <button class="btn btn-primary" onclick="goOnb('onb-review')">Ver o que consegui e corrigir o resto</button>
+            <button class="btn btn-secondary" onclick="goOnb('onb-photo')">Tirar outra foto (melhor iluminação)</button>
+            <button class="btn btn-ghost" onclick="goOnb('onb-concierge')">Pedir ajuda de uma atendente</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Concierge -->
+      <div class="screen" id="onb-concierge">
+        <div class="onb-concierge">
+          <div class="conc-header">
+            <div class="conc-avatar">👩‍💼</div>
+            <h2>Atendimento assistido</h2>
+            <p class="conc-sub">Uma atendente da Lara vai te ajudar a configurar tudo. Responde pelo WhatsApp ou aqui mesmo.</p>
+          </div>
+
+          <div class="conc-chat">
+            <div class="conc-bubble agent">
+              <div class="sender">Bia · Equipe Lara</div>
+              Oi Cris! 👋 Sou a Bia, da equipe da Lara. Vou te ajudar a colocar sua agenda no ar.<br><br>
+              Pode me mandar uma foto do seu caderno de agenda, ou se preferir, me conta quais são os seus horários dessa semana e eu monto pra você!
             </div>
-            <div class="processing-step" id="step-2">
-              <span class="check">⏳</span> Encontrando horários e nomes
+            <div class="conc-bubble" style="margin-left:20%; background:var(--wa-light);">
+              Oi Bia! Vou te mandar a foto, mas a letra tá meio ruim rs
             </div>
-            <div class="processing-step" id="step-3">
-              <span class="check">⏳</span> Identificando serviços
+            <div class="conc-bubble agent">
+              <div class="sender">Bia · Equipe Lara</div>
+              Sem problema! 😊 A gente lê caligrafia todo dia. Manda que eu monto e te mostro pra conferir antes de confirmar qualquer coisa.
             </div>
-            <div class="processing-step" id="step-4">
-              <span class="check">⏳</span> Montando sua agenda digital
-            </div>
+          </div>
+
+          <div class="conc-form">
+            <textarea placeholder="Digite sua mensagem..."></textarea>
+            <button class="btn btn-primary" style="margin-top:10px;">Enviar 💬</button>
+          </div>
+
+          <div style="margin-top:16px; text-align:center;">
+            <button class="btn btn-ghost" onclick="goOnb('onb-welcome')">← Voltar e tentar sozinha</button>
           </div>
         </div>
       </div>
@@ -2168,873 +606,575 @@ body {
       <!-- Review -->
       <div class="screen" id="onb-review">
         <div class="onb-review">
-          <div class="review-header">
+          <div class="rh">
             <h2>Confira e corrija ✏️</h2>
-            <p>Toque em qualquer item para editar. Itens em amarelo precisam de atenção.</p>
+            <p>Toque para editar, ✕ para apagar, + para adicionar. Itens em amarelo precisam de atenção.</p>
           </div>
 
-          <div class="review-date-group">
-            <div class="review-date-label">📅 Sexta, 22 de Agosto</div>
+          <div class="rv-date">📅 Sábado, 22 de Agosto</div>
 
-            <div class="review-card" onclick="openEditModal()">
-              <div class="time-block"><div class="time">08:00</div><div class="dur">60 min</div></div>
-              <div class="divider"></div>
-              <div class="info">
-                <div class="name">Maria Helena</div>
-                <div class="service">Limpeza de Pele</div>
-              </div>
-              <span class="confidence-badge high">✓ OK</span>
-            </div>
-
-            <div class="review-card" onclick="openEditModal()">
-              <div class="time-block"><div class="time">09:30</div><div class="dur">60 min</div></div>
-              <div class="divider"></div>
-              <div class="info">
-                <div class="name">Ana C.</div>
-                <div class="service">Drenagem Linfática</div>
-              </div>
-              <span class="confidence-badge high">✓ OK</span>
-            </div>
-
-            <div class="review-card" onclick="openEditModal()">
-              <div class="time-block"><div class="time">11:00</div><div class="dur">45 min</div></div>
-              <div class="divider"></div>
-              <div class="info">
-                <div class="name">Juliana</div>
-                <div class="service">Design de Sobrancelha</div>
-              </div>
-              <span class="confidence-badge high">✓ OK</span>
-            </div>
-
-            <div class="review-card low-confidence" onclick="openEditModal()">
-              <div class="time-block"><div class="time">14:00</div><div class="dur">60 min</div></div>
-              <div class="divider"></div>
-              <div class="info">
-                <div class="name">Fer???</div>
-                <div class="service">Peeling</div>
-              </div>
-              <span class="confidence-badge low">⚠ Verificar</span>
-            </div>
-
-            <div class="review-card" onclick="openEditModal()">
-              <div class="time-block"><div class="time">15:30</div><div class="dur">60 min</div></div>
-              <div class="divider"></div>
-              <div class="info">
-                <div class="name">Rê</div>
-                <div class="service">Massagem Relaxante</div>
-              </div>
-              <span class="confidence-badge high">✓ OK</span>
-            </div>
-
-            <div class="review-card low-confidence" onclick="openEditModal()">
-              <div class="time-block"><div class="time">17:00</div><div class="dur">90 min</div></div>
-              <div class="divider"></div>
-              <div class="info">
-                <div class="name">Patrícia</div>
-                <div class="service">Limp + Hidrat???</div>
-              </div>
-              <span class="confidence-badge low">⚠ Verificar</span>
-            </div>
+          <div class="rv-card" onclick="openEdit()">
+            <div class="tb"><div class="time">08:00</div><div class="dur">60 min</div></div>
+            <div class="bar"></div>
+            <div class="info"><div class="name">Maria Helena</div><div class="svc">Limpeza de Pele</div></div>
+            <span class="badge badge-ok">✓ OK</span>
+            <div class="del-btn" onclick="event.stopPropagation(); this.parentElement.style.display='none'">✕</div>
           </div>
 
-          <div style="display:flex; gap:10px; margin-top:16px;">
-            <button class="btn btn-secondary" onclick="showOnbScreen('onb-photo')" style="flex:1;">← Voltar</button>
-            <button class="btn btn-primary" onclick="showOnbScreen('onb-success')" style="flex:2;">Tudo certo, confirmar ✅</button>
+          <div class="rv-card" onclick="openEdit()">
+            <div class="tb"><div class="time">09:30</div><div class="dur">60 min</div></div>
+            <div class="bar"></div>
+            <div class="info"><div class="name">Ana C.</div><div class="svc">Drenagem Linfática</div></div>
+            <span class="badge badge-ok">✓ OK</span>
+            <div class="del-btn" onclick="event.stopPropagation(); this.parentElement.style.display='none'">✕</div>
           </div>
+
+          <div class="rv-card" onclick="openEdit()">
+            <div class="tb"><div class="time">11:00</div><div class="dur">45 min</div></div>
+            <div class="bar"></div>
+            <div class="info"><div class="name">Juliana</div><div class="svc">Design de Sobrancelha</div></div>
+            <span class="badge badge-ok">✓ OK</span>
+            <div class="del-btn" onclick="event.stopPropagation(); this.parentElement.style.display='none'">✕</div>
+          </div>
+
+          <div class="rv-card low" onclick="openEdit()">
+            <div class="tb"><div class="time">14:00</div><div class="dur">60 min</div></div>
+            <div class="bar"></div>
+            <div class="info"><div class="name">Fer???</div><div class="svc">Peeling — "cancelou?"</div></div>
+            <span class="badge badge-warn">⚠ Verificar</span>
+            <div class="del-btn" onclick="event.stopPropagation(); this.parentElement.style.display='none'">✕</div>
+          </div>
+
+          <div class="rv-card" onclick="openEdit()">
+            <div class="tb"><div class="time">15:30</div><div class="dur">60 min</div></div>
+            <div class="bar"></div>
+            <div class="info"><div class="name">Rê</div><div class="svc">Massagem Relaxante</div></div>
+            <span class="badge badge-ok">✓ OK</span>
+            <div class="del-btn" onclick="event.stopPropagation(); this.parentElement.style.display='none'">✕</div>
+          </div>
+
+          <div class="rv-card low" onclick="openEdit()">
+            <div class="tb"><div class="time">17:00</div><div class="dur">90 min</div></div>
+            <div class="bar"></div>
+            <div class="info"><div class="name">Patrícia</div><div class="svc">Limp + Hidrat???</div></div>
+            <span class="badge badge-warn">⚠ Verificar</span>
+            <div class="del-btn" onclick="event.stopPropagation(); this.parentElement.style.display='none'">✕</div>
+          </div>
+
+          <button class="add-item-btn" onclick="openEdit()">+ Adicionar agendamento que a Lara não encontrou</button>
+
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-secondary" onclick="goOnb('onb-photo')" style="flex:1;">← Voltar</button>
+            <button class="btn btn-primary" onclick="goOnb('onb-phones')" style="flex:2;">Próximo: telefones →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phones & Opt-in -->
+      <div class="screen" id="onb-phones">
+        <div class="onb-phones">
+          <div class="ph-header">
+            <h2>📱 Telefones das clientes</h2>
+            <p>Pra eu enviar lembretes e confirmações, preciso do WhatsApp de cada cliente. Preencha os que estão faltando.</p>
+          </div>
+
+          <div class="phones-summary">
+            <strong>2 de 6</strong> clientes já com WhatsApp · <strong>4 faltando</strong>
+          </div>
+
+          <div class="phone-card">
+            <div class="pc-row">
+              <span class="pc-name">Maria Helena</span>
+              <input class="pc-input" value="(11) 98765-4321" placeholder="(11) 99999-9999">
+            </div>
+            <div class="pc-status ok">✓ WhatsApp preenchido</div>
+          </div>
+
+          <div class="phone-card">
+            <div class="pc-row">
+              <span class="pc-name">Ana C.</span>
+              <input class="pc-input" value="" placeholder="(11) 99999-9999">
+            </div>
+            <div class="pc-status missing">⚠ WhatsApp necessário para lembrete</div>
+          </div>
+
+          <div class="phone-card">
+            <div class="pc-row">
+              <span class="pc-name">Juliana</span>
+              <input class="pc-input" value="" placeholder="(11) 99999-9999">
+            </div>
+            <div class="pc-status missing">⚠ WhatsApp necessário para lembrete</div>
+          </div>
+
+          <div class="phone-card">
+            <div class="pc-row">
+              <span class="pc-name">Fer</span>
+              <input class="pc-input" value="" placeholder="(11) 99999-9999">
+            </div>
+            <div class="pc-status missing">⚠ WhatsApp necessário para lembrete</div>
+          </div>
+
+          <div class="phone-card">
+            <div class="pc-row">
+              <span class="pc-name">Rê</span>
+              <input class="pc-input" value="(11) 97654-3210" placeholder="(11) 99999-9999">
+            </div>
+            <div class="pc-status ok">✓ WhatsApp preenchido</div>
+          </div>
+
+          <div class="phone-card">
+            <div class="pc-row">
+              <span class="pc-name">Patrícia</span>
+              <input class="pc-input" value="" placeholder="(11) 99999-9999">
+            </div>
+            <div class="pc-status missing">⚠ WhatsApp necessário para lembrete</div>
+          </div>
+
+          <button class="btn btn-secondary btn-sm" style="width:100%; margin:12px 0;" onclick="alert('Simulação: abrindo contatos do celular...')">📲 Importar da agenda do celular</button>
+
+          <div class="optin-box">
+            <h4>🔐 Primeira mensagem de apresentação</h4>
+            <p>Vou enviar uma mensagem pra cada cliente se apresentando e pedindo permissão para enviar lembretes. Quem responder SAIR não recebe mais.</p>
+            <div class="preview">"Oi [Maria]! Aqui é a Lara, assistente da Cris Beleza. A partir de agora cuido dos lembretes dos seus horários. Se não quiser receber, responda SAIR a qualquer momento."</div>
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-secondary" onclick="goOnb('onb-review')" style="flex:1;">← Voltar</button>
+            <button class="btn btn-primary" onclick="goOnb('onb-success')" style="flex:2;">Confirmar e ativar ✅</button>
+          </div>
+
+          <p style="font-size:12px; color:var(--gray-400); text-align:center; margin-top:12px;">Clientes sem WhatsApp ficam na agenda, mas não recebem lembrete automático. Você pode adicionar depois.</p>
         </div>
       </div>
 
       <!-- Success -->
       <div class="screen" id="onb-success">
         <div class="onb-success">
-          <div class="success-check">✓</div>
+          <div class="succ-check">✓</div>
           <h2>Pronto! Sua agenda digital<br>está no ar 🎉</h2>
-          <p style="font-size:14px; color:var(--gray-500); margin-top:4px;">Agora suas clientes podem agendar online</p>
+          <p style="font-size:15px; color:var(--gray-500); margin-top:4px;">Lembretes serão enviados automaticamente para as clientes com WhatsApp</p>
 
           <div class="stats-row">
             <div class="stat-card">
               <div class="num">6</div>
-              <div class="label">Agendamentos importados</div>
+              <div class="lbl">Agendamentos</div>
             </div>
             <div class="stat-card">
-              <div class="num">5</div>
-              <div class="label">Serviços identificados</div>
+              <div class="num">2</div>
+              <div class="lbl">Com WhatsApp</div>
+            </div>
+            <div class="stat-card">
+              <div class="num">4</div>
+              <div class="lbl">Sem número (sem lembrete)</div>
             </div>
           </div>
 
-          <p style="font-size:13px; font-weight:600; color:var(--gray-700); margin-bottom:8px;">Compartilhe seu link de agendamento:</p>
+          <p style="font-size:14px; font-weight:600; color:var(--gray-700); margin-bottom:8px;">Compartilhe seu link de agendamento:</p>
           <div class="share-link">
             <span style="font-size:18px;">🔗</span>
             <span class="url">lara.app/cris-beleza</span>
-            <button class="copy-btn" onclick="this.textContent='Copiado!'">Copiar</button>
+            <button class="cpbtn" onclick="this.textContent='Copiado!'">Copiar</button>
           </div>
 
-          <button class="btn btn-primary" style="margin-top:20px;" onclick="showSection('dashboard')">Ir para minha agenda 📱</button>
+          <button class="btn btn-primary" style="margin-top:20px;" onclick="showSec('dashboard')">Ir para minha agenda 📱</button>
+          <p style="font-size:13px; color:var(--gray-500); margin-top:12px;">Sua agenda no WhatsApp e na web. Use como preferir — pelo link do painel ou respondendo direto pra Lara no WhatsApp.</p>
         </div>
       </div>
     </div>
 
-    <!-- =========== DASHBOARD =========== -->
-    <div class="section" id="section-dashboard">
-      <div class="dash-container">
-        <div class="dash-header">
+    <!-- ═══ DASHBOARD ═══ -->
+    <div class="section" id="sec-dashboard">
+      <div class="dash">
+        <div class="dash-hdr">
           <span class="brand">Lara</span>
-          <div class="wa-status">
-            <div class="wa-dot"></div>
-            WhatsApp ativo
-          </div>
+          <div class="wa"><div class="dot"></div>WhatsApp ativo</div>
         </div>
 
-        <!-- Home -->
-        <div class="dash-sub active" id="dash-home">
-          <div class="dash-home">
+        <div class="dsub active" id="d-home">
+          <div class="dhome">
             <div class="greeting">Bom dia, Cris! 👋</div>
-
-            <div class="metrics-row">
-              <div class="metric-card highlight">
-                <div class="metric-value">5</div>
-                <div class="metric-label">Hoje</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-value">23</div>
-                <div class="metric-label">Esta semana</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-value">4%</div>
-                <div class="metric-label">No-show (mês)</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-value">2</div>
-                <div class="metric-label">Pendentes</div>
-              </div>
+            <div class="mrow">
+              <div class="mcard hl"><div class="mv">5</div><div class="ml">Hoje (sábado)</div></div>
+              <div class="mcard"><div class="mv">23</div><div class="ml">Esta semana</div></div>
+              <div class="mcard"><div class="mv">4%</div><div class="ml">No-show (mês)</div></div>
+              <div class="mcard"><div class="mv">2</div><div class="ml">Pendentes</div></div>
             </div>
 
-            <div class="section-title">
-              Agenda de hoje
-              <span class="see-all" onclick="showDashTab('dash-agenda')">Ver tudo →</span>
-            </div>
+            <div class="stitle">Agenda de hoje (sábado 22/08)<span class="sa" onclick="showDTab('d-agenda')">Ver tudo →</span></div>
 
-            <div class="appt-list">
-              <div class="appt-item">
-                <div class="appt-time"><div class="hour">08:00</div></div>
-                <div class="appt-bar confirmed"></div>
-                <div class="appt-info">
-                  <div class="client-name">Maria Helena</div>
-                  <div class="service-name">Limpeza de Pele · 60 min</div>
-                </div>
-                <span class="status-badge confirmed">Confirmado</span>
-              </div>
+            <div class="appt"><div class="ah">08:00</div><div class="abar green"></div><div class="ai"><div class="cn">Maria Helena</div><div class="sn">Limpeza de Pele · 60 min</div></div><span class="badge badge-confirmed">Confirmado</span></div>
+            <div class="appt"><div class="ah">09:30</div><div class="abar green"></div><div class="ai"><div class="cn">Ana Carolina</div><div class="sn">Drenagem Linfática · 60 min</div></div><span class="badge badge-confirmed">Confirmado</span></div>
+            <div class="appt"><div class="ah">11:00</div><div class="abar amber"></div><div class="ai"><div class="cn">Juliana Mendes</div><div class="sn">Design de Sobrancelha · 45 min</div></div><span class="badge badge-pending">Pendente</span></div>
+            <div class="appt"><div class="ah">14:00</div><div class="abar red"></div><div class="ai"><div class="cn">Fernanda Ribeiro</div><div class="sn">Peeling · 60 min</div></div><span class="badge badge-cancelled">Cancelado</span></div>
+            <div class="appt"><div class="ah">15:30</div><div class="abar green"></div><div class="ai"><div class="cn">Renata Silva</div><div class="sn">Massagem Relaxante · 60 min</div></div><span class="badge badge-confirmed">Confirmado</span></div>
 
-              <div class="appt-item">
-                <div class="appt-time"><div class="hour">09:30</div></div>
-                <div class="appt-bar confirmed"></div>
-                <div class="appt-info">
-                  <div class="client-name">Ana Carolina</div>
-                  <div class="service-name">Drenagem Linfática · 60 min</div>
-                </div>
-                <span class="status-badge confirmed">Confirmado</span>
-              </div>
-
-              <div class="appt-item">
-                <div class="appt-time"><div class="hour">11:00</div></div>
-                <div class="appt-bar pending"></div>
-                <div class="appt-info">
-                  <div class="client-name">Juliana Mendes</div>
-                  <div class="service-name">Design de Sobrancelha · 45 min</div>
-                </div>
-                <span class="status-badge pending">Pendente</span>
-              </div>
-
-              <div class="appt-item">
-                <div class="appt-time"><div class="hour">14:00</div></div>
-                <div class="appt-bar cancelled"></div>
-                <div class="appt-info">
-                  <div class="client-name">Fernanda Ribeiro</div>
-                  <div class="service-name">Peeling · 60 min</div>
-                </div>
-                <span class="status-badge cancelled">Cancelado</span>
-              </div>
-
-              <div class="appt-item">
-                <div class="appt-time"><div class="hour">15:30</div></div>
-                <div class="appt-bar confirmed"></div>
-                <div class="appt-info">
-                  <div class="client-name">Renata Silva</div>
-                  <div class="service-name">Massagem Relaxante · 60 min</div>
-                </div>
-                <span class="status-badge confirmed">Confirmado</span>
-              </div>
-            </div>
-
-            <div class="section-title">Ações rápidas</div>
-            <div class="quick-actions">
-              <button class="quick-action">
-                <div class="qa-icon">🚫</div>
-                <div class="qa-label">Bloquear horário</div>
-              </button>
-              <button class="quick-action">
-                <div class="qa-icon">⏸️</div>
-                <div class="qa-label">Pausar Lara</div>
-              </button>
-              <button class="quick-action">
-                <div class="qa-icon">💬</div>
-                <div class="qa-label">Ver pendentes</div>
-              </button>
+            <div class="stitle" style="margin-top:20px;">Ações rápidas</div>
+            <div class="qactions">
+              <button class="qa"><div class="qi">🚫</div><div class="ql">Bloquear horário</div></button>
+              <button class="qa"><div class="qi">⏸️</div><div class="ql">Pausar Lara</div></button>
+              <button class="qa"><div class="qi">💬</div><div class="ql">Ver pendentes</div></button>
             </div>
           </div>
         </div>
 
-        <!-- Agenda -->
-        <div class="dash-sub" id="dash-agenda">
-          <div class="dash-agenda">
-            <div class="week-strip">
-              <div class="week-day has-appts"><div class="day-name">Seg</div><div class="day-num">18</div><div class="day-dot"></div></div>
-              <div class="week-day has-appts"><div class="day-name">Ter</div><div class="day-num">19</div><div class="day-dot"></div></div>
-              <div class="week-day has-appts"><div class="day-name">Qua</div><div class="day-num">20</div><div class="day-dot"></div></div>
-              <div class="week-day has-appts"><div class="day-name">Qui</div><div class="day-num">21</div><div class="day-dot"></div></div>
-              <div class="week-day active has-appts"><div class="day-name">Sex</div><div class="day-num">22</div><div class="day-dot"></div></div>
-              <div class="week-day"><div class="day-name">Sáb</div><div class="day-num">23</div><div class="day-dot"></div></div>
-              <div class="week-day"><div class="day-name">Dom</div><div class="day-num">24</div><div class="day-dot"></div></div>
+        <div class="dsub" id="d-agenda">
+          <div class="dagenda">
+            <div class="wstrip">
+              <div class="wd has" onclick="selDay(this)"><div class="wn">Seg</div><div class="wnum">17</div><div class="wdot"></div></div>
+              <div class="wd has" onclick="selDay(this)"><div class="wn">Ter</div><div class="wnum">18</div><div class="wdot"></div></div>
+              <div class="wd has" onclick="selDay(this)"><div class="wn">Qua</div><div class="wnum">19</div><div class="wdot"></div></div>
+              <div class="wd has" onclick="selDay(this)"><div class="wn">Qui</div><div class="wnum">20</div><div class="wdot"></div></div>
+              <div class="wd has" onclick="selDay(this)"><div class="wn">Sex</div><div class="wnum">21</div><div class="wdot"></div></div>
+              <div class="wd active has" onclick="selDay(this)"><div class="wn">Sáb</div><div class="wnum">22</div><div class="wdot"></div></div>
+              <div class="wd" onclick="selDay(this)"><div class="wn">Dom</div><div class="wnum">23</div><div class="wdot"></div></div>
             </div>
-
             <div class="timeline">
-              <div class="timeline-slot">
-                <div class="timeline-hour">07:00</div>
-                <div class="timeline-content"></div>
-              </div>
-              <div class="timeline-slot">
-                <div class="timeline-hour">08:00</div>
-                <div class="timeline-content">
-                  <div class="timeline-appt"><div class="ta-name">Maria Helena</div><div class="ta-service">Limpeza de Pele · 08:00–09:00</div></div>
-                </div>
-              </div>
-              <div class="timeline-slot">
-                <div class="timeline-hour">09:00</div>
-                <div class="timeline-content">
-                  <div class="timeline-appt" style="margin-top:24px;"><div class="ta-name">Ana Carolina</div><div class="ta-service">Drenagem Linfática · 09:30–10:30</div></div>
-                </div>
-              </div>
-              <div class="timeline-slot">
-                <div class="timeline-hour">10:00</div>
-                <div class="timeline-content"></div>
-              </div>
-              <div class="timeline-slot">
-                <div class="timeline-hour">11:00</div>
-                <div class="timeline-content">
-                  <div class="timeline-appt pending-appt"><div class="ta-name">Juliana Mendes</div><div class="ta-service">Design Sobrancelha · 11:00–11:45</div></div>
-                </div>
-              </div>
-              <div class="timeline-slot">
-                <div class="timeline-hour">12:00</div>
-                <div class="timeline-content"></div>
-              </div>
-              <div class="timeline-slot">
-                <div class="timeline-hour">13:00</div>
-                <div class="timeline-content">
-                  <div style="font-size:12px; color:var(--gray-400); padding:8px 0;">🍽️ Almoço</div>
-                </div>
-              </div>
-              <div class="timeline-slot">
-                <div class="timeline-hour">14:00</div>
-                <div class="timeline-content">
-                  <div style="font-size:12px; color:var(--red-500); text-decoration:line-through; padding:8px 0; opacity:0.6;">Fernanda — Peeling (cancelado)</div>
-                </div>
-              </div>
-              <div class="timeline-slot">
-                <div class="timeline-hour">15:00</div>
-                <div class="timeline-content">
-                  <div class="timeline-appt" style="margin-top:24px;"><div class="ta-name">Renata Silva</div><div class="ta-service">Massagem Relaxante · 15:30–16:30</div></div>
-                </div>
-              </div>
-              <div class="timeline-slot">
-                <div class="timeline-hour">16:00</div>
-                <div class="timeline-content"></div>
-              </div>
-              <div class="timeline-slot">
-                <div class="timeline-hour">17:00</div>
-                <div class="timeline-content">
-                  <div class="timeline-appt"><div class="ta-name">Patrícia Santos</div><div class="ta-service">Limpeza + Hidratação · 17:00–18:30</div></div>
-                </div>
-              </div>
-              <div class="timeline-slot">
-                <div class="timeline-hour">18:00</div>
-                <div class="timeline-content"></div>
-              </div>
+              <div class="tslot"><div class="thr">07:00</div><div class="tc"></div></div>
+              <div class="tslot"><div class="thr">08:00</div><div class="tc"><div class="ta conf"><div class="tan">Maria Helena</div><div class="tas">Limpeza de Pele · 08:00–09:00</div></div></div></div>
+              <div class="tslot"><div class="thr">09:00</div><div class="tc"><div class="ta conf" style="margin-top:20px;"><div class="tan">Ana Carolina</div><div class="tas">Drenagem Linfática · 09:30–10:30</div></div></div></div>
+              <div class="tslot"><div class="thr">10:00</div><div class="tc"></div></div>
+              <div class="tslot"><div class="thr">11:00</div><div class="tc"><div class="ta pend"><div class="tan">Juliana Mendes</div><div class="tas">Design Sobrancelha · 11:00–11:45</div></div></div></div>
+              <div class="tslot"><div class="thr">12:00</div><div class="tc"><div style="font-size:13px; color:var(--gray-400); padding:8px 0;">🍽️ Almoço</div></div></div>
+              <div class="tslot"><div class="thr">13:00</div><div class="tc"><div style="font-size:13px; color:var(--gray-400); padding:8px 0;">Sábado — encerra 13:00</div></div></div>
             </div>
           </div>
         </div>
 
-        <!-- Conversations -->
-        <div class="dash-sub" id="dash-conversations">
-          <div class="dash-conversations">
-            <input class="conv-search" placeholder="🔍 Buscar conversas..." readonly>
-
-            <div class="conv-item">
-              <div class="conv-avatar" style="background: linear-gradient(135deg, #f472b6, #e11d48);">MH</div>
-              <div class="conv-info">
-                <div class="conv-name">Maria Helena <span class="via-tag lara">Via Lara</span></div>
-                <div class="conv-preview">✅ Confirmei meu horário de amanhã!</div>
-              </div>
-              <div class="conv-meta">
-                <div class="conv-time">10:23</div>
-              </div>
-            </div>
-
-            <div class="conv-item">
-              <div class="conv-avatar" style="background: linear-gradient(135deg, #a78bfa, #7c3aed);">JM</div>
-              <div class="conv-info">
-                <div class="conv-name">Juliana Mendes <span class="via-tag lara">Via Lara</span></div>
-                <div class="conv-preview">Posso remarcar pra 11:30?</div>
-              </div>
-              <div class="conv-meta">
-                <div class="conv-time">09:41</div>
-                <div class="conv-badge">1</div>
-              </div>
-            </div>
-
-            <div class="conv-item">
-              <div class="conv-avatar" style="background: linear-gradient(135deg, #34d399, #059669);">FR</div>
-              <div class="conv-info">
-                <div class="conv-name">Fernanda Ribeiro <span class="via-tag lara">Via Lara</span></div>
-                <div class="conv-preview">Preciso cancelar amanhã 😞</div>
-              </div>
-              <div class="conv-meta">
-                <div class="conv-time">Ontem</div>
-              </div>
-            </div>
-
-            <div class="conv-item">
-              <div class="conv-avatar" style="background: linear-gradient(135deg, #fbbf24, #d97706);">AC</div>
-              <div class="conv-info">
-                <div class="conv-name">Ana Carolina <span class="via-tag manual">Manual</span></div>
-                <div class="conv-preview">Oi Cris, tem horário na terça?</div>
-              </div>
-              <div class="conv-meta">
-                <div class="conv-time">Ontem</div>
-                <div class="conv-badge">2</div>
-              </div>
-            </div>
-
-            <div class="conv-item">
-              <div class="conv-avatar" style="background: linear-gradient(135deg, #60a5fa, #2563eb);">RS</div>
-              <div class="conv-info">
-                <div class="conv-name">Renata Silva <span class="via-tag lara">Via Lara</span></div>
-                <div class="conv-preview">Lembrete enviado automaticamente ✓</div>
-              </div>
-              <div class="conv-meta">
-                <div class="conv-time">Ontem</div>
-              </div>
-            </div>
-
-            <div class="conv-item">
-              <div class="conv-avatar" style="background: linear-gradient(135deg, #f97316, #dc2626);">PS</div>
-              <div class="conv-info">
-                <div class="conv-name">Patrícia Santos <span class="via-tag lara">Via Lara</span></div>
-                <div class="conv-preview">Agendamento confirmado para sexta 17h</div>
-              </div>
-              <div class="conv-meta">
-                <div class="conv-time">Ter</div>
-              </div>
-            </div>
+        <div class="dsub" id="d-conv">
+          <div class="dconv">
+            <input class="csearch" placeholder="🔍 Buscar conversas..." readonly>
+            <div class="ci"><div class="cav" style="background:linear-gradient(135deg,#f472b6,#e11d48);">MH</div><div class="cinf"><div class="cname">Maria Helena <span class="vtag lara">Via Lara</span></div><div class="cprev">✅ Confirmei meu horário de amanhã!</div></div><div class="cmeta"><div class="ctime">10:23</div></div></div>
+            <div class="ci"><div class="cav" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);">JM</div><div class="cinf"><div class="cname">Juliana Mendes <span class="vtag lara">Via Lara</span></div><div class="cprev">Posso remarcar pra 11:30?</div></div><div class="cmeta"><div class="ctime">09:41</div><div class="cbadge">1</div></div></div>
+            <div class="ci"><div class="cav" style="background:linear-gradient(135deg,#34d399,#059669);">FR</div><div class="cinf"><div class="cname">Fernanda Ribeiro <span class="vtag lara">Via Lara</span></div><div class="cprev">Preciso cancelar amanhã 😞</div></div><div class="cmeta"><div class="ctime">Ontem</div></div></div>
+            <div class="ci"><div class="cav" style="background:linear-gradient(135deg,#fbbf24,#d97706);">AC</div><div class="cinf"><div class="cname">Ana Carolina <span class="vtag manual">Manual</span></div><div class="cprev">Oi Cris, tem horário na terça?</div></div><div class="cmeta"><div class="ctime">Ontem</div><div class="cbadge">2</div></div></div>
+            <div class="ci"><div class="cav" style="background:linear-gradient(135deg,#60a5fa,#2563eb);">RS</div><div class="cinf"><div class="cname">Renata Silva <span class="vtag lara">Via Lara</span></div><div class="cprev">Lembrete enviado automaticamente ✓</div></div><div class="cmeta"><div class="ctime">Ontem</div></div></div>
           </div>
         </div>
 
-        <!-- Contacts -->
-        <div class="dash-sub" id="dash-contacts">
-          <div class="dash-contacts">
-            <input class="conv-search" placeholder="🔍 Buscar clientes..." readonly>
-
-            <div class="contact-item">
-              <div class="contact-avatar">MH</div>
-              <div class="contact-info">
-                <div class="ct-name">Maria Helena Oliveira</div>
-                <div class="ct-detail">Última visita: 15/08 · 12 visitas · (11) 98765-4321</div>
-              </div>
-              <span class="contact-tag active">Pacote ativo</span>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-avatar">AC</div>
-              <div class="contact-info">
-                <div class="ct-name">Ana Carolina Dias</div>
-                <div class="ct-detail">Última visita: 12/08 · 8 visitas · (11) 97654-3210</div>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-avatar">JM</div>
-              <div class="contact-info">
-                <div class="ct-name">Juliana Mendes</div>
-                <div class="ct-detail">Última visita: 08/08 · 5 visitas · (11) 96543-2109</div>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-avatar">FR</div>
-              <div class="contact-info">
-                <div class="ct-name">Fernanda Ribeiro</div>
-                <div class="ct-detail">Última visita: 01/08 · 3 visitas · (11) 95432-1098</div>
-              </div>
-              <span class="contact-tag inactive">Inativa 15d</span>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-avatar">RS</div>
-              <div class="contact-info">
-                <div class="ct-name">Renata Silva</div>
-                <div class="ct-detail">Última visita: 10/08 · 15 visitas · (11) 94321-0987</div>
-              </div>
-              <span class="contact-tag active">Pacote ativo</span>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-avatar">PS</div>
-              <div class="contact-info">
-                <div class="ct-name">Patrícia Santos</div>
-                <div class="ct-detail">Última visita: 05/08 · 7 visitas · (11) 93210-9876</div>
-              </div>
-              <span class="contact-tag inactive">Inativa 11d</span>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-avatar">LC</div>
-              <div class="contact-info">
-                <div class="ct-name">Luciana Costa</div>
-                <div class="ct-detail">Última visita: 20/07 · 2 visitas · (11) 92109-8765</div>
-              </div>
-              <span class="contact-tag inactive">Inativa 27d</span>
-            </div>
+        <div class="dsub" id="d-cont">
+          <div class="dcont">
+            <input class="csearch" placeholder="🔍 Buscar clientes..." readonly>
+            <div class="cti"><div class="ctav">MH</div><div class="ctinf"><div class="ctn">Maria Helena Oliveira</div><div class="ctd">Última: 15/08 · 12 visitas · (11) 98765-4321</div></div><span class="tag-active">Pacote ativo</span></div>
+            <div class="cti"><div class="ctav">AC</div><div class="ctinf"><div class="ctn">Ana Carolina Dias</div><div class="ctd">Última: 12/08 · 8 visitas · (11) 97654-3210</div></div></div>
+            <div class="cti"><div class="ctav">JM</div><div class="ctinf"><div class="ctn">Juliana Mendes</div><div class="ctd">Última: 08/08 · 5 visitas · (11) 96543-2109</div></div></div>
+            <div class="cti"><div class="ctav">FR</div><div class="ctinf"><div class="ctn">Fernanda Ribeiro</div><div class="ctd">Última: 01/08 · 3 visitas · sem WhatsApp</div></div><span class="tag-inactive">Inativa 15d</span></div>
+            <div class="cti"><div class="ctav">RS</div><div class="ctinf"><div class="ctn">Renata Silva</div><div class="ctd">Última: 10/08 · 15 visitas · (11) 94321-0987</div></div><span class="tag-active">Pacote ativo</span></div>
+            <div class="cti"><div class="ctav">LC</div><div class="ctinf"><div class="ctn">Luciana Costa</div><div class="ctd">Última: 20/07 · 2 visitas · sem WhatsApp</div></div><span class="tag-inactive">Inativa 27d</span></div>
           </div>
         </div>
 
-        <!-- Settings -->
-        <div class="dash-sub" id="dash-settings">
-          <div class="dash-settings">
-            <div style="padding-top:4px; margin-bottom:4px; font-family:'Playfair Display',serif; font-size:20px; font-weight:600; color:var(--gray-900);">Configurações</div>
+        <div class="dsub" id="d-set">
+          <div class="dset">
+            <div style="padding-top:4px; margin-bottom:8px; font-family:'Playfair Display',serif; font-size:20px; font-weight:600;">Configurações</div>
 
-            <div class="settings-card">
+            <div class="scard">
               <h3>💆 Meus protocolos</h3>
-              <div class="protocol-item">
-                <span class="prot-name">Limpeza de Pele</span>
-                <span class="prot-info">60 min · R$ 150</span>
-              </div>
-              <div class="protocol-item">
-                <span class="prot-name">Drenagem Linfática</span>
-                <span class="prot-info">60 min · R$ 180</span>
-              </div>
-              <div class="protocol-item">
-                <span class="prot-name">Massagem Relaxante</span>
-                <span class="prot-info">60 min · R$ 160</span>
-              </div>
-              <div class="protocol-item">
-                <span class="prot-name">Design de Sobrancelha</span>
-                <span class="prot-info">45 min · R$ 80</span>
-              </div>
-              <div class="protocol-item">
-                <span class="prot-name">Peeling</span>
-                <span class="prot-info">60 min · R$ 200</span>
-              </div>
-              <div class="protocol-item">
-                <span class="prot-name">Limpeza + Hidratação</span>
-                <span class="prot-info">90 min · R$ 220</span>
-              </div>
-              <button class="btn btn-ghost btn-small" style="margin-top:8px;">+ Adicionar protocolo</button>
+              <div class="pi"><span class="pn">Limpeza de Pele</span><span class="pp">60 min · R$ 150</span></div>
+              <div class="pi"><span class="pn">Drenagem Linfática</span><span class="pp">60 min · R$ 180</span></div>
+              <div class="pi"><span class="pn">Massagem Relaxante</span><span class="pp">60 min · R$ 160</span></div>
+              <div class="pi"><span class="pn">Design de Sobrancelha</span><span class="pp">45 min · R$ 80</span></div>
+              <div class="pi"><span class="pn">Peeling</span><span class="pp">60 min · R$ 200</span></div>
+              <div class="pi"><span class="pn">Limpeza + Hidratação</span><span class="pp">90 min · R$ 220</span></div>
             </div>
 
-            <div class="settings-card">
+            <div class="scard">
               <h3>🕐 Horários de trabalho</h3>
-              <div class="toggle-row">
-                <span class="toggle-label">Segunda a Sexta</span>
-                <span style="font-size:13px; color:var(--gray-500);">08:00 – 18:00</span>
-              </div>
-              <div class="toggle-row">
-                <span class="toggle-label">Sábado</span>
-                <span style="font-size:13px; color:var(--gray-500);">08:00 – 13:00</span>
-              </div>
-              <div class="toggle-row">
-                <span class="toggle-label">Domingo</span>
-                <span style="font-size:13px; color:var(--gray-400);">Fechado</span>
-              </div>
+              <div class="trow"><span class="tl">Segunda a Sexta</span><span style="font-size:14px; color:var(--gray-500);">08:00–18:00</span></div>
+              <div class="trow"><span class="tl">Sábado</span><span style="font-size:14px; color:var(--gray-500);">08:00–13:00</span></div>
+              <div class="trow"><span class="tl">Domingo</span><span style="font-size:14px; color:var(--gray-400);">Fechado</span></div>
             </div>
 
-            <div class="settings-card">
+            <div class="scard">
               <h3>🏠 Atendimento domiciliar</h3>
-              <div class="toggle-row">
-                <span class="toggle-label">Ativo</span>
-                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-              </div>
-              <div class="toggle-row">
-                <span class="toggle-label">Buffer de deslocamento</span>
-                <span style="font-size:13px; color:var(--gray-500);">30 min</span>
-              </div>
-              <div class="toggle-row">
-                <span class="toggle-label">Raio de atendimento</span>
-                <span style="font-size:13px; color:var(--gray-500);">15 km</span>
-              </div>
+              <div class="trow"><span class="tl">Ativo</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+              <div class="trow"><span class="tl">Buffer de deslocamento</span><span style="font-size:14px; color:var(--gray-500);">30 min</span></div>
+              <div class="trow"><span class="tl">Raio</span><span style="font-size:14px; color:var(--gray-500);">15 km</span></div>
+              <div class="trow"><span class="tl">Adicional domiciliar</span><span style="font-size:14px; color:var(--gray-500);">+R$ 30</span></div>
             </div>
 
-            <div class="settings-card">
+            <div class="scard">
               <h3>🔗 Meu link de agendamento</h3>
-              <div class="link-share">
-                <span class="link-url">lara.app/cris-beleza</span>
-                <button class="share-btn" onclick="this.textContent='Copiado!'">Copiar</button>
-              </div>
+              <div class="lshare"><span class="lu">lara.app/cris-beleza</span><button class="sbtn" onclick="this.textContent='Copiado!'">Copiar</button></div>
             </div>
 
-            <div class="settings-card">
+            <div class="scard">
               <h3>📱 WhatsApp</h3>
-              <div class="toggle-row">
-                <span class="toggle-label">Status</span>
-                <span style="font-size:13px; color:var(--green-600); font-weight:600;">🟢 Conectado</span>
-              </div>
-              <div class="toggle-row">
-                <span class="toggle-label">Número central Lara</span>
-                <span style="font-size:13px; color:var(--gray-500);">(11) 4002-LARA</span>
-              </div>
+              <div class="trow"><span class="tl">Status</span><span style="font-size:14px; color:var(--green-600); font-weight:600;">🟢 Conectado</span></div>
+              <div class="trow"><span class="tl">Número central Lara</span><span style="font-size:14px; color:var(--gray-500);">(11) 4002-LARA</span></div>
             </div>
           </div>
         </div>
 
-        <!-- Bottom Tab Bar -->
-        <div class="bottom-tabs">
-          <button class="active" onclick="showDashTab('dash-home')">
-            <span class="tab-icon">🏠</span> Início
-          </button>
-          <button onclick="showDashTab('dash-agenda')">
-            <span class="tab-icon">📅</span> Agenda
-          </button>
-          <button onclick="showDashTab('dash-conversations')">
-            <span class="tab-icon">💬</span> Conversas
-            <span class="badge-dot"></span>
-          </button>
-          <button onclick="showDashTab('dash-contacts')">
-            <span class="tab-icon">👥</span> Contatos
-          </button>
-          <button onclick="showDashTab('dash-settings')">
-            <span class="tab-icon">⚙️</span> Lara
-          </button>
+        <div class="btabs">
+          <button class="active" onclick="showDTab('d-home')"><span class="ti">🏠</span>Início</button>
+          <button onclick="showDTab('d-agenda')"><span class="ti">📅</span>Agenda</button>
+          <button onclick="showDTab('d-conv')"><span class="ti">💬</span>Conversas<span class="bdot"></span></button>
+          <button onclick="showDTab('d-cont')"><span class="ti">👥</span>Contatos</button>
+          <button onclick="showDTab('d-set')"><span class="ti">⚙️</span>Lara</button>
         </div>
       </div>
     </div>
 
-    <!-- =========== BOOKING =========== -->
-    <div class="section" id="section-booking">
-      <div class="booking-container">
+    <!-- ═══ BOOKING ═══ -->
+    <div class="section" id="sec-booking">
+      <div class="bcontainer">
 
-        <!-- Profile -->
-        <div class="booking-sub active" id="booking-profile">
-          <div class="booking-profile">
-            <div class="prof-photo">👩‍⚕️</div>
+        <div class="bsub active" id="b-profile">
+          <div class="bprofile">
+            <div class="pphoto">👩‍⚕️</div>
             <h2>Cris Beleza</h2>
-            <p class="prof-bio">Esteticista facial e corporal · 8 anos de experiência<br>Atendimento em estúdio e domiciliar</p>
-            <div class="prof-tags">
-              <span class="prof-tag">📍 Vila Mariana, SP</span>
-              <span class="prof-tag">🏠 Atende a domicílio</span>
-              <span class="prof-tag">⭐ 4.9</span>
-            </div>
+            <p class="pbio">Esteticista facial e corporal · 8 anos de experiência<br>Atendimento em estúdio e a domicílio</p>
+            <div class="ptags"><span class="ptag">📍 Vila Mariana, SP</span><span class="ptag">🏠 Domicílio</span><span class="ptag">⭐ 4.9</span></div>
           </div>
-
-          <div class="booking-services">
+          <div class="bservices">
             <h3>Escolha o serviço</h3>
-            <div class="service-card" onclick="selectService(this, 'booking-calendar')">
-              <div class="svc-left">
-                <div class="svc-name">Limpeza de Pele</div>
-                <div class="svc-duration">⏱️ 60 min</div>
+            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Limpeza de Pele</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 150</div></div>
+            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Drenagem Linfática</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 180</div></div>
+            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Massagem Relaxante</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 160</div></div>
+            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Design de Sobrancelha</div><div class="svd">⏱️ 45 min</div></div><div class="svp">R$ 80</div></div>
+            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Peeling</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 200</div></div>
+            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Limpeza + Hidratação</div><div class="svd">⏱️ 90 min</div></div><div class="svp">R$ 220</div></div>
+          </div>
+        </div>
+
+        <!-- Modality: studio vs home -->
+        <div class="bsub" id="b-modality">
+          <div class="bmodality">
+            <button class="btn btn-ghost" onclick="showBSub('b-profile')" style="padding:8px 0; font-size:14px; text-align:left; width:auto;">← Voltar</button>
+            <h3>Onde prefere ser atendida?</h3>
+            <div class="svc-pill">💆 Limpeza de Pele · 60 min</div>
+
+            <div class="mod-card" id="mod-studio" onclick="selMod('studio')">
+              <span class="mod-icon">🏢</span>
+              <div class="mod-text">
+                <h4>No estúdio da Cris</h4>
+                <p>Rua das Flores, 123 — Vila Mariana, SP</p>
+                <div class="mod-price">R$ 150</div>
               </div>
-              <div class="svc-price">R$ 150</div>
             </div>
-            <div class="service-card" onclick="selectService(this, 'booking-calendar')">
-              <div class="svc-left">
-                <div class="svc-name">Drenagem Linfática</div>
-                <div class="svc-duration">⏱️ 60 min</div>
+
+            <div class="mod-card" id="mod-home" onclick="selMod('home')">
+              <span class="mod-icon">🏠</span>
+              <div class="mod-text">
+                <h4>No seu endereço (domicílio)</h4>
+                <p>Cris se desloca até você — raio de 15 km</p>
+                <div class="mod-price">R$ 180 <span style="font-size:12px; font-weight:400; color:var(--gray-500);">(+R$ 30 deslocamento)</span></div>
               </div>
-              <div class="svc-price">R$ 180</div>
             </div>
-            <div class="service-card" onclick="selectService(this, 'booking-calendar')">
-              <div class="svc-left">
-                <div class="svc-name">Massagem Relaxante</div>
-                <div class="svc-duration">⏱️ 60 min</div>
+
+            <div class="addr-section" id="addr-sec">
+              <div class="fg">
+                <label>Seu endereço</label>
+                <input type="text" placeholder="Rua, número, bairro..." value="Rua Augusta, 456 — Jardins">
               </div>
-              <div class="svc-price">R$ 160</div>
+              <div class="buffer-info">⏱️ Buffer de 30 min entre atendimentos para deslocamento</div>
             </div>
-            <div class="service-card" onclick="selectService(this, 'booking-calendar')">
-              <div class="svc-left">
-                <div class="svc-name">Design de Sobrancelha</div>
-                <div class="svc-duration">⏱️ 45 min</div>
-              </div>
-              <div class="svc-price">R$ 80</div>
-            </div>
-            <div class="service-card" onclick="selectService(this, 'booking-calendar')">
-              <div class="svc-left">
-                <div class="svc-name">Peeling</div>
-                <div class="svc-duration">⏱️ 60 min</div>
-              </div>
-              <div class="svc-price">R$ 200</div>
-            </div>
-            <div class="service-card" onclick="selectService(this, 'booking-calendar')">
-              <div class="svc-left">
-                <div class="svc-name">Limpeza + Hidratação</div>
-                <div class="svc-duration">⏱️ 90 min</div>
-              </div>
-              <div class="svc-price">R$ 220</div>
-            </div>
+
+            <button class="btn btn-primary" style="margin-top:20px;" onclick="showBSub('b-cal')">Escolher data e horário →</button>
           </div>
         </div>
 
         <!-- Calendar -->
-        <div class="booking-sub" id="booking-calendar">
-          <div class="booking-calendar">
-            <button class="btn btn-ghost" onclick="showBookingScreen('booking-profile')" style="padding:8px 0; font-size:13px; text-align:left; width:auto;">← Voltar</button>
+        <div class="bsub" id="b-cal">
+          <div class="bcal">
+            <button class="btn btn-ghost" onclick="showBSub('b-modality')" style="padding:8px 0; font-size:14px; text-align:left; width:auto;">← Voltar</button>
             <h3>Escolha data e horário</h3>
-            <div style="background:var(--rose-50); border-radius:10px; padding:10px; margin-bottom:16px; font-size:13px; color:var(--rose-600);">
-              💆 Limpeza de Pele · 60 min · R$ 150
-            </div>
-            <div class="cal-month">Agosto 2026</div>
-            <div class="cal-grid">
-              <div class="cal-header">D</div><div class="cal-header">S</div><div class="cal-header">T</div><div class="cal-header">Q</div><div class="cal-header">Q</div><div class="cal-header">S</div><div class="cal-header">S</div>
-              <div class="cal-day disabled"></div><div class="cal-day disabled"></div><div class="cal-day disabled"></div><div class="cal-day disabled"></div><div class="cal-day disabled"></div><div class="cal-day disabled"></div><div class="cal-day disabled">1</div>
-              <div class="cal-day disabled">2</div><div class="cal-day disabled">3</div><div class="cal-day disabled">4</div><div class="cal-day disabled">5</div><div class="cal-day disabled">6</div><div class="cal-day disabled">7</div><div class="cal-day disabled">8</div>
-              <div class="cal-day disabled">9</div><div class="cal-day disabled">10</div><div class="cal-day disabled">11</div><div class="cal-day disabled">12</div><div class="cal-day disabled">13</div><div class="cal-day disabled">14</div><div class="cal-day disabled">15</div>
-              <div class="cal-day today">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day selected" onclick="selectDay(this)">22</div>
-              <div class="cal-day disabled">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
-              <div class="cal-day disabled">30</div><div class="cal-day">31</div>
+            <div class="svc-pill">💆 Limpeza de Pele · 60 min · R$ 150 · No estúdio</div>
+            <div class="cmonth">Agosto 2026</div>
+            <div class="cgrid">
+              <div class="ch">D</div><div class="ch">S</div><div class="ch">T</div><div class="ch">Q</div><div class="ch">Q</div><div class="ch">S</div><div class="ch">S</div>
+              <div class="cd dis"></div><div class="cd dis"></div><div class="cd dis"></div><div class="cd dis"></div><div class="cd dis"></div><div class="cd dis"></div><div class="cd dis">1</div>
+              <div class="cd dis">2</div><div class="cd dis">3</div><div class="cd dis">4</div><div class="cd dis">5</div><div class="cd dis">6</div><div class="cd dis">7</div><div class="cd dis">8</div>
+              <div class="cd dis">9</div><div class="cd dis">10</div><div class="cd dis">11</div><div class="cd dis">12</div><div class="cd dis">13</div><div class="cd dis">14</div><div class="cd dis">15</div>
+              <div class="cd today dis">16</div><div class="cd">17</div><div class="cd">18</div><div class="cd">19</div><div class="cd">20</div><div class="cd">21</div><div class="cd sel" onclick="selCDay(this)">22</div>
+              <div class="cd dis">23</div><div class="cd">24</div><div class="cd">25</div><div class="cd">26</div><div class="cd">27</div><div class="cd">28</div><div class="cd">29</div>
+              <div class="cd dis">30</div><div class="cd">31</div>
             </div>
 
-            <p style="font-size:14px; font-weight:600; color:var(--gray-700); margin-bottom:10px;">Horários disponíveis — Sex, 22/08</p>
-            <div class="time-slots">
-              <div class="time-slot unavailable">08:00</div>
-              <div class="time-slot unavailable">09:00</div>
-              <div class="time-slot">10:00</div>
-              <div class="time-slot unavailable">11:00</div>
-              <div class="time-slot">12:00</div>
-              <div class="time-slot">13:00</div>
-              <div class="time-slot unavailable">14:00</div>
-              <div class="time-slot selected" onclick="selectTimeSlot(this)">15:00</div>
-              <div class="time-slot unavailable">16:00</div>
-              <div class="time-slot unavailable">17:00</div>
-              <div class="time-slot">18:00</div>
-              <div class="time-slot unavailable">19:00</div>
+            <p style="font-size:15px; font-weight:600; margin-bottom:10px;">Horários disponíveis — Sáb, 22/08</p>
+            <div class="tslots">
+              <div class="ts un">08:00</div><div class="ts un">09:00</div><div class="ts">10:00</div>
+              <div class="ts un">11:00</div><div class="ts">12:00</div><div class="ts un">13:00</div>
             </div>
+            <p style="font-size:12px; color:var(--gray-400); margin-top:8px; text-align:center;">Sábado: 08:00–13:00 · Horários ocupados riscados</p>
 
-            <button class="btn btn-primary" style="margin-top:20px;" onclick="showBookingScreen('booking-form')">Continuar →</button>
+            <button class="btn btn-primary" style="margin-top:20px;" onclick="showBSub('b-form')">Continuar →</button>
           </div>
         </div>
 
         <!-- Form -->
-        <div class="booking-sub" id="booking-form">
-          <div class="booking-form">
-            <button class="btn btn-ghost" onclick="showBookingScreen('booking-calendar')" style="padding:8px 0; font-size:13px; text-align:left; width:auto;">← Voltar</button>
+        <div class="bsub" id="b-form">
+          <div class="bform">
+            <button class="btn btn-ghost" onclick="showBSub('b-cal')" style="padding:8px 0; font-size:14px; text-align:left; width:auto;">← Voltar</button>
             <h3>Seus dados</h3>
-            <p style="font-size:13px; color:var(--gray-500); margin-bottom:16px;">Sem criar conta. Só precisamos do básico para confirmar seu horário.</p>
-
-            <div style="background:var(--rose-50); border-radius:10px; padding:10px; margin-bottom:16px; font-size:13px; color:var(--rose-600);">
-              💆 Limpeza de Pele · Sex 22/08 às 15:00 · R$ 150
-            </div>
-
-            <div class="form-group">
-              <label>Nome completo</label>
-              <input type="text" placeholder="Maria da Silva" value="Maria Souza">
-            </div>
-            <div class="form-group">
-              <label>WhatsApp</label>
-              <input type="tel" placeholder="(11) 99999-9999" value="(11) 98888-7777">
-            </div>
-            <div class="form-group">
-              <label>Observações (opcional)</label>
-              <textarea placeholder="Alguma alergia, preferência, etc.">Primeira vez fazendo limpeza de pele</textarea>
-            </div>
-
-            <div class="consent-check">
+            <p style="font-size:14px; color:var(--gray-500); margin-bottom:16px;">Sem criar conta. Só precisamos do básico pra confirmar seu horário.</p>
+            <div class="svc-pill">💆 Limpeza de Pele · Sáb 22/08 às 10:00 · R$ 150</div>
+            <div class="fg"><label>Nome completo</label><input type="text" placeholder="Maria da Silva" value="Maria Souza"></div>
+            <div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(11) 99999-9999" value="(11) 98888-7777"></div>
+            <div class="fg"><label>Observações (opcional)</label><textarea placeholder="Alguma alergia, preferência...">Primeira vez fazendo limpeza de pele</textarea></div>
+            <div class="consent">
               <input type="checkbox" checked>
               <label>Concordo em receber confirmação e lembretes pelo WhatsApp da Lara. Posso cancelar a qualquer momento respondendo SAIR. <a href="#" style="color:var(--rose-500);">Política de privacidade</a></label>
             </div>
-
-            <button class="btn btn-primary" onclick="showBookingScreen('booking-confirmed')">Confirmar agendamento ✅</button>
+            <button class="btn btn-primary" onclick="showBSub('b-conf')">Confirmar agendamento ✅</button>
           </div>
         </div>
 
         <!-- Confirmed -->
-        <div class="booking-sub" id="booking-confirmed">
-          <div class="booking-confirmed">
-            <div class="confirm-icon">✅</div>
+        <div class="bsub" id="b-conf">
+          <div class="bconf">
+            <div class="bci">✅</div>
             <h2>Agendamento confirmado!</h2>
-            <p class="confirm-sub">Você receberá confirmação pelo WhatsApp</p>
-
-            <div class="confirm-details">
-              <div class="confirm-row">
-                <span class="cr-label">Profissional</span>
-                <span class="cr-value">Cris Beleza</span>
-              </div>
-              <div class="confirm-row">
-                <span class="cr-label">Serviço</span>
-                <span class="cr-value">Limpeza de Pele</span>
-              </div>
-              <div class="confirm-row">
-                <span class="cr-label">Data</span>
-                <span class="cr-value">Sexta, 22/08/2026</span>
-              </div>
-              <div class="confirm-row">
-                <span class="cr-label">Horário</span>
-                <span class="cr-value">15:00</span>
-              </div>
-              <div class="confirm-row">
-                <span class="cr-label">Duração</span>
-                <span class="cr-value">60 min</span>
-              </div>
-              <div class="confirm-row">
-                <span class="cr-label">Valor</span>
-                <span class="cr-value">R$ 150</span>
-              </div>
+            <p class="bcsub">Você receberá confirmação pelo WhatsApp</p>
+            <div class="cdets">
+              <div class="crow"><span class="cl">Profissional</span><span class="cv">Cris Beleza</span></div>
+              <div class="crow"><span class="cl">Serviço</span><span class="cv">Limpeza de Pele</span></div>
+              <div class="crow"><span class="cl">Data</span><span class="cv">Sábado, 22/08/2026</span></div>
+              <div class="crow"><span class="cl">Horário</span><span class="cv">10:00</span></div>
+              <div class="crow"><span class="cl">Local</span><span class="cv">Estúdio — Rua das Flores, 123</span></div>
+              <div class="crow"><span class="cl">Duração</span><span class="cv">60 min</span></div>
+              <div class="crow"><span class="cl">Valor</span><span class="cv">R$ 150</span></div>
             </div>
-
-            <div class="wa-notice">
-              <span class="wa-icon">💬</span>
-              <p>Em instantes você receberá uma mensagem de confirmação da <strong>Lara</strong> pelo WhatsApp no número (11) 4002-LARA</p>
+            <div class="wanot">
+              <span style="font-size:24px;">💬</span>
+              <p>Em instantes você receberá uma mensagem da <strong>Lara</strong> pelo WhatsApp no número (11) 4002-LARA</p>
             </div>
-
-            <button class="btn btn-ghost" style="margin-top:16px;" onclick="showBookingScreen('booking-profile')">← Agendar outro horário</button>
+            <button class="btn btn-ghost" style="margin-top:16px;" onclick="showBSub('b-profile')">← Agendar outro horário</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- =========== WHATSAPP =========== -->
-    <div class="section" id="section-whatsapp">
-      <div class="wa-container">
-        <div class="wa-header-bar">
-          <span class="wa-back">‹</span>
-          <div class="wa-contact-avatar">💕</div>
-          <div class="wa-contact-info">
-            <div class="wa-contact-name">Lara · Cris Beleza</div>
-            <div class="wa-contact-status">online</div>
-          </div>
+    <!-- ═══ WHATSAPP ═══ -->
+    <div class="section" id="sec-whatsapp">
+      <div class="wac">
+        <div class="wahdr">
+          <span class="wab">‹</span>
+          <div class="waav">💕</div>
+          <div class="wai"><div class="wan">Lara · Cris Beleza</div><div class="was">online</div></div>
         </div>
-
-        <div class="wa-chat">
-          <div class="wa-tabs">
-            <button class="active" onclick="showWaTab('wa-confirm')">Confirmação</button>
-            <button onclick="showWaTab('wa-reminder')">Lembrete</button>
-            <button onclick="showWaTab('wa-cancel')">Cancelamento</button>
+        <div class="wachat">
+          <div class="watabs">
+            <button class="active" onclick="showWTab('w-confirm')">Confirmação</button>
+            <button onclick="showWTab('w-remind')">Lembrete</button>
+            <button onclick="showWTab('w-cancel')">Cancelamento</button>
           </div>
 
           <!-- Confirmation -->
-          <div class="wa-sub active" id="wa-confirm">
-            <div class="wa-date-divider"><span>Hoje</span></div>
-
-            <div class="wa-bubble received">
-              <div class="wa-sender">Lara · Cris Beleza</div>
+          <div class="wsub active" id="w-confirm">
+            <div class="wdd"><span>Sábado, 22/08</span></div>
+            <div class="wb recv">
+              <div class="wsnd">Lara · Cris Beleza</div>
               Oi Maria! 💕<br><br>
               Seu horário com <strong>Cris Beleza</strong> está confirmado:<br><br>
               💆 <strong>Limpeza de Pele</strong><br>
-              📅 Sexta, 22 de agosto<br>
-              🕐 15:00 (duração: 60 min)<br>
+              📅 Sábado, 22 de agosto<br>
+              🕐 10:00 (duração: 60 min)<br>
               📍 Studio Cris — Rua das Flores, 123, Vila Mariana<br><br>
-              Para cancelar ou remarcar, basta responder aqui!
-              <div class="wa-time">15:02 ✓✓</div>
+              Para cancelar ou remarcar, responda aqui!
+              <div class="wt">10:02 ✓✓</div>
+              <span class="badge badge-template tmpl-tag">📋 Template HSM</span>
             </div>
 
-            <div class="wa-bubble sent">
+            <div class="wb sent">
               Obrigada! Estarei lá ✨
-              <div class="wa-time">15:05</div>
+              <div class="wt">10:05</div>
             </div>
 
-            <div class="wa-bubble received">
-              <div class="wa-sender">Lara · Cris Beleza</div>
+            <div class="wb recv">
+              <div class="wsnd">Lara · Cris Beleza</div>
               Perfeito, Maria! A Cris vai adorar te receber 🥰<br>Qualquer dúvida, é só falar!
-              <div class="wa-time">15:05 ✓✓</div>
+              <div class="wt">10:05 ✓✓</div>
+              <span class="badge badge-window tmpl-tag">💬 Janela 24h</span>
+            </div>
+
+            <div style="background:rgba(255,255,255,.7); border-radius:10px; padding:10px; margin-top:12px; font-size:12px; color:var(--gray-500);">
+              <strong>Legenda:</strong><br>
+              <span class="badge badge-template">📋 Template HSM</span> = mensagem pré-aprovada pela Meta, custo por envio, enviável a qualquer momento<br><br>
+              <span class="badge badge-window">💬 Janela 24h</span> = resposta livre dentro de 24h após mensagem da cliente
             </div>
           </div>
 
           <!-- Reminder -->
-          <div class="wa-sub" id="wa-reminder">
-            <div class="wa-date-divider"><span>Quinta, 21 de agosto</span></div>
-
-            <div class="wa-bubble received">
-              <div class="wa-sender">Lara · Cris Beleza</div>
+          <div class="wsub" id="w-remind">
+            <div class="wdd"><span>Sexta, 21/08 (véspera)</span></div>
+            <div class="wb recv">
+              <div class="wsnd">Lara · Cris Beleza</div>
               Oi Maria! 🔔<br><br>
-              Lembrete: <strong>amanhã</strong> às <strong>15:00</strong> você tem:<br><br>
+              Lembrete: <strong>amanhã</strong> às <strong>10:00</strong> você tem:<br><br>
               💆 Limpeza de Pele com Cris Beleza<br>
               📍 Studio Cris — Rua das Flores, 123<br><br>
               Confirma sua presença?
-              <div class="wa-time">09:00 ✓✓</div>
-
-              <div class="wa-buttons">
-                <button class="wa-btn" onclick="waAction('confirm')">Sim, confirmo ✅</button>
-                <button class="wa-btn" onclick="showWaTab('wa-cancel')">Preciso remarcar 📅</button>
-                <button class="wa-btn" onclick="showWaTab('wa-cancel')">Cancelar ❌</button>
+              <div class="wt">09:00 ✓✓</div>
+              <span class="badge badge-template tmpl-tag">📋 Template HSM</span>
+              <div class="wbtns">
+                <button class="wbtn" onclick="waConfirm()">Sim, confirmo ✅</button>
+                <button class="wbtn" onclick="showWTab('w-cancel')">Preciso remarcar 📅</button>
+                <button class="wbtn" onclick="showWTab('w-cancel')">Cancelar ❌</button>
               </div>
+              <div style="font-size:11px; color:var(--gray-400); margin-top:6px;">⬆️ Botões declarados no template. Não são texto livre.</div>
             </div>
 
-            <div class="wa-bubble sent" id="wa-confirm-reply" style="display:none;">
-              Sim, confirmo ✅
-              <div class="wa-time">09:15</div>
-            </div>
-
-            <div class="wa-bubble received" id="wa-confirm-ack" style="display:none;">
-              <div class="wa-sender">Lara · Cris Beleza</div>
-              Maravilha! ✨ Até amanhã, Maria!<br>A Cris te espera às 15:00 no studio.
-              <div class="wa-time">09:15 ✓✓</div>
+            <div id="wa-cr" style="display:none;">
+              <div class="wb sent">Sim, confirmo ✅<div class="wt">09:15</div></div>
+              <div class="wb recv">
+                <div class="wsnd">Lara · Cris Beleza</div>
+                Maravilha! ✨ Até amanhã, Maria!<br>A Cris te espera às 10:00 no studio.
+                <div class="wt">09:15 ✓✓</div>
+                <span class="badge badge-window tmpl-tag">💬 Janela 24h</span>
+              </div>
             </div>
           </div>
 
           <!-- Cancellation -->
-          <div class="wa-sub" id="wa-cancel">
-            <div class="wa-date-divider"><span>Quinta, 21 de agosto</span></div>
-
-            <div class="wa-bubble sent">
+          <div class="wsub" id="w-cancel">
+            <div class="wdd"><span>Sexta, 21/08</span></div>
+            <div class="wb sent">
               Oi, preciso cancelar meu horário de amanhã 😞
-              <div class="wa-time">10:30</div>
+              <div class="wt">10:30</div>
             </div>
-
-            <div class="wa-bubble received">
-              <div class="wa-sender">Lara · Cris Beleza</div>
+            <div class="wb recv">
+              <div class="wsnd">Lara · Cris Beleza</div>
               Sem problema, Maria! Entendo que imprevistos acontecem 💛<br><br>
-              Quer que eu cancele ou prefere remarcar para outro dia?
-              <div class="wa-time">10:30 ✓✓</div>
-
-              <div class="wa-buttons">
-                <button class="wa-btn" onclick="waShowReschedule()">Quero remarcar 📅</button>
-                <button class="wa-btn" onclick="waShowCancelled()">Cancelar mesmo ❌</button>
+              Quer que eu cancele ou prefere remarcar?
+              <div class="wt">10:30 ✓✓</div>
+              <span class="badge badge-window tmpl-tag">💬 Janela 24h</span>
+              <div class="wbtns">
+                <button class="wbtn" onclick="waResc()">Quero remarcar 📅</button>
+                <button class="wbtn" onclick="waCanc()">Cancelar mesmo ❌</button>
               </div>
             </div>
 
-            <div id="wa-reschedule" style="display:none;">
-              <div class="wa-bubble sent">
-                Quero remarcar 📅
-                <div class="wa-time">10:32</div>
-              </div>
-
-              <div class="wa-bubble received">
-                <div class="wa-sender">Lara · Cris Beleza</div>
-                Claro! Esses são os próximos horários disponíveis da Cris para Limpeza de Pele:<br><br>
-                1️⃣ Segunda 25/08 às 10:00<br>
-                2️⃣ Segunda 25/08 às 14:00<br>
-                3️⃣ Terça 26/08 às 09:00<br>
-                4️⃣ Terça 26/08 às 16:00<br><br>
-                Qual fica melhor pra você?
-                <div class="wa-time">10:32 ✓✓</div>
-
-                <div class="wa-buttons">
-                  <button class="wa-btn">1️⃣ Seg 25/08 10:00</button>
-                  <button class="wa-btn">2️⃣ Seg 25/08 14:00</button>
-                  <button class="wa-btn">3️⃣ Ter 26/08 09:00</button>
-                  <button class="wa-btn">4️⃣ Ter 26/08 16:00</button>
+            <div id="wa-resc" style="display:none;">
+              <div class="wb sent">Quero remarcar 📅<div class="wt">10:32</div></div>
+              <div class="wb recv">
+                <div class="wsnd">Lara · Cris Beleza</div>
+                Claro! Próximos horários disponíveis da Cris para Limpeza de Pele:<br><br>
+                1️⃣ Segunda 24/08 às 10:00<br>
+                2️⃣ Segunda 24/08 às 14:00<br>
+                3️⃣ Terça 25/08 às 09:00<br>
+                4️⃣ Terça 25/08 às 16:00<br><br>
+                Qual fica melhor?
+                <div class="wt">10:32 ✓✓</div>
+                <span class="badge badge-window tmpl-tag">💬 Janela 24h</span>
+                <div class="wbtns">
+                  <button class="wbtn">1️⃣ Seg 24/08 10:00</button>
+                  <button class="wbtn">2️⃣ Seg 24/08 14:00</button>
+                  <button class="wbtn">3️⃣ Ter 25/08 09:00</button>
+                  <button class="wbtn">4️⃣ Ter 25/08 16:00</button>
                 </div>
               </div>
             </div>
 
-            <div id="wa-cancelled" style="display:none;">
-              <div class="wa-bubble sent">
-                Cancelar mesmo ❌
-                <div class="wa-time">10:32</div>
-              </div>
-
-              <div class="wa-bubble received">
-                <div class="wa-sender">Lara · Cris Beleza</div>
-                Tudo bem! Seu horário de Limpeza de Pele em 22/08 às 15:00 foi cancelado ✓<br><br>
-                Quando quiser agendar de novo, é só me chamar ou acessar:<br>🔗 lara.app/cris-beleza<br><br>
+            <div id="wa-canc" style="display:none;">
+              <div class="wb sent">Cancelar mesmo ❌<div class="wt">10:32</div></div>
+              <div class="wb recv">
+                <div class="wsnd">Lara · Cris Beleza</div>
+                Tudo bem! Seu horário de Limpeza de Pele em 22/08 às 10:00 foi cancelado ✓<br><br>
+                Quando quiser agendar de novo:<br>🔗 lara.app/cris-beleza<br><br>
                 Cuide-se! 💕
-                <div class="wa-time">10:32 ✓✓</div>
+                <div class="wt">10:32 ✓✓</div>
+                <span class="badge badge-window tmpl-tag">💬 Janela 24h</span>
               </div>
             </div>
           </div>
@@ -3042,235 +1182,118 @@ body {
       </div>
     </div>
 
-  </div><!-- /phone-frame -->
-
-  <div class="proto-label">
-    Protótipo interativo · <span>Lara</span> · v1 — Ago 2026
   </div>
+
+  <div class="plabel">Protótipo interativo v2 · <span>Lara</span> · Ago 2026</div>
 </div>
 
 <!-- Edit Modal -->
-<div class="edit-modal-overlay" id="edit-modal">
-  <div class="edit-modal">
+<div class="modal-ov" id="editModal">
+  <div class="modal">
     <h3>Editar agendamento ✏️</h3>
-    <div class="form-group">
-      <label>Nome da cliente</label>
-      <input type="text" value="Fernanda Ribeiro" id="edit-name">
-    </div>
-    <div class="form-group">
-      <label>Serviço</label>
-      <select id="edit-service">
-        <option>Peeling</option>
-        <option>Limpeza de Pele</option>
-        <option>Drenagem Linfática</option>
-        <option>Massagem Relaxante</option>
-        <option>Design de Sobrancelha</option>
-        <option>Limpeza + Hidratação</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Horário</label>
-      <input type="time" value="14:00" id="edit-time">
-    </div>
-    <div class="form-group">
-      <label>Duração</label>
-      <select>
-        <option>45 min</option>
-        <option selected>60 min</option>
-        <option>90 min</option>
-        <option>120 min</option>
-      </select>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="closeEditModal()" style="flex:1;">Cancelar</button>
-      <button class="btn btn-primary" onclick="closeEditModal()" style="flex:1;">Salvar ✓</button>
+    <div class="fg"><label>Nome da cliente</label><input type="text" value="Fernanda Ribeiro"></div>
+    <div class="fg"><label>Serviço</label><select><option>Peeling</option><option>Limpeza de Pele</option><option>Drenagem Linfática</option><option>Massagem Relaxante</option><option>Design de Sobrancelha</option><option>Limpeza + Hidratação</option></select></div>
+    <div class="fg"><label>Data</label><input type="date" value="2026-08-22"></div>
+    <div class="fg"><label>Horário</label><input type="time" value="14:00"></div>
+    <div class="fg"><label>Duração</label><select><option>45 min</option><option selected>60 min</option><option>90 min</option><option>120 min</option></select></div>
+    <div class="brow">
+      <button class="btn btn-danger btn-sm" onclick="closeEdit()" style="flex:1;">Apagar item</button>
+      <button class="btn btn-secondary btn-sm" onclick="closeEdit()" style="flex:1;">Cancelar</button>
+      <button class="btn btn-primary btn-sm" onclick="closeEdit()" style="flex:1;">Salvar ✓</button>
     </div>
   </div>
 </div>
 
 <script>
-// Section navigation
-function showSection(id) {
+function showSec(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.top-nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById('section-' + id).classList.add('active');
+  document.getElementById('sec-' + id).classList.add('active');
   document.getElementById('nav-' + id).classList.add('active');
 }
 
-// Onboarding screen navigation
-function showOnbScreen(id) {
-  document.querySelectorAll('#section-onboarding .screen').forEach(s => s.classList.remove('active'));
+function goOnb(id) {
+  document.querySelectorAll('#sec-onboarding .screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-// Photo capture simulation
 function capturePhoto() {
-  const preview = document.getElementById('agenda-preview');
-  const btn = document.getElementById('btn-process');
-  const zone = document.querySelector('.upload-zone');
-
-  if (!preview.classList.contains('visible')) {
-    preview.classList.add('visible');
-    btn.style.display = 'block';
-    zone.innerHTML = '<span class="camera-icon">✅</span><h3>Foto capturada!</h3><p>Toque para tirar outra</p>';
-    zone.style.borderColor = 'var(--green-500)';
-    zone.style.background = 'var(--green-50)';
+  const p = document.getElementById('agprev');
+  const b = document.getElementById('btnProc');
+  const c = document.getElementById('pcounter');
+  const z = document.getElementById('uz');
+  if (!p.classList.contains('visible')) {
+    p.classList.add('visible');
+    b.style.display = 'block';
+    c.style.display = 'block';
+    z.innerHTML = '<span class="cam">✅</span><h3>Foto capturada!</h3><p>Toque para tirar outra</p>';
+    z.style.borderColor = 'var(--green-500)';
+    z.style.background = 'var(--green-50)';
   }
 }
 
-// Processing animation
-function startProcessing() {
-  const steps = ['step-1', 'step-2', 'step-3', 'step-4'];
+function startProc() {
+  const steps = ['ps1','ps2','ps3','ps4'];
   let i = 0;
-
-  function advanceStep() {
-    if (i > 0) {
-      const prev = document.getElementById(steps[i-1]);
-      prev.classList.remove('active');
-      prev.classList.add('done');
-      prev.querySelector('.check').textContent = '✅';
-    }
-
-    if (i < steps.length) {
-      const curr = document.getElementById(steps[i]);
-      curr.classList.add('active');
-      curr.querySelector('.check').textContent = '⏳';
-      i++;
-      setTimeout(advanceStep, 900);
-    } else {
-      setTimeout(() => showOnbScreen('onb-review'), 500);
-    }
+  function adv() {
+    if (i > 0) { const p = document.getElementById(steps[i-1]); p.classList.remove('active'); p.classList.add('done'); p.querySelector('.ck').textContent = '✅'; }
+    if (i < steps.length) { const c = document.getElementById(steps[i]); c.classList.add('active'); c.querySelector('.ck').textContent = '⏳'; i++; setTimeout(adv, 800); }
+    else { setTimeout(() => goOnb('onb-review'), 500); }
   }
-
-  setTimeout(advanceStep, 400);
+  // Reset steps
+  steps.forEach(s => { const el = document.getElementById(s); el.classList.remove('active','done'); el.querySelector('.ck').textContent = '⏳'; });
+  document.getElementById(steps[0]).classList.add('active');
+  setTimeout(adv, 600);
 }
 
-// Integration simulation
-function simulateIntegration(type) {
-  const btn = event.target.closest('button');
-  const originalText = btn.innerHTML;
-  btn.innerHTML = '⏳ Conectando...';
-  btn.disabled = true;
-  btn.style.opacity = '0.7';
-
-  setTimeout(() => {
-    btn.innerHTML = '✅ Conectado!';
-    btn.style.borderColor = 'var(--green-500)';
-    btn.style.background = 'var(--green-50)';
-    btn.style.color = 'var(--green-700)';
-
-    setTimeout(() => {
-      showOnbScreen('onb-processing');
-      startProcessing();
-    }, 800);
-  }, 1500);
-}
-
-function simulateFileUpload() {
-  const zone = document.querySelector('.file-upload-zone');
-  zone.innerHTML = '<span class="upload-icon">✅</span><h3>agenda_agosto.xlsx</h3><p>128 KB — Pronto para processar</p>';
-  zone.style.borderColor = 'var(--green-500)';
-  zone.style.background = 'var(--green-50)';
-
-  setTimeout(() => {
-    showOnbScreen('onb-processing');
-    startProcessing();
-  }, 1200);
-}
-
-// Dashboard tabs
-function showDashTab(id) {
-  document.querySelectorAll('.dash-sub').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.bottom-tabs button').forEach(b => b.classList.remove('active'));
+function showDTab(id) {
+  document.querySelectorAll('.dsub').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.btabs button').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-
-  const tabMap = { 'dash-home': 0, 'dash-agenda': 1, 'dash-conversations': 2, 'dash-contacts': 3, 'dash-settings': 4 };
-  document.querySelectorAll('.bottom-tabs button')[tabMap[id]].classList.add('active');
+  const m = {'d-home':0,'d-agenda':1,'d-conv':2,'d-cont':3,'d-set':4};
+  document.querySelectorAll('.btabs button')[m[id]].classList.add('active');
 }
 
-// Booking navigation
-function showBookingScreen(id) {
-  document.querySelectorAll('.booking-sub').forEach(s => s.classList.remove('active'));
+function showBSub(id) {
+  document.querySelectorAll('.bsub').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-function selectService(el, target) {
-  document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  setTimeout(() => showBookingScreen(target), 200);
+function selSvc(el) {
+  document.querySelectorAll('.svcard').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  setTimeout(() => showBSub('b-modality'), 200);
 }
 
-function selectDay(el) {
-  document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('selected'));
-  el.classList.add('selected');
+function selMod(type) {
+  document.getElementById('mod-studio').classList.remove('sel');
+  document.getElementById('mod-home').classList.remove('sel');
+  document.getElementById('mod-' + type).classList.add('sel');
+  document.getElementById('addr-sec').classList.toggle('visible', type === 'home');
 }
 
-function selectTimeSlot(el) {
-  document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-  el.classList.add('selected');
-}
+function selCDay(el) { document.querySelectorAll('.cgrid .cd').forEach(d => d.classList.remove('sel')); el.classList.add('sel'); }
 
-// WhatsApp tabs
-function showWaTab(id) {
-  document.querySelectorAll('.wa-sub').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.wa-tabs button').forEach(b => b.classList.remove('active'));
+function selDay(el) { document.querySelectorAll('.wd').forEach(d => d.classList.remove('active')); el.classList.add('active'); }
+
+function showWTab(id) {
+  document.querySelectorAll('.wsub').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.watabs button').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-
-  const tabMap = { 'wa-confirm': 0, 'wa-reminder': 1, 'wa-cancel': 2 };
-  document.querySelectorAll('.wa-tabs button')[tabMap[id]].classList.add('active');
+  const m = {'w-confirm':0,'w-remind':1,'w-cancel':2};
+  document.querySelectorAll('.watabs button')[m[id]].classList.add('active');
 }
 
-function waAction(type) {
-  if (type === 'confirm') {
-    document.getElementById('wa-confirm-reply').style.display = 'block';
-    setTimeout(() => {
-      document.getElementById('wa-confirm-ack').style.display = 'block';
-    }, 500);
-  }
-}
+function waConfirm() { document.getElementById('wa-cr').style.display = 'block'; }
+function waResc() { document.getElementById('wa-resc').style.display = 'block'; document.getElementById('wa-canc').style.display = 'none'; }
+function waCanc() { document.getElementById('wa-canc').style.display = 'block'; document.getElementById('wa-resc').style.display = 'none'; }
 
-function waShowReschedule() {
-  document.getElementById('wa-reschedule').style.display = 'block';
-  document.getElementById('wa-cancelled').style.display = 'none';
-}
+function openEdit() { document.getElementById('editModal').classList.add('visible'); }
+function closeEdit() { document.getElementById('editModal').classList.remove('visible'); }
+document.getElementById('editModal').addEventListener('click', function(e) { if (e.target === this) closeEdit(); });
 
-function waShowCancelled() {
-  document.getElementById('wa-cancelled').style.display = 'block';
-  document.getElementById('wa-reschedule').style.display = 'none';
-}
-
-// Edit modal
-function openEditModal() {
-  document.getElementById('edit-modal').classList.add('visible');
-}
-
-function closeEditModal() {
-  document.getElementById('edit-modal').classList.remove('visible');
-}
-
-// Close modal on overlay click
-document.getElementById('edit-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeEditModal();
-});
-
-// Add click handlers for calendar days
-document.querySelectorAll('.cal-day:not(.disabled)').forEach(day => {
-  day.addEventListener('click', function() { selectDay(this); });
-});
-
-// Add click handlers for time slots
-document.querySelectorAll('.time-slot:not(.unavailable)').forEach(slot => {
-  slot.addEventListener('click', function() { selectTimeSlot(this); });
-});
-
-// Add click handlers for week days
-document.querySelectorAll('.week-day').forEach(day => {
-  day.addEventListener('click', function() {
-    document.querySelectorAll('.week-day').forEach(d => d.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
+document.querySelectorAll('.cgrid .cd:not(.dis)').forEach(d => d.addEventListener('click', function() { selCDay(this); }));
+document.querySelectorAll('.tslots .ts:not(.un)').forEach(s => s.addEventListener('click', function() { document.querySelectorAll('.tslots .ts').forEach(x => x.classList.remove('sel')); this.classList.add('sel'); }));
 </script>
-
 </body>
 </html>
