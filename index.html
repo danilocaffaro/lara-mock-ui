@@ -222,6 +222,253 @@ body {
 .onb-welcome .feature-text h3 { font-size: 14px; font-weight: 600; color: var(--gray-800); }
 .onb-welcome .feature-text p { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
 
+/* Import Method Selection */
+.onb-import-method {
+  min-height: 680px;
+  display: flex;
+  flex-direction: column;
+  padding: 56px 24px 32px;
+  background: linear-gradient(160deg, #fff5f6 0%, #fff 60%, #f0f7ff 100%);
+}
+
+.onb-import-method .method-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.onb-import-method .method-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.onb-import-method .method-header p {
+  font-size: 14px;
+  color: var(--gray-500);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.import-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.import-method-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 16px;
+  border: 2px solid var(--gray-200);
+  border-radius: 16px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.import-method-card:hover {
+  border-color: var(--rose-300);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.import-method-card:active {
+  transform: scale(0.98);
+}
+
+.import-method-card .method-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.import-method-card .method-icon.photo-bg { background: var(--rose-50); }
+.import-method-card .method-icon.google-bg { background: #e8f0fe; }
+.import-method-card .method-icon.outlook-bg { background: #e6f1fb; }
+.import-method-card .method-icon.upload-bg { background: var(--amber-50); }
+
+.import-method-card .method-info { flex: 1; }
+.import-method-card .method-info h3 { font-size: 15px; font-weight: 600; color: var(--gray-800); }
+.import-method-card .method-info p { font-size: 12px; color: var(--gray-500); margin-top: 2px; line-height: 1.4; }
+.import-method-card .method-arrow { font-size: 18px; color: var(--gray-400); }
+
+.import-method-card.recommended {
+  border-color: var(--rose-300);
+  background: var(--rose-50);
+}
+
+.import-method-card.recommended::after {
+  content: '✨ Mais rápido';
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--rose-600);
+  background: white;
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* Google/Outlook/Upload simulation screens */
+.onb-integration {
+  min-height: 680px;
+  padding: 48px 24px 32px;
+  background: linear-gradient(180deg, #f0f7ff 0%, #fff 50%);
+}
+
+.onb-integration .integration-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.onb-integration .integration-header .int-icon {
+  width: 72px; height: 72px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin: 0 auto 16px;
+}
+
+.onb-integration .integration-header .int-icon.google { background: #e8f0fe; }
+.onb-integration .integration-header .int-icon.outlook { background: #e6f1fb; }
+.onb-integration .integration-header .int-icon.upload { background: var(--amber-50); }
+
+.onb-integration .integration-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.onb-integration .integration-header p {
+  font-size: 14px;
+  color: var(--gray-500);
+  margin-top: 6px;
+}
+
+.integration-steps {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.integration-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.integration-step:last-child { border-bottom: none; }
+
+.integration-step .step-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--rose-100);
+  color: var(--rose-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.integration-step .step-text { font-size: 14px; color: var(--gray-700); }
+
+.google-auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px;
+  border: 2px solid var(--gray-200);
+  border-radius: 12px;
+  background: white;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+}
+
+.google-auth-btn:hover { border-color: #4285f4; background: #f8faff; }
+.outlook-auth-btn { composes: google-auth-btn; }
+
+.outlook-auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px;
+  border: 2px solid var(--gray-200);
+  border-radius: 12px;
+  background: white;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+}
+
+.outlook-auth-btn:hover { border-color: #0078d4; background: #f0f7ff; }
+
+.file-upload-zone {
+  border: 2px dashed var(--amber-500);
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+  background: var(--amber-50);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 16px;
+}
+
+.file-upload-zone:hover {
+  border-color: var(--amber-600);
+  background: var(--amber-100);
+}
+
+.file-upload-zone .upload-icon { font-size: 40px; margin-bottom: 8px; display: block; }
+.file-upload-zone h3 { font-size: 15px; font-weight: 600; color: var(--amber-700); }
+.file-upload-zone p { font-size: 12px; color: var(--gray-500); margin-top: 4px; }
+
+.supported-formats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.format-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--gray-100);
+  color: var(--gray-600);
+}
+
 /* Photo Screen */
 .onb-photo {
   min-height: 680px;
@@ -1691,8 +1938,172 @@ body {
               </div>
             </div>
           </div>
-          <button class="btn btn-primary" onclick="showOnbScreen('onb-photo')">Começar ✨</button>
+          <button class="btn btn-primary" onclick="showOnbScreen('onb-import-method')">Começar ✨</button>
           <button class="btn btn-ghost" style="margin-top:8px; font-size:13px;">Prefiro ajuda de uma atendente</button>
+        </div>
+      </div>
+
+      <!-- Import Method Selection -->
+      <div class="screen" id="onb-import-method">
+        <div class="onb-import-method">
+          <div class="method-header">
+            <h2>Como trazer sua agenda?</h2>
+            <p>Escolha a forma mais fácil pra você. Depois é só revisar e pronto!</p>
+          </div>
+          <div class="import-methods">
+            <div class="import-method-card recommended" onclick="showOnbScreen('onb-photo')">
+              <div class="method-icon photo-bg">📸</div>
+              <div class="method-info">
+                <h3>Fotografar o caderno</h3>
+                <p>Tire uma foto da sua agenda de papel — a Lara lê e digitaliza em segundos</p>
+              </div>
+              <span class="method-arrow">›</span>
+            </div>
+            <div class="import-method-card" onclick="showOnbScreen('onb-google')">
+              <div class="method-icon google-bg">
+                <svg width="22" height="22" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.97 10.97 0 0 0 1 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+              </div>
+              <div class="method-info">
+                <h3>Google Agenda</h3>
+                <p>Conecte sua conta e importe seus compromissos automaticamente</p>
+              </div>
+              <span class="method-arrow">›</span>
+            </div>
+            <div class="import-method-card" onclick="showOnbScreen('onb-outlook')">
+              <div class="method-icon outlook-bg">
+                <svg width="22" height="22" viewBox="0 0 24 24"><path d="M24 7.387v10.478a2 2 0 0 1-2 2h-8v-14.73h8a2 2 0 0 1 2 2z" fill="#0078D4"/><path d="M14 5.135v14.73H2a2 2 0 0 1-2-2V7.387a2 2 0 0 1 2-2h12z" fill="#0364B8"/><ellipse cx="7" cy="12.5" rx="4.5" ry="4" fill="#fff" opacity="0.9"/></svg>
+              </div>
+              <div class="method-info">
+                <h3>Outlook / Microsoft</h3>
+                <p>Sincronize com seu calendário Outlook ou Microsoft 365</p>
+              </div>
+              <span class="method-arrow">›</span>
+            </div>
+            <div class="import-method-card" onclick="showOnbScreen('onb-upload')">
+              <div class="method-icon upload-bg">📁</div>
+              <div class="method-info">
+                <h3>Importar arquivo</h3>
+                <p>Exporte do seu sistema atual (Trinks, Belle, Avec, etc.) e envie aqui</p>
+              </div>
+              <span class="method-arrow">›</span>
+            </div>
+          </div>
+          <div style="margin-top:16px; text-align:center;">
+            <button class="btn btn-ghost" onclick="showOnbScreen('onb-welcome')">← Voltar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Calendar Integration -->
+      <div class="screen" id="onb-google">
+        <div class="onb-integration">
+          <div class="integration-header">
+            <div class="int-icon google">
+              <svg width="36" height="36" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.97 10.97 0 0 0 1 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            </div>
+            <h2>Google Agenda</h2>
+            <p>Conecte sua conta Google para importar seus agendamentos</p>
+          </div>
+          <div class="integration-steps">
+            <div class="integration-step">
+              <span class="step-num">1</span>
+              <span class="step-text">Faça login com sua conta Google</span>
+            </div>
+            <div class="integration-step">
+              <span class="step-num">2</span>
+              <span class="step-text">Autorize a Lara a ler sua agenda</span>
+            </div>
+            <div class="integration-step">
+              <span class="step-num">3</span>
+              <span class="step-text">Revise os agendamentos importados</span>
+            </div>
+          </div>
+          <button class="google-auth-btn" onclick="simulateIntegration('google')">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.97 10.97 0 0 0 1 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Continuar com Google
+          </button>
+          <p style="font-size:12px; color:var(--gray-400); text-align:center; margin-bottom:16px;">A Lara só lê seus compromissos. Nunca altera ou exclui nada.</p>
+          <div style="text-align:center;">
+            <button class="btn btn-ghost" onclick="showOnbScreen('onb-import-method')">← Voltar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outlook Integration -->
+      <div class="screen" id="onb-outlook">
+        <div class="onb-integration">
+          <div class="integration-header">
+            <div class="int-icon outlook">
+              <svg width="36" height="36" viewBox="0 0 24 24"><path d="M24 7.387v10.478a2 2 0 0 1-2 2h-8v-14.73h8a2 2 0 0 1 2 2z" fill="#0078D4"/><path d="M14 5.135v14.73H2a2 2 0 0 1-2-2V7.387a2 2 0 0 1 2-2h12z" fill="#0364B8"/><ellipse cx="7" cy="12.5" rx="4.5" ry="4" fill="#fff" opacity="0.9"/></svg>
+            </div>
+            <h2>Outlook / Microsoft</h2>
+            <p>Conecte sua conta Microsoft para importar seus agendamentos</p>
+          </div>
+          <div class="integration-steps">
+            <div class="integration-step">
+              <span class="step-num">1</span>
+              <span class="step-text">Faça login com sua conta Microsoft</span>
+            </div>
+            <div class="integration-step">
+              <span class="step-num">2</span>
+              <span class="step-text">Autorize a Lara a ler seu calendário</span>
+            </div>
+            <div class="integration-step">
+              <span class="step-num">3</span>
+              <span class="step-text">Revise os agendamentos importados</span>
+            </div>
+          </div>
+          <button class="outlook-auth-btn" onclick="simulateIntegration('outlook')">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M24 7.387v10.478a2 2 0 0 1-2 2h-8v-14.73h8a2 2 0 0 1 2 2z" fill="#0078D4"/><path d="M14 5.135v14.73H2a2 2 0 0 1-2-2V7.387a2 2 0 0 1 2-2h12z" fill="#0364B8"/><ellipse cx="7" cy="12.5" rx="4.5" ry="4" fill="#fff" opacity="0.9"/></svg>
+            Continuar com Microsoft
+          </button>
+          <p style="font-size:12px; color:var(--gray-400); text-align:center; margin-bottom:16px;">A Lara só lê seus compromissos. Nunca altera ou exclui nada.</p>
+          <div style="text-align:center;">
+            <button class="btn btn-ghost" onclick="showOnbScreen('onb-import-method')">← Voltar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- File Upload -->
+      <div class="screen" id="onb-upload">
+        <div class="onb-integration">
+          <div class="integration-header">
+            <div class="int-icon upload" style="background: var(--amber-50);">📁</div>
+            <h2>Importar arquivo</h2>
+            <p>Envie um arquivo exportado do seu sistema de gestão atual</p>
+          </div>
+          <div class="file-upload-zone" onclick="simulateFileUpload()">
+            <span class="upload-icon">📎</span>
+            <h3>Toque para selecionar arquivo</h3>
+            <p>ou arraste aqui</p>
+          </div>
+          <div class="supported-formats">
+            <span class="format-tag">.CSV</span>
+            <span class="format-tag">.XLS / .XLSX</span>
+            <span class="format-tag">.ICS</span>
+            <span class="format-tag">.PDF</span>
+          </div>
+          <div class="integration-steps">
+            <div class="integration-step">
+              <span class="step-num">💡</span>
+              <span class="step-text"><strong>Trinks:</strong> Relatórios → Exportar agenda</span>
+            </div>
+            <div class="integration-step">
+              <span class="step-num">💡</span>
+              <span class="step-text"><strong>Belle Software:</strong> Agenda → Exportar CSV</span>
+            </div>
+            <div class="integration-step">
+              <span class="step-num">💡</span>
+              <span class="step-text"><strong>Avec:</strong> Configurações → Dados → Exportar</span>
+            </div>
+            <div class="integration-step">
+              <span class="step-num">💡</span>
+              <span class="step-text"><strong>Outro sistema:</strong> Exporte como CSV ou planilha</span>
+            </div>
+          </div>
+          <div style="text-align:center; margin-top:12px;">
+            <button class="btn btn-ghost" onclick="showOnbScreen('onb-import-method')">← Voltar</button>
+          </div>
         </div>
       </div>
 
@@ -1723,7 +2134,7 @@ body {
           <button class="btn btn-primary" id="btn-process" style="display:none" onclick="showOnbScreen('onb-processing'); startProcessing()">Enviar para Lara ler 🪄</button>
 
           <div style="margin-top:16px; text-align:center;">
-            <button class="btn btn-ghost" onclick="showOnbScreen('onb-welcome')">← Voltar</button>
+            <button class="btn btn-ghost" onclick="showOnbScreen('onb-import-method')">← Voltar</button>
           </div>
         </div>
       </div>
@@ -2732,6 +3143,39 @@ function startProcessing() {
   }
 
   setTimeout(advanceStep, 400);
+}
+
+// Integration simulation
+function simulateIntegration(type) {
+  const btn = event.target.closest('button');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '⏳ Conectando...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+
+  setTimeout(() => {
+    btn.innerHTML = '✅ Conectado!';
+    btn.style.borderColor = 'var(--green-500)';
+    btn.style.background = 'var(--green-50)';
+    btn.style.color = 'var(--green-700)';
+
+    setTimeout(() => {
+      showOnbScreen('onb-processing');
+      startProcessing();
+    }, 800);
+  }, 1500);
+}
+
+function simulateFileUpload() {
+  const zone = document.querySelector('.file-upload-zone');
+  zone.innerHTML = '<span class="upload-icon">✅</span><h3>agenda_agosto.xlsx</h3><p>128 KB — Pronto para processar</p>';
+  zone.style.borderColor = 'var(--green-500)';
+  zone.style.background = 'var(--green-50)';
+
+  setTimeout(() => {
+    showOnbScreen('onb-processing');
+    startProcessing();
+  }, 1200);
 }
 
 // Dashboard tabs
