@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Lara — Protótipo Interativo v2</title>
+<title>Lara — Protótipo Interativo v3</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -312,29 +312,77 @@ body {
 .lshare .sbtn { background:var(--rose-500); color:#fff; border:none; padding:7px 14px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; }
 
 /* ════════════════════════════════════
-   3. BOOKING
+   3. BOOKING (Landing Page + Wizard)
    ════════════════════════════════════ */
-.bcontainer { min-height:700px; background:#fff; }
+.bcontainer { min-height:700px; background:#fff; position:relative; }
 .bsub { display:none; }
 .bsub.active { display:block; }
 
-.bprofile { padding:52px 24px 20px; text-align:center; background:linear-gradient(180deg,var(--rose-50),#fff 60%); }
-.bprofile .pphoto { width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,var(--rose-300),var(--rose-500)); display:flex; align-items:center; justify-content:center; font-size:36px; margin:0 auto 12px; box-shadow:0 8px 24px rgba(244,63,94,.2); }
-.bprofile h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; }
-.bprofile .pbio { font-size:15px; color:var(--gray-500); margin-top:4px; line-height:1.4; }
+/* ── Landing Page (mini-site) ── */
+.blanding { padding-bottom:72px; }
+.bl-hero { padding:52px 24px 20px; text-align:center; background:linear-gradient(180deg,var(--rose-50),#fff 80%); }
+.bl-hero .pphoto { width:96px; height:96px; border-radius:50%; background:linear-gradient(135deg,var(--rose-300),var(--rose-500)); display:flex; align-items:center; justify-content:center; font-size:44px; margin:0 auto 14px; box-shadow:0 12px 32px rgba(244,63,94,.25); }
+.bl-hero h2 { font-family:'Playfair Display',serif; font-size:24px; font-weight:600; color:var(--gray-900); }
+.bl-hero .pbio { font-size:15px; color:var(--gray-500); margin-top:6px; line-height:1.5; }
+.bl-hero .lara-seal { display:inline-flex; align-items:center; gap:6px; margin-top:12px; padding:6px 14px; background:var(--rose-50); border:1px solid var(--rose-100); border-radius:20px; font-size:12px; font-weight:500; color:var(--rose-600); }
 .ptags { display:flex; justify-content:center; gap:8px; margin-top:12px; flex-wrap:wrap; }
-.ptag { font-size:12px; font-weight:500; padding:4px 10px; border-radius:8px; background:var(--rose-50); color:var(--rose-600); }
-.bservices { padding:0 20px 20px; }
-.bservices h3 { font-size:17px; font-weight:600; margin-bottom:12px; }
+.ptag { font-size:13px; font-weight:500; padding:5px 12px; border-radius:10px; background:var(--gray-50); color:var(--gray-600); }
+
+/* Fixed CTA */
+.bl-fixed-cta { position:absolute; bottom:0; left:0; right:0; padding:12px 20px; background:rgba(255,255,255,.95); backdrop-filter:blur(8px); border-top:1px solid var(--gray-100); z-index:20; }
+.bl-fixed-cta .btn { box-shadow:0 4px 16px rgba(244,63,94,.35); }
+
+/* Social proof */
+.bl-social { padding:20px 20px 0; }
+.bl-social h3 { font-size:16px; font-weight:600; color:var(--gray-800); margin-bottom:12px; }
+.bl-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:16px; }
+.bl-gallery .gphoto { aspect-ratio:1; border-radius:12px; overflow:hidden; }
+.bl-gallery .gphoto img { width:100%; height:100%; object-fit:cover; }
+.bl-gallery .gphoto-placeholder { width:100%; height:100%; background:linear-gradient(135deg,var(--rose-50),var(--gray-100)); display:flex; align-items:center; justify-content:center; font-size:24px; }
+.bl-testimonial { background:var(--gray-50); border-radius:14px; padding:14px 16px; margin-bottom:10px; }
+.bl-testimonial .tq { font-size:14px; color:var(--gray-600); line-height:1.5; font-style:italic; }
+.bl-testimonial .ta { font-size:13px; font-weight:600; color:var(--gray-700); margin-top:8px; }
+
+/* Services menu (on landing) */
+.bl-services { padding:20px; }
+.bl-services h3 { font-size:16px; font-weight:600; color:var(--gray-800); margin-bottom:12px; }
+.svc-cat { font-size:13px; font-weight:600; color:var(--rose-500); text-transform:uppercase; letter-spacing:.5px; margin:16px 0 8px; padding-left:2px; }
+.svc-cat:first-child { margin-top:0; }
 .svcard { background:#fff; border:1.5px solid var(--gray-200); border-radius:14px; padding:14px 16px; margin-bottom:8px; cursor:pointer; transition:.2s; display:flex; align-items:center; justify-content:space-between; }
 .svcard:hover,.svcard.sel { border-color:var(--rose-500); background:var(--rose-50); }
 .svcard .svn { font-size:15px; font-weight:600; }
 .svcard .svd { font-size:13px; color:var(--gray-500); margin-top:2px; }
-.svcard .svp { font-size:17px; font-weight:700; color:var(--rose-500); }
+.svcard .svp { font-size:17px; font-weight:700; color:var(--rose-500); white-space:nowrap; }
+.svc-help { display:flex; align-items:center; gap:10px; padding:14px 16px; background:var(--green-50); border:1.5px solid var(--green-100); border-radius:14px; margin-top:8px; cursor:pointer; transition:.2s; }
+.svc-help:hover { background:var(--green-100); }
+.svc-help .sh-icon { font-size:24px; }
+.svc-help .sh-text { font-size:14px; color:var(--green-700); font-weight:500; }
 
-/* Booking - Modality (studio vs domiciliar) */
-.bmodality { padding:52px 24px 24px; }
-.bmodality h3 { font-size:17px; font-weight:600; margin-bottom:16px; }
+/* Practical info */
+.bl-info { padding:0 20px 24px; }
+.bl-info h3 { font-size:16px; font-weight:600; color:var(--gray-800); margin-bottom:12px; }
+.info-row { display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid var(--gray-100); }
+.info-row:last-child { border:none; }
+.info-row .ir-icon { font-size:18px; flex-shrink:0; margin-top:1px; }
+.info-row .ir-label { font-size:14px; color:var(--gray-500); min-width:80px; flex-shrink:0; }
+.info-row .ir-value { font-size:14px; color:var(--gray-700); font-weight:500; }
+
+/* ── Wizard steps ── */
+.bwiz-header { padding:48px 20px 12px; background:#fff; border-bottom:1px solid var(--gray-100); position:sticky; top:0; z-index:10; }
+.bwiz-header .bwiz-back { background:none; border:none; font-family:inherit; font-size:14px; color:var(--rose-500); cursor:pointer; padding:0; margin-bottom:8px; display:flex; align-items:center; gap:4px; }
+.bwiz-steps { display:flex; gap:4px; }
+.bwiz-steps .ws { flex:1; height:3px; border-radius:2px; background:var(--gray-200); transition:.3s; }
+.bwiz-steps .ws.done { background:var(--rose-500); }
+.bwiz-steps .ws.current { background:var(--rose-400); }
+
+/* Wizard: Service selection */
+.bw-service { padding:16px 20px 20px; }
+.bw-service h3 { font-size:17px; font-weight:600; margin-bottom:14px; }
+
+/* Wizard: Modality */
+.bw-modality { padding:16px 20px 20px; }
+.bw-modality h3 { font-size:17px; font-weight:600; margin-bottom:14px; }
+.svc-pill { background:var(--rose-50); border-radius:10px; padding:10px 14px; margin-bottom:16px; font-size:14px; color:var(--rose-600); }
 .mod-card { background:#fff; border:1.5px solid var(--gray-200); border-radius:14px; padding:16px; margin-bottom:10px; cursor:pointer; transition:.2s; display:flex; align-items:center; gap:14px; }
 .mod-card:hover,.mod-card.sel { border-color:var(--rose-500); background:var(--rose-50); }
 .mod-card .mod-icon { font-size:28px; }
@@ -347,11 +395,16 @@ body {
 .addr-section input { width:100%; padding:12px 14px; border:1.5px solid var(--gray-200); border-radius:12px; font-family:inherit; font-size:14px; }
 .addr-section input:focus { border-color:var(--rose-500); outline:none; }
 .addr-section .buffer-info { font-size:13px; color:var(--amber-600); margin-top:8px; padding:8px 12px; background:var(--amber-50); border-radius:10px; }
+.addr-section .cep-error { font-size:13px; color:var(--red-700); margin-top:6px; padding:6px 10px; background:var(--red-50); border-radius:8px; display:none; }
 
-/* Booking Calendar */
-.bcal { padding:52px 20px 20px; }
-.bcal h3 { font-size:17px; font-weight:600; margin-bottom:16px; }
-.svc-pill { background:var(--rose-50); border-radius:10px; padding:10px; margin-bottom:16px; font-size:14px; color:var(--rose-600); }
+/* Wizard: Calendar */
+.bw-cal { padding:16px 20px 20px; }
+.bw-cal h3 { font-size:17px; font-weight:600; margin-bottom:14px; }
+.next-free { background:var(--green-50); border:1.5px solid var(--green-100); border-radius:12px; padding:12px 16px; margin-bottom:16px; display:flex; align-items:center; gap:10px; cursor:pointer; transition:.2s; }
+.next-free:hover { background:var(--green-100); }
+.next-free .nf-icon { font-size:20px; }
+.next-free .nf-text { font-size:14px; font-weight:600; color:var(--green-700); }
+.next-free .nf-sub { font-size:12px; color:var(--green-600); font-weight:400; }
 .cmonth { text-align:center; font-size:16px; font-weight:600; color:var(--gray-700); margin-bottom:12px; }
 .cgrid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:20px; }
 .cgrid .ch { text-align:center; font-size:12px; color:var(--gray-400); font-weight:600; padding:4px; }
@@ -360,36 +413,47 @@ body {
 .cgrid .cd.dis { color:var(--gray-300); pointer-events:none; }
 .cgrid .cd.sel { background:var(--rose-500); color:#fff; font-weight:600; }
 .cgrid .cd.today { border:2px solid var(--rose-300); }
+.cgrid .cd.has-slots::after { content:''; display:block; width:4px; height:4px; border-radius:50%; background:var(--rose-400); margin:2px auto 0; }
 .tslots { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
 .ts { padding:11px; text-align:center; border:1.5px solid var(--gray-200); border-radius:10px; font-size:15px; font-weight:500; color:var(--gray-700); cursor:pointer; transition:.15s; }
 .ts:hover { border-color:var(--rose-400); }
 .ts.sel { background:var(--rose-500); color:#fff; border-color:var(--rose-500); }
-.ts.un { color:var(--gray-300); border-color:var(--gray-100); text-decoration:line-through; pointer-events:none; }
 
-/* Booking Form */
-.bform { padding:52px 24px 24px; }
-.bform h3 { font-size:17px; font-weight:600; margin-bottom:16px; }
+/* Wizard: Form */
+.bw-form { padding:16px 20px 20px; }
+.bw-form h3 { font-size:17px; font-weight:600; margin-bottom:14px; }
 .fg { margin-bottom:14px; }
 .fg label { font-size:13px; font-weight:600; color:var(--gray-500); display:block; margin-bottom:4px; }
 .fg input,.fg textarea { width:100%; padding:12px 14px; border:1.5px solid var(--gray-200); border-radius:12px; font-family:inherit; font-size:15px; }
 .fg input:focus,.fg textarea:focus { border-color:var(--rose-500); outline:none; }
 .fg textarea { height:72px; resize:none; }
-.consent { display:flex; align-items:flex-start; gap:10px; padding:14px; background:var(--gray-50); border-radius:12px; margin-bottom:20px; }
+.fg .fg-hint { font-size:12px; color:var(--gray-400); margin-top:4px; }
+.fg .fg-match { font-size:12px; color:var(--green-600); margin-top:4px; display:none; }
+.consent-group { margin-bottom:20px; }
+.consent { display:flex; align-items:flex-start; gap:10px; padding:12px 14px; background:var(--gray-50); border-radius:12px; margin-bottom:8px; }
 .consent input[type="checkbox"] { width:18px; height:18px; accent-color:var(--rose-500); margin-top:2px; flex-shrink:0; }
 .consent label { font-size:13px; color:var(--gray-600); line-height:1.4; }
+.consent.marketing { background:transparent; border:1px solid var(--gray-200); }
+.cancel-policy { background:var(--amber-50); border-radius:12px; padding:12px 14px; margin-bottom:16px; font-size:13px; color:var(--amber-700); line-height:1.4; }
+.cancel-policy strong { color:var(--amber-800); }
+.health-warning { font-size:11px; color:var(--gray-400); margin-top:4px; }
 
 /* Booking Confirmed */
-.bconf { min-height:700px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 28px; background:linear-gradient(180deg,#fff,var(--green-50)); text-align:center; }
+.bconf { min-height:700px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 24px; background:linear-gradient(180deg,#fff,var(--green-50)); text-align:center; }
 .bconf .bci { font-size:64px; margin-bottom:16px; animation:popIn .5s cubic-bezier(.175,.885,.32,1.275); }
 .bconf h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:600; margin-bottom:4px; }
-.bconf .bcsub { font-size:15px; color:var(--gray-500); margin-bottom:24px; }
-.cdets { background:#fff; border-radius:16px; padding:20px; width:100%; box-shadow:0 2px 12px rgba(0,0,0,.06); text-align:left; margin-bottom:20px; }
+.bconf .bcsub { font-size:15px; color:var(--gray-500); margin-bottom:20px; }
+.cdets { background:#fff; border-radius:16px; padding:20px; width:100%; box-shadow:0 2px 12px rgba(0,0,0,.06); text-align:left; margin-bottom:16px; }
 .crow { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--gray-100); }
 .crow:last-child { border:none; }
 .crow .cl { font-size:14px; color:var(--gray-500); }
 .crow .cv { font-size:14px; font-weight:600; }
-.wanot { display:flex; align-items:center; gap:10px; background:#e8f5e9; border-radius:12px; padding:12px 16px; width:100%; }
-.wanot p { font-size:14px; color:var(--green-700); }
+.wa-deep { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:16px; background:#25D366; color:#fff; border:none; border-radius:14px; font-family:inherit; font-size:16px; font-weight:600; cursor:pointer; transition:.2s; box-shadow:0 4px 16px rgba(37,211,102,.3); margin-bottom:10px; }
+.wa-deep:hover { background:#1da851; }
+.wa-deep:active { transform:scale(.97); }
+.conf-actions { display:flex; gap:8px; width:100%; margin-top:4px; }
+.conf-actions .btn { flex:1; font-size:13px; padding:12px; }
+.conf-note { font-size:12px; color:var(--gray-400); margin-top:12px; line-height:1.4; }
 
 /* ════════════════════════════════════
    4. WHATSAPP
@@ -915,41 +979,123 @@ body {
       </div>
     </div>
 
-    <!-- ═══ BOOKING ═══ -->
+    <!-- ═══ BOOKING (Visão do Cliente) ═══ -->
     <div class="section" id="sec-booking">
       <div class="bcontainer">
 
-        <div class="bsub active" id="b-profile">
-          <div class="bprofile">
-            <div class="pphoto">👩‍⚕️</div>
-            <h2>Cris Beleza</h2>
-            <p class="pbio">Esteticista facial e corporal · 8 anos de experiência<br>Atendimento em estúdio e a domicílio</p>
-            <div class="ptags"><span class="ptag">📍 Vila Mariana, SP</span><span class="ptag">🏠 Domicílio</span><span class="ptag">⭐ 4.9</span></div>
-          </div>
-          <div class="bservices">
-            <h3>Escolha o serviço</h3>
-            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Limpeza de Pele</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 150</div></div>
-            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Drenagem Linfática</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 180</div></div>
-            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Massagem Relaxante</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 160</div></div>
-            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Design de Sobrancelha</div><div class="svd">⏱️ 45 min</div></div><div class="svp">R$ 80</div></div>
-            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Peeling</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 200</div></div>
-            <div class="svcard" onclick="selSvc(this)"><div><div class="svn">Limpeza + Hidratação</div><div class="svd">⏱️ 90 min</div></div><div class="svp">R$ 220</div></div>
+        <!-- ── Landing Page / Mini-site ── -->
+        <div class="bsub active" id="b-landing">
+          <div class="blanding">
+
+            <!-- Hero: Perfil -->
+            <div class="bl-hero">
+              <div class="pphoto">👩‍⚕️</div>
+              <h2>Cris Beleza</h2>
+              <p class="pbio">Esteticista facial e corporal<br>8 anos de experiência · Vila Mariana, SP</p>
+              <div class="ptags">
+                <span class="ptag">📍 Vila Mariana</span>
+                <span class="ptag">🏠 Estúdio e domicílio</span>
+              </div>
+              <div class="lara-seal">💕 Agenda gerenciada pela Lara</div>
+            </div>
+
+            <!-- Social proof -->
+            <div class="bl-social">
+              <h3>Trabalhos recentes</h3>
+              <div class="bl-gallery">
+                <div class="gphoto"><div class="gphoto-placeholder">💆</div></div>
+                <div class="gphoto"><div class="gphoto-placeholder">✨</div></div>
+                <div class="gphoto"><div class="gphoto-placeholder">🧖</div></div>
+                <div class="gphoto"><div class="gphoto-placeholder">💅</div></div>
+                <div class="gphoto"><div class="gphoto-placeholder">🌸</div></div>
+                <div class="gphoto"><div class="gphoto-placeholder">💎</div></div>
+              </div>
+
+              <div class="bl-testimonial">
+                <div class="tq">"A Cris é maravilhosa! Minha pele nunca esteve tão bem. Super atenciosa e profissional."</div>
+                <div class="ta">— Maria Helena, cliente há 2 anos</div>
+              </div>
+              <div class="bl-testimonial">
+                <div class="tq">"Faço drenagem com ela toda semana. O espaço é lindo e ela é pontualíssima."</div>
+                <div class="ta">— Renata S.</div>
+              </div>
+            </div>
+
+            <!-- Serviços (cardápio) -->
+            <div class="bl-services">
+              <h3>Serviços e valores</h3>
+              <div class="svc-cat">Facial</div>
+              <div class="svcard" onclick="startWizard(this)"><div><div class="svn">Limpeza de Pele</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 150</div></div>
+              <div class="svcard" onclick="startWizard(this)"><div><div class="svn">Peeling</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 200</div></div>
+              <div class="svcard" onclick="startWizard(this)"><div><div class="svn">Limpeza + Hidratação</div><div class="svd">⏱️ 90 min</div></div><div class="svp">R$ 220</div></div>
+              <div class="svcard" onclick="startWizard(this)"><div><div class="svn">Design de Sobrancelha</div><div class="svd">⏱️ 45 min</div></div><div class="svp">R$ 80</div></div>
+              <div class="svc-cat">Corporal</div>
+              <div class="svcard" onclick="startWizard(this)"><div><div class="svn">Drenagem Linfática</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 180</div></div>
+              <div class="svcard" onclick="startWizard(this)"><div><div class="svn">Massagem Relaxante</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 160</div></div>
+
+              <div class="svc-help" onclick="window.open('https://wa.me/5511400252721?text=Oi%2C+n%C3%A3o+sei+qual+procedimento+preciso.+Pode+me+ajudar%3F','_blank')">
+                <span class="sh-icon">💬</span>
+                <span class="sh-text">Não sei o que preciso — quero indicação</span>
+              </div>
+            </div>
+
+            <!-- Info prática -->
+            <div class="bl-info">
+              <h3>Informações</h3>
+              <div class="info-row"><span class="ir-icon">📍</span><span class="ir-label">Local</span><span class="ir-value">Vila Mariana, São Paulo (endereço após confirmação)</span></div>
+              <div class="info-row"><span class="ir-icon">🏠</span><span class="ir-label">Domicílio</span><span class="ir-value">Disponível · raio de 15 km · +R$ 30</span></div>
+              <div class="info-row"><span class="ir-icon">💳</span><span class="ir-label">Pagamento</span><span class="ir-value">Pix, dinheiro, cartão (débito/crédito)</span></div>
+              <div class="info-row"><span class="ir-icon">📅</span><span class="ir-label">Horários</span><span class="ir-value">Seg–Sex 08h–18h · Sáb 08h–13h</span></div>
+              <div class="info-row"><span class="ir-icon">❌</span><span class="ir-label">Cancelamento</span><span class="ir-value">Gratuito até 4h antes do horário</span></div>
+            </div>
+
+            <!-- Fixed CTA -->
+            <div class="bl-fixed-cta">
+              <button class="btn btn-primary" onclick="showBSub('b-wiz-svc')">Agendar horário 📅</button>
+            </div>
           </div>
         </div>
 
-        <!-- Modality: studio vs home -->
-        <div class="bsub" id="b-modality">
-          <div class="bmodality">
-            <button class="btn btn-ghost" onclick="showBSub('b-profile')" style="padding:8px 0; font-size:14px; text-align:left; width:auto;">← Voltar</button>
+        <!-- ═══ WIZARD STEP 1: Serviço ═══ -->
+        <div class="bsub" id="b-wiz-svc">
+          <div class="bwiz-header">
+            <button class="bwiz-back" onclick="showBSub('b-landing')">← Voltar</button>
+            <div class="bwiz-steps"><div class="ws current"></div><div class="ws"></div><div class="ws"></div><div class="ws"></div></div>
+          </div>
+          <div class="bw-service">
+            <h3>Qual serviço você gostaria?</h3>
+            <div class="svc-cat">Facial</div>
+            <div class="svcard" onclick="wizSelSvc(this,'Limpeza de Pele','60 min','R$ 150')"><div><div class="svn">Limpeza de Pele</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 150</div></div>
+            <div class="svcard" onclick="wizSelSvc(this,'Peeling','60 min','R$ 200')"><div><div class="svn">Peeling</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 200</div></div>
+            <div class="svcard" onclick="wizSelSvc(this,'Limpeza + Hidratação','90 min','R$ 220')"><div><div class="svn">Limpeza + Hidratação</div><div class="svd">⏱️ 90 min</div></div><div class="svp">R$ 220</div></div>
+            <div class="svcard" onclick="wizSelSvc(this,'Design de Sobrancelha','45 min','R$ 80')"><div><div class="svn">Design de Sobrancelha</div><div class="svd">⏱️ 45 min</div></div><div class="svp">R$ 80</div></div>
+            <div class="svc-cat">Corporal</div>
+            <div class="svcard" onclick="wizSelSvc(this,'Drenagem Linfática','60 min','R$ 180')"><div><div class="svn">Drenagem Linfática</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 180</div></div>
+            <div class="svcard" onclick="wizSelSvc(this,'Massagem Relaxante','60 min','R$ 160')"><div><div class="svn">Massagem Relaxante</div><div class="svd">⏱️ 60 min</div></div><div class="svp">R$ 160</div></div>
+
+            <div class="svc-help" onclick="window.open('https://wa.me/5511400252721?text=Oi%2C+n%C3%A3o+sei+qual+procedimento+preciso.+Pode+me+ajudar%3F','_blank')">
+              <span class="sh-icon">💬</span>
+              <span class="sh-text">Não sei o que preciso — quero indicação</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ WIZARD STEP 2: Modalidade ═══ -->
+        <div class="bsub" id="b-wiz-mod">
+          <div class="bwiz-header">
+            <button class="bwiz-back" onclick="showBSub('b-wiz-svc')">← Voltar</button>
+            <div class="bwiz-steps"><div class="ws done"></div><div class="ws current"></div><div class="ws"></div><div class="ws"></div></div>
+          </div>
+          <div class="bw-modality">
             <h3>Onde prefere ser atendida?</h3>
-            <div class="svc-pill">💆 Limpeza de Pele · 60 min</div>
+            <div class="svc-pill" id="wiz-svc-pill">💆 Limpeza de Pele · 60 min</div>
 
             <div class="mod-card" id="mod-studio" onclick="selMod('studio')">
               <span class="mod-icon">🏢</span>
               <div class="mod-text">
                 <h4>No estúdio da Cris</h4>
-                <p>Rua das Flores, 123 — Vila Mariana, SP</p>
-                <div class="mod-price">R$ 150</div>
+                <p>Vila Mariana, SP</p>
+                <div class="mod-price" id="mod-studio-price">R$ 150</div>
               </div>
             </div>
 
@@ -958,88 +1104,142 @@ body {
               <div class="mod-text">
                 <h4>No seu endereço (domicílio)</h4>
                 <p>Cris se desloca até você — raio de 15 km</p>
-                <div class="mod-price">R$ 180 <span style="font-size:12px; font-weight:400; color:var(--gray-500);">(+R$ 30 deslocamento)</span></div>
+                <div class="mod-price" id="mod-home-price">R$ 180 <span style="font-size:12px; font-weight:400; color:var(--gray-500);">(+R$ 30 deslocamento)</span></div>
               </div>
             </div>
 
             <div class="addr-section" id="addr-sec">
               <div class="fg">
-                <label>Seu endereço</label>
-                <input type="text" placeholder="Rua, número, bairro..." value="Rua Augusta, 456 — Jardins">
+                <label>CEP ou bairro</label>
+                <input type="text" id="addr-cep" placeholder="01311-000 ou Jardins" value="">
+              </div>
+              <div id="addr-cep-ok" style="display:none; font-size:13px; color:var(--green-600); margin-top:6px; padding:6px 10px; background:var(--green-50); border-radius:8px;">✓ Endereço dentro da área de atendimento</div>
+              <div class="cep-error" id="addr-cep-error">⚠ Endereço fora da área de atendimento (raio de 15 km)</div>
+              <div class="fg" style="margin-top:10px;">
+                <label>Endereço completo</label>
+                <input type="text" placeholder="Rua, número, complemento..." value="">
               </div>
               <div class="buffer-info">⏱️ Buffer de 30 min entre atendimentos para deslocamento</div>
             </div>
 
-            <button class="btn btn-primary" style="margin-top:20px;" onclick="showBSub('b-cal')">Escolher data e horário →</button>
+            <button class="btn btn-primary" style="margin-top:20px;" id="btn-mod-next" onclick="validateAddr()">Escolher data e horário →</button>
           </div>
         </div>
 
-        <!-- Calendar -->
-        <div class="bsub" id="b-cal">
-          <div class="bcal">
-            <button class="btn btn-ghost" onclick="showBSub('b-modality')" style="padding:8px 0; font-size:14px; text-align:left; width:auto;">← Voltar</button>
+        <!-- ═══ WIZARD STEP 3: Data e Horário ═══ -->
+        <div class="bsub" id="b-wiz-cal">
+          <div class="bwiz-header">
+            <button class="bwiz-back" onclick="showBSub('b-wiz-mod')">← Voltar</button>
+            <div class="bwiz-steps"><div class="ws done"></div><div class="ws done"></div><div class="ws current"></div><div class="ws"></div></div>
+          </div>
+          <div class="bw-cal">
             <h3>Escolha data e horário</h3>
-            <div class="svc-pill">💆 Limpeza de Pele · 60 min · R$ 150 · No estúdio</div>
+            <div class="svc-pill" id="wiz-cal-pill">💆 Limpeza de Pele · 60 min · R$ 150 · Estúdio</div>
+
+            <div class="next-free" onclick="selNextFree()">
+              <span class="nf-icon">⚡</span>
+              <div>
+                <div class="nf-text">Próximo horário livre: Seg 24/08, 10:00</div>
+                <div class="nf-sub">Toque para selecionar</div>
+              </div>
+            </div>
+
             <div class="cmonth">Agosto 2026</div>
             <div class="cgrid">
               <div class="ch">D</div><div class="ch">S</div><div class="ch">T</div><div class="ch">Q</div><div class="ch">Q</div><div class="ch">S</div><div class="ch">S</div>
               <div class="cd dis"></div><div class="cd dis"></div><div class="cd dis"></div><div class="cd dis"></div><div class="cd dis"></div><div class="cd dis"></div><div class="cd dis">1</div>
               <div class="cd dis">2</div><div class="cd dis">3</div><div class="cd dis">4</div><div class="cd dis">5</div><div class="cd dis">6</div><div class="cd dis">7</div><div class="cd dis">8</div>
               <div class="cd dis">9</div><div class="cd dis">10</div><div class="cd dis">11</div><div class="cd dis">12</div><div class="cd dis">13</div><div class="cd dis">14</div><div class="cd dis">15</div>
-              <div class="cd today dis">16</div><div class="cd">17</div><div class="cd">18</div><div class="cd">19</div><div class="cd">20</div><div class="cd">21</div><div class="cd sel" onclick="selCDay(this)">22</div>
-              <div class="cd dis">23</div><div class="cd">24</div><div class="cd">25</div><div class="cd">26</div><div class="cd">27</div><div class="cd">28</div><div class="cd">29</div>
-              <div class="cd dis">30</div><div class="cd">31</div>
+              <div class="cd dis">16</div><div class="cd dis">17</div><div class="cd dis">18</div><div class="cd today dis">19</div><div class="cd has-slots">20</div><div class="cd has-slots">21</div><div class="cd has-slots">22</div>
+              <div class="cd dis">23</div><div class="cd has-slots sel">24</div><div class="cd has-slots">25</div><div class="cd has-slots">26</div><div class="cd has-slots">27</div><div class="cd has-slots">28</div><div class="cd has-slots">29</div>
+              <div class="cd dis">30</div><div class="cd has-slots">31</div>
             </div>
 
-            <p style="font-size:15px; font-weight:600; margin-bottom:10px;">Horários disponíveis — Sáb, 22/08</p>
+            <p style="font-size:15px; font-weight:600; margin-bottom:10px;">Horários disponíveis — Seg, 24/08</p>
             <div class="tslots">
-              <div class="ts un">08:00</div><div class="ts un">09:00</div><div class="ts">10:00</div>
-              <div class="ts un">11:00</div><div class="ts">12:00</div><div class="ts un">13:00</div>
+              <div class="ts sel">10:00</div><div class="ts">11:00</div><div class="ts">14:00</div>
+              <div class="ts">15:00</div><div class="ts">16:00</div>
             </div>
-            <p style="font-size:12px; color:var(--gray-400); margin-top:8px; text-align:center;">Sábado: 08:00–13:00 · Horários ocupados riscados</p>
+            <p style="font-size:12px; color:var(--gray-400); margin-top:8px; text-align:center;">Seg–Sex: 08h–18h · Somente horários disponíveis</p>
 
-            <button class="btn btn-primary" style="margin-top:20px;" onclick="showBSub('b-form')">Continuar →</button>
+            <button class="btn btn-primary" style="margin-top:20px;" onclick="showBSub('b-wiz-form')">Continuar →</button>
           </div>
         </div>
 
-        <!-- Form -->
-        <div class="bsub" id="b-form">
-          <div class="bform">
-            <button class="btn btn-ghost" onclick="showBSub('b-cal')" style="padding:8px 0; font-size:14px; text-align:left; width:auto;">← Voltar</button>
+        <!-- ═══ WIZARD STEP 4: Dados + Confirmação ═══ -->
+        <div class="bsub" id="b-wiz-form">
+          <div class="bwiz-header">
+            <button class="bwiz-back" onclick="showBSub('b-wiz-cal')">← Voltar</button>
+            <div class="bwiz-steps"><div class="ws done"></div><div class="ws done"></div><div class="ws done"></div><div class="ws current"></div></div>
+          </div>
+          <div class="bw-form">
             <h3>Seus dados</h3>
-            <p style="font-size:14px; color:var(--gray-500); margin-bottom:16px;">Sem criar conta. Só precisamos do básico pra confirmar seu horário.</p>
-            <div class="svc-pill">💆 Limpeza de Pele · Sáb 22/08 às 10:00 · R$ 150</div>
-            <div class="fg"><label>Nome completo</label><input type="text" placeholder="Maria da Silva" value="Maria Souza"></div>
-            <div class="fg"><label>WhatsApp</label><input type="tel" placeholder="(11) 99999-9999" value="(11) 98888-7777"></div>
-            <div class="fg"><label>Observações (opcional)</label><textarea placeholder="Alguma alergia, preferência...">Primeira vez fazendo limpeza de pele</textarea></div>
-            <div class="consent">
-              <input type="checkbox" checked>
-              <label>Concordo em receber confirmação e lembretes pelo WhatsApp da Lara. Posso cancelar a qualquer momento respondendo SAIR. <a href="#" style="color:var(--rose-500);">Política de privacidade</a></label>
+            <p style="font-size:14px; color:var(--gray-500); margin-bottom:14px;">Sem criar conta. Só precisamos do básico pra confirmar.</p>
+            <div class="svc-pill" id="wiz-form-pill">💆 Limpeza de Pele · Seg 24/08 às 10:00 · R$ 150 · Estúdio</div>
+
+            <div class="fg">
+              <label>Nome completo</label>
+              <input type="text" placeholder="Maria da Silva" value="Maria Souza">
             </div>
+            <div class="fg">
+              <label>WhatsApp</label>
+              <input type="tel" id="wiz-phone" placeholder="(11) 99999-9999" value="(11) 98888-7777" oninput="checkPhone(this.value)">
+              <div class="fg-match" id="phone-match">✓ Olá de novo, Maria! Dados pré-preenchidos.</div>
+            </div>
+            <div class="fg">
+              <label>Observações (opcional)</label>
+              <textarea placeholder="Preferências, alergias..."></textarea>
+              <div class="health-warning">⚕️ Informações de saúde são usadas apenas pela profissional e não serão compartilhadas.</div>
+            </div>
+
+            <div class="cancel-policy">
+              <strong>📋 Política de cancelamento:</strong> Gratuito até 4 horas antes do horário agendado. Cancelamentos tardios ou faltas podem impactar agendamentos futuros.
+            </div>
+
+            <div class="consent-group">
+              <div class="consent">
+                <input type="checkbox" checked>
+                <label>Autorizo o envio de <strong>confirmação e lembrete</strong> do meu horário pelo WhatsApp (necessário para o serviço). <a href="#" style="color:var(--rose-500);">Política de privacidade</a></label>
+              </div>
+              <div class="consent marketing">
+                <input type="checkbox">
+                <label>Aceito receber <strong>novidades e promoções</strong> da Cris Beleza pelo WhatsApp (opcional, cancele a qualquer momento).</label>
+              </div>
+            </div>
+
             <button class="btn btn-primary" onclick="showBSub('b-conf')">Confirmar agendamento ✅</button>
           </div>
         </div>
 
-        <!-- Confirmed -->
+        <!-- ═══ Confirmação ═══ -->
         <div class="bsub" id="b-conf">
           <div class="bconf">
             <div class="bci">✅</div>
             <h2>Agendamento confirmado!</h2>
-            <p class="bcsub">Você receberá confirmação pelo WhatsApp</p>
+            <p class="bcsub">Toque abaixo para confirmar pelo WhatsApp</p>
             <div class="cdets">
               <div class="crow"><span class="cl">Profissional</span><span class="cv">Cris Beleza</span></div>
               <div class="crow"><span class="cl">Serviço</span><span class="cv">Limpeza de Pele</span></div>
-              <div class="crow"><span class="cl">Data</span><span class="cv">Sábado, 22/08/2026</span></div>
-              <div class="crow"><span class="cl">Horário</span><span class="cv">10:00</span></div>
-              <div class="crow"><span class="cl">Local</span><span class="cv">Estúdio — Rua das Flores, 123</span></div>
-              <div class="crow"><span class="cl">Duração</span><span class="cv">60 min</span></div>
+              <div class="crow"><span class="cl">Data</span><span class="cv">Segunda, 24/08/2026</span></div>
+              <div class="crow"><span class="cl">Horário</span><span class="cv">10:00 (60 min)</span></div>
+              <div class="crow"><span class="cl">Local</span><span class="cv">Estúdio — Vila Mariana, SP</span></div>
               <div class="crow"><span class="cl">Valor</span><span class="cv">R$ 150</span></div>
             </div>
-            <div class="wanot">
-              <span style="font-size:24px;">💬</span>
-              <p>Em instantes você receberá uma mensagem da <strong>Lara</strong> pelo WhatsApp no número (11) 4002-LARA</p>
+
+            <button class="wa-deep" onclick="window.open('https://wa.me/5511400252721?text=Oi+Lara!+Confirmando+meu+hor%C3%A1rio+de+Limpeza+de+Pele+em+24%2F08+%C3%A0s+10h+com+a+Cris.+%F0%9F%92%95','_blank')">
+              <span style="font-size:22px;">💬</span> Abrir conversa com a Lara no WhatsApp
+            </button>
+
+            <div class="conf-actions">
+              <button class="btn btn-secondary" onclick="alert('Simulação: baixando arquivo .ics...')">📅 Adicionar ao calendário</button>
+              <button class="btn btn-secondary" onclick="alert('Simulação: link de cancelamento copiado')">🔗 Cancelar / Remarcar</button>
             </div>
-            <button class="btn btn-ghost" style="margin-top:16px;" onclick="showBSub('b-profile')">← Agendar outro horário</button>
+
+            <p class="conf-note">
+              Ao abrir a conversa, você confirma seu número e a Lara pode enviar lembretes sem custo extra. O endereço completo do estúdio será enviado na confirmação.
+            </p>
+
+            <button class="btn btn-ghost" style="margin-top:8px;" onclick="showBSub('b-landing')">← Agendar outro horário</button>
           </div>
         </div>
       </div>
@@ -1184,7 +1384,7 @@ body {
 
   </div>
 
-  <div class="plabel">Protótipo interativo v2 · <span>Lara</span> · Ago 2026</div>
+  <div class="plabel">Protótipo interativo v3 · <span>Lara</span> · Ago 2026</div>
 </div>
 
 <!-- Edit Modal -->
@@ -1257,19 +1457,72 @@ function showDTab(id) {
 function showBSub(id) {
   document.querySelectorAll('.bsub').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  // Scroll to top of booking container
+  document.querySelector('.bcontainer').scrollTop = 0;
 }
 
-function selSvc(el) {
-  document.querySelectorAll('.svcard').forEach(c => c.classList.remove('sel'));
-  el.classList.add('sel');
-  setTimeout(() => showBSub('b-modality'), 200);
+// Wizard state
+var wizState = { svc:'', dur:'', price:'', mod:'studio' };
+
+function startWizard(el) {
+  var name = el.querySelector('.svn').textContent;
+  var dur = el.querySelector('.svd').textContent.replace('⏱️ ','');
+  var price = el.querySelector('.svp').textContent;
+  wizSelSvc(null, name, dur, price);
+}
+
+function wizSelSvc(el, name, dur, price) {
+  wizState.svc = name; wizState.dur = dur; wizState.price = price;
+  if (el) {
+    document.querySelectorAll('#b-wiz-svc .svcard').forEach(c => c.classList.remove('sel'));
+    el.classList.add('sel');
+  }
+  document.getElementById('wiz-svc-pill').textContent = '💆 ' + name + ' · ' + dur;
+  setTimeout(() => showBSub('b-wiz-mod'), 200);
 }
 
 function selMod(type) {
+  wizState.mod = type;
   document.getElementById('mod-studio').classList.remove('sel');
   document.getElementById('mod-home').classList.remove('sel');
   document.getElementById('mod-' + type).classList.add('sel');
   document.getElementById('addr-sec').classList.toggle('visible', type === 'home');
+}
+
+function validateAddr() {
+  if (wizState.mod === 'home') {
+    var cep = document.getElementById('addr-cep').value.trim();
+    if (!cep) {
+      document.getElementById('addr-cep-error').style.display = 'block';
+      document.getElementById('addr-cep-ok').style.display = 'none';
+      return;
+    }
+    // Simula validação — CEP dentro do raio
+    document.getElementById('addr-cep-error').style.display = 'none';
+    document.getElementById('addr-cep-ok').style.display = 'block';
+  }
+  var loc = wizState.mod === 'studio' ? 'Estúdio' : 'Domicílio';
+  document.getElementById('wiz-cal-pill').textContent = '💆 ' + wizState.svc + ' · ' + wizState.dur + ' · ' + wizState.price + ' · ' + loc;
+  showBSub('b-wiz-cal');
+}
+
+function selNextFree() {
+  // Simula seleção do próximo horário livre
+  document.querySelectorAll('#b-wiz-cal .cgrid .cd').forEach(d => d.classList.remove('sel'));
+  document.querySelectorAll('#b-wiz-cal .cgrid .cd')[24].classList.add('sel'); // 24 = Monday
+  document.querySelectorAll('#b-wiz-cal .tslots .ts').forEach(t => t.classList.remove('sel'));
+  document.querySelectorAll('#b-wiz-cal .tslots .ts')[0].classList.add('sel');
+}
+
+function checkPhone(val) {
+  // Simula reconhecimento de cliente existente
+  var match = document.getElementById('phone-match');
+  if (val.includes('98765')) {
+    match.style.display = 'block';
+    match.textContent = '✓ Olá de novo, Maria Helena! Dados pré-preenchidos.';
+  } else {
+    match.style.display = 'none';
+  }
 }
 
 function selCDay(el) { document.querySelectorAll('.cgrid .cd').forEach(d => d.classList.remove('sel')); el.classList.add('sel'); }
@@ -1293,7 +1546,7 @@ function closeEdit() { document.getElementById('editModal').classList.remove('vi
 document.getElementById('editModal').addEventListener('click', function(e) { if (e.target === this) closeEdit(); });
 
 document.querySelectorAll('.cgrid .cd:not(.dis)').forEach(d => d.addEventListener('click', function() { selCDay(this); }));
-document.querySelectorAll('.tslots .ts:not(.un)').forEach(s => s.addEventListener('click', function() { document.querySelectorAll('.tslots .ts').forEach(x => x.classList.remove('sel')); this.classList.add('sel'); }));
+document.querySelectorAll('.tslots .ts').forEach(s => s.addEventListener('click', function() { document.querySelectorAll('.tslots .ts').forEach(x => x.classList.remove('sel')); this.classList.add('sel'); }));
 </script>
 </body>
 </html>
